@@ -31,7 +31,7 @@ function Register() {
         <p>It's quick and easy.</p>
         <div className="hr3" />
         <form>
-          <div className="row">
+          <div className="row" id="firstrow">
             <input
               onChange={(e) => {
                 setFirstName(e.target.value);
@@ -56,6 +56,7 @@ function Register() {
               }}
               type="email"
               placeholder="Email"
+              id="type_mail"
             />
           </center>
           <center>
@@ -63,6 +64,7 @@ function Register() {
               onChange={(event) => setPassword(event.target.value)}
               type="password"
               placeholder="New Password"
+              id="type_mail"
             />
           </center>
           <h5 className="register__date">Date Of Birth</h5>
