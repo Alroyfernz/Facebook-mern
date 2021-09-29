@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import "./homeheader.css";
 
 import { AiFillCaretDown } from "react-icons/ai";
-import { BsGrid3X3Gap } from "react-icons/bs";
+import { BsArrowBarLeft, BsArrowBarRight, BsGrid3X3Gap } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
 import { BiArrowBack } from "react-icons/bi";
 import { Avatar } from "@material-ui/core";
 const Homeheader = ({ selected }) => {
+  const [toggle, setToggle] = useState(false);
   const [users, setUsers] = useState([]);
   const user = null;
   const [searchTerm, setSearchTerm] = useState("");
@@ -128,7 +129,14 @@ const Homeheader = ({ selected }) => {
           </svg>
         </div>
       </div>
-      <div class="homeHeader__otherIcons">
+      <div
+        className={
+          toggle === true
+            ? "homeHeader__otherIcons open"
+            : "homeHeader__otherIcons"
+        }
+        // className="homeHeader__otherIcons"
+      >
         <div class="round profile">
           <a href="#">
             <Avatar className="ProfileAvatar" src="" />
@@ -289,6 +297,18 @@ const Homeheader = ({ selected }) => {
             </a>
           </div>
         </div>
+      </div>
+      <div
+        className="toggle_open"
+        onClick={() => {
+          setToggle(!toggle);
+        }}
+      >
+        {toggle ? (
+          <BsArrowBarRight className="togglebar" />
+        ) : (
+          <BsArrowBarLeft className="togglebar" />
+        )}
       </div>
     </div>
   );
