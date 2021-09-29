@@ -170,10 +170,17 @@
   }
   
   @media screen and (max-width: 600px) {
-    .homeHeader__otherIcons, .market, .groups {
+    .homeHeader__otherIcons, .market, .groups,.homeHeader__pages {
       display: none;
     }
   
+    .homeHeaderLogoAndSearch{
+       margin:auto;
+    }
+    .homeHeader__search{
+        width: 40px;
+        height: 40px;
+    }
     .dropdownIconspe {
       display: block !important;
     }
