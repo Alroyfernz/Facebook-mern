@@ -5,6 +5,7 @@
     padding-top: 8px;
     margin-right: 160px;
     width: 90%;
+    height: 40px;
     transition: 100ms ease-out;
     cursor: pointer;
 }
