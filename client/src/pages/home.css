@@ -2,3 +2,6 @@ body{
     background-color: #18191A;
     overflow-x: hidden;
 }
+.app__page{
+    display: flex;
+}
