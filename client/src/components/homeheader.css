@@ -263,7 +263,8 @@
     width: 345px;
     z-index: 1;
     margin-left: -300px;
-    margin-top: 10px;
+    top: 25px;
+    margin-top: 30px;
     border-radius: 10px;
   }
   

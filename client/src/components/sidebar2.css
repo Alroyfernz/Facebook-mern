@@ -1,8 +1,12 @@
 .sidebar2{
     display: flex;
+   
+    flex: 0.3;
+   
     flex-direction: column;
-    width: 100%;
-    margin-left: 10%;
+    width: 400px;
+    margin-left: 25%;
+    
 }
 
 
