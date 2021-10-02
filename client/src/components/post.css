@@ -12,7 +12,7 @@
     object-fit: cover;
     /* border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray; */
-    user-drag: none; 
+   
 user-select: none;
 -moz-user-select: none;
 -webkit-user-drag: none;
