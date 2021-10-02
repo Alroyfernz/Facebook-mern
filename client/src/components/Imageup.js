@@ -18,7 +18,12 @@ const Imageup = () => {
 
   return (
     <div className="imageupload">
-      <Dialog onClose={handleClose} scroll="false">
+      <Dialog
+        className="MuiDialog-paper"
+        style={{ margin: "auto" }}
+        onClose={handleClose}
+        scroll="false"
+      >
         <div class="makeStyles-paper-1">
           <div class="modalInit">
             <h1>Create Post</h1>
@@ -26,7 +31,10 @@ const Imageup = () => {
           </div>
           <div class="hr2" />
           <div class="profileHead">
-            <img src={user?.photoURL} className="Avatar" />
+            <img
+              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
+              className="Avatar"
+            />
             <h1>Alroy</h1>
           </div>
           <div class="inputForUpload">

@@ -52,23 +52,23 @@
     margin: 10px;
 }
 .photoIcon {
-    background-image: url(https://facebook.com/rsrc.php/v3/ye/r/yUmeYUiEaF0.png);
-    background-size: 33px 643px;
+    height: 24px;
+    width: 24px;
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/y3/r/gXYmnW88c0T.png);
+    background-position: 0px -104px;
+    background-size: 26px 578px;
     background-repeat: no-repeat;
     display: inline-block;
-    width: 24px;
-    height: 24px;
-    background-position: 0 -208px;
 }
 
 .feelingIcon {
-    background-image: url(https://facebook.com/rsrc.php/v3/ye/r/yUmeYUiEaF0.png);
-    background-size: 33px 643px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 24px;
     height: 24px;
-    background-position: 0 -133px;
+    width: 24px;
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yF/r/jFFXSLBdcxF.png);
+    background-position: 0px -234px;
+    background-size: 26px 260px;
+    background-repeat: no-repeat;
+    display: inline-block; 
 }
 
 .options {
@@ -124,7 +124,7 @@
     color: #e4e6eb;
     text-align: center;
     margin-top: 15px;
-    margin-left: 200px;
+   
     margin-bottom: 15px;
 }
 
@@ -135,7 +135,7 @@
     width: 20px;
     margin-top: 10px;
     cursor: pointer;
-    margin-left: 160px;
+  margin-right: 10px;
     background-color: rgba(225,225,225,0.1);
     padding: 10px;
     border-radius: 200px;
@@ -149,6 +149,8 @@
 .modalInit {
     display: flex;
     width: 100%;
+    justify-content: space-between;
+align-items: center;
     flex-direction: row;
 }
 
@@ -214,53 +216,51 @@
     padding: 18px;
 }
 
-.roomIcon {
-    vertical-align: -0.25em;
-    object-fit: cover;
-    background-image: url(https://facebook.com/rsrc.php/v3/yk/r/Jk43U6fk1vT.png);
-    background-size: 25px 675px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    background-position: 0 -25px;
+.Icon.roomIcon{
     height: 24px;
     width: 24px;
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/y3/r/gXYmnW88c0T.png);
+    background-position: 0px -234px;
+    background-size: 26px 578px;
+    background-repeat: no-repeat;
+    display: inline-block;
 }
 
 .friendsIcon {
-    vertical-align: -0.25em;
-    object-fit: cover;
-    background-image: url(https://facebook.com/rsrc.php/v3/ye/r/yUmeYUiEaF0.png);
-    background-size: 33px 643px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    background-position: 0 -158px;
     height: 24px;
     width: 24px;
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/y3/r/gXYmnW88c0T.png);
+    background-position: 0px -26px;
+    background-size: 26px 578px;
+    background-repeat: no-repeat;
+    display: inline-block;
 }
 
 .tagIcon {
-    vertical-align: -0.25em;
-    object-fit: cover;
-    background-image: url(https://facebook.com/rsrc.php/v3/yk/r/Jk43U6fk1vT.png);
-    background-size: 25px 675px;
+    /* height: 24px;
+    width: 24px;
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yF/r/jFFXSLBdcxF.png);
+    background-position: 0px -234px;
+    background-size: 26px 260px;
+    background-repeat: no-repeat;
+    display: inline-block; */
+    height: 24px;
+    width: 24px;
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/y3/r/gXYmnW88c0T.png);
+    background-position: 0px -78px;
+    background-size: 26px 578px;
     background-repeat: no-repeat;
     display: inline-block;
-    background-position: 0 -550px;
-    height: 24px;
-    margin-top: 15px;
-    width: 24px;
 }
 
-.moreIcon {
-    vertical-align: -0.25em;
-    object-fit: cover;
-    background-image: url(https://facebook.com/rsrc.php/v3/yH/r/hD_JBkCe96v.png);
-    background-size: 33px 1483px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    background-position: 0 -258px;
+.Icon.moreIcon {
     height: 24px;
     width: 24px;
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/5zR6djZ03vP.png);
+    background-position: 0px -136px;
+    background-size: 50px 576px;
+    background-repeat: no-repeat;
+    display: inline-block;
 }
 
 .Icon {
@@ -336,8 +336,10 @@
     width: auto;
     border-radius: 10px;
 }
-
-Dialog {
+.dialog{
+    margin: auto !important;
+}
+Dialog{
     z-index: 100 !important;
 }
 .makeStyles-paper-1 {
@@ -352,7 +354,11 @@ Dialog {
 .left > h1 {
     cursor: pointer;
 }
-
+.MuiDialog-paper{
+    margin-top: 6% !important;
+    margin-left: 14%!important;
+    overflow-y: hidden;
+}
 progress {
     width: 90%;
     margin-left: 13px;
