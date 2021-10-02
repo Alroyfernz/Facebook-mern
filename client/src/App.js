@@ -12,6 +12,7 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
+          <Route path="/:username/:id"></Route>
           <Route path="/" exact>
             <Home />
           </Route>
