@@ -50,7 +50,9 @@ cursor: pointer;
     display: flex;
     flex-direction: column;
 }
-
+.postAndWatch{
+    width: 100%;
+}
 .profileHead2 button {
     background-color: #1E87DC;
     border: none;
@@ -253,4 +255,28 @@ margin-bottom: 0px !important;
   .bioText {
       text-align: center;
       color: #AAADB2;
+  }
+
+  @media screen and (max-width: 768px) {
+      .profile{
+          width: 100%;
+      }
+      .profile__topSection{
+          width: 100%;
+      }
+      .profile__coverPhoto{
+          width: 100%;
+          margin:unset;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      .profileAvatar{
+         margin-left: unset;
+        
+      }
+      .postAndWatch{
+          margin: unset;
+         width: 100% !important;
+      }
   }
