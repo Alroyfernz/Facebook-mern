@@ -20,6 +20,7 @@ const Imageup = () => {
     <div className="imageupload">
       <Dialog
         className="MuiDialog-paper"
+        open={open}
         style={{ margin: "auto" }}
         onClose={handleClose}
         scroll="false"
@@ -27,7 +28,7 @@ const Imageup = () => {
         <div class="makeStyles-paper-1">
           <div class="modalInit">
             <h1>Create Post</h1>
-            <CloseIcon class="closeModalIcon" onClick={handleClose} />
+            <CloseIcon class="closeModalIcon" onClick={() => setOpen(!open)} />
           </div>
           <div class="hr2" />
           <div class="profileHead">
@@ -96,7 +97,7 @@ const Imageup = () => {
           <input
             value={caption}
             onChange={(e) => setCaption(e.target.value)}
-            onClick={handleClickOpen("body")}
+            onClick={() => setOpen(!open)}
             placeholder={`What's on your mind, Alroy`}
           />
         </div>

@@ -22,7 +22,9 @@
     margin-top: 10px;
     margin-left: 15px;
   }
-  
+  .messengerIcon{
+    margin: unset !important;
+  }
   .homeHeader__search {
     background-color: #3A3B3C;
     border-radius: 30px;

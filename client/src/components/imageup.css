@@ -377,6 +377,14 @@ progress {
     .imageupload{
         width: 100% !important;;
     }
+    .MuiDialog-paper{
+        width: 100%;
+        margin-left: unset!important;
+        margin-top: 10%!important;
+    }
+    .MuiDialog-container{
+        width: 100% !important
+    }
     .imageupload__container{
         width: 100%;
     }

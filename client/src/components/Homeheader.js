@@ -11,6 +11,7 @@ const Homeheader = ({ selected }) => {
   const [toggle, setToggle] = useState(false);
   const [users, setUsers] = useState([]);
   const user = null;
+  const [rightO, setRightO] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
 
@@ -235,9 +236,14 @@ const Homeheader = ({ selected }) => {
             height: "40px",
           }}
         >
-          <AiFillCaretDown />
+          <AiFillCaretDown onClick={() => setRightO(!rightO)} />
           {/* <i class={`dropdownIcon ${profileDown === true && "blue"}`} /> */}
-          <div class="dropdown-content">
+          <div
+            className={
+              rightO == true ? "dropdown-content block" : "dropdown-content"
+            }
+            onClick={() => setRightO(!rightO)}
+          >
             <a href="#">
               <div class="optionDrop">
                 <img
