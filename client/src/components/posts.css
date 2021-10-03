@@ -16,5 +16,7 @@
 {
     .posts{
         margin-left: 0%;
+        width: 100%;
+        min-width: unset !important;
     }
 }

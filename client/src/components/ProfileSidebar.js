@@ -20,13 +20,13 @@ const ProfileSidebar = () => {
       <div className="posts2">
         <h1>Photos</h1>
         <div className="photos">
-          {nposts.length === 0 ? (
+          {/* {nposts.length === 0 ? (
             <h1 className="NoNotif">
               It seems that there are no image posted by this user
             </h1>
           ) : (
             nposts.map((post) => <img src={post} />)
-          )}
+          )} */}
         </div>
       </div>
       <div class="hr profile" />

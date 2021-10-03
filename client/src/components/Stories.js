@@ -4,10 +4,10 @@ import StoryComp from "./StoryComp";
 const Stories = () => {
   return (
     <div className="story">
-      <StoryComp />
-      <StoryComp />
-      <StoryComp />
-      <StoryComp />
+      <StoryComp remove={false} />
+      <StoryComp remove={false} />
+      <StoryComp remove={false} />
+      <StoryComp remove={true} />
     </div>
   );
 };

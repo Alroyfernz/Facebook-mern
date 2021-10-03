@@ -5,9 +5,12 @@
     border-radius: 10px;
     margin-top: 10px;
     margin-bottom: 20px;
-    width: 500px;
+    width: 100%;
 }
 
+.imageupload{
+    width: 100%;
+}
 .imageupload.none {
     display: none;
 }
@@ -367,4 +370,51 @@ progress {
 
 .hidden {
     display: none;
+}
+
+
+@media screen  and (max-width: 600px){
+    .imageupload{
+        width: 100% !important;;
+    }
+    .imageupload__container{
+        width: 100%;
+    }
+    .postArea{
+        display: flex;
+        width: 100%;
+    }
+    .hr{
+        width: 90%;
+        margin:unset;
+        padding:unset;
+    }
+    .postArea>.Avatar{
+        /* flex: 0.2; */
+    }
+    .postArea>input{
+      width:100%;
+    }
+    .options{
+        width: 100%;
+        display: flex;
+    }
+    .options>.liveVideo{
+flex:0.3;
+    }
+    .options>.liveVideo>h2{
+        display: none;
+    }
+    .options>.photo>h2{
+        display: none;
+    }
+    .options>.feeling>h2{
+        display: none;
+    }
+    .options>.photo{
+        flex:0.3;
+    }
+    .options>.feeling{
+        flex:0.3;
+    }
 }

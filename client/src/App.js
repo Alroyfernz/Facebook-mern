@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./app.css";
+import Profile from "./components/Profile";
 function App() {
   return (
     <div>
@@ -12,7 +13,9 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <Route path="/:username/:id"></Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
           <Route path="/" exact>
             <Home />
           </Route>

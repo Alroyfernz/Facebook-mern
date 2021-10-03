@@ -1,6 +1,6 @@
 .post {
     width: 100%;
-    /* max-width: 220px; */
+    max-width: 500px;
     background-color: rgb(36,37,38);
     margin-bottom: 45px;
     border-radius: 10px;
@@ -401,4 +401,10 @@ user-select: none;
     margin-top: -14px;
     margin-bottom: 8px;
     display:none
+}
+
+@media screen and (max-width: 600px) {
+    .post__image{
+        height: 400px;
+    }
 }
