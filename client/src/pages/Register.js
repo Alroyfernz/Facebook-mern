@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import axios from "axios";
 import "./Register.css";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -13,10 +13,24 @@ function Register() {
   const [birthday, setBirthday] = useState([]);
   const [gender, setGender] = useState("");
 
-  const register = (event) => {
+  const register = async (event) => {
     event.preventDefault();
-    if (birthday[2] >= 2010) {
-      return alert("You are not eligible to register to Facebook!");
+    // if (birthday[2] >= 2010) {
+    //   return alert("You are not eligible to register to Facebook!");
+    // } else {
+    try {
+      const response = await axios.post("/auth/register", {
+        name: "yash sharma fitness",
+        email: "sharma@yahoo.in",
+        password: "12345",
+        // DOB: birthday,
+        gender: "male",
+      });
+
+      // response.data && window.location.replace("/login");
+      console.log(response);
+    } catch (error) {
+      console.log("error while registering");
     }
   };
 
@@ -30,7 +44,7 @@ function Register() {
         <h1>Sign Up</h1>
         <p>It's quick and easy.</p>
         <div className="hr3" />
-        <form>
+        <form onSubmit={register}>
           <div className="row" id="firstrow">
             <input
               onChange={(e) => {
@@ -288,11 +302,7 @@ function Register() {
           </p>
 
           <center>
-            <button
-              onClick={register}
-              type="submit"
-              className="register__register"
-            >
+            <button type="submit" className="register__register">
               Sign Up
             </button>
           </center>

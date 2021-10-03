@@ -6,11 +6,12 @@ router.post("/register", async (req, res) => {
   try {
     const newUser = new User({
       name: req.body.name,
-      username: req.body.username,
+      email: req.body.email,
       password: req.body.password,
+      // gender: req.body.gender,
     });
     const user = await newUser.save();
-    // await User.generateAtuhToken();
+    // const token = await User.generateAuthToken();
     // console.log(token);
     res.status(200).json(user);
   } catch (error) {

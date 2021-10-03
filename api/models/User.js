@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    username: {
+    email: {
       type: String,
       required: true,
       unique: true,
@@ -22,9 +22,13 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    posts: {
+    DOB: {
       type: Array,
       default: [],
+    },
+    gender: {
+      type: String,
+      default: "",
     },
     friends: {
       type: Array,
@@ -60,10 +64,7 @@ const userSchema = new mongoose.Schema(
 
 userSchema.methods.generateAuthToken = async function () {
   try {
-    let token = jwt.sign(
-      { _id: this._id },
-      "asdfghjklzxccvbmkiureshdhdddddsaaasddsaaaajhjsskslss"
-    );
+    let token = await jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
     this.tokens = this.tokens.concat({ token: token });
     await this.save();
     return token;
