@@ -24,7 +24,7 @@ function Register() {
         name,
         email,
         password,
-        DOB,
+        birthday,
         gender,
       });
 

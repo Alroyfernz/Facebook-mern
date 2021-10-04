@@ -1,21 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
+import { useHistory } from "react-router-dom";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useHistory,
-} from "react-router-dom";
+import { loginAction } from "../Redux/Actions/userActions";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 function Login() {
   const history = useHistory("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { isFetching, error, userInfo } = userLogin;
 
-  const login = (event) => {
+  useEffect(() => {
+    if (userInfo) {
+      history.push("/");
+    }
+  });
+
+  const login = async (event) => {
     event.preventDefault();
+    // dispatch(loginAction(email, password));
+    try {
+      const res = await axios.post("/auth/login", email, password);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
