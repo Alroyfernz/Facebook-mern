@@ -26,7 +26,7 @@ function Login() {
       />
       <div className="login__container">
         <h3>Log in to Facebook</h3>
-        <form>
+        <form onSubmit={login}>
           <center>
             <input
               type="email"
@@ -42,7 +42,7 @@ function Login() {
             />
           </center>
           <center>
-            <button onClick={login} type="submit" class="login__login">
+            <button type="submit" class="login__login">
               Log In
             </button>
           </center>

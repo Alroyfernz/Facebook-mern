@@ -15,19 +15,20 @@ function Register() {
 
   const register = async (event) => {
     event.preventDefault();
+    const name = firstName + " " + lastName;
     // if (birthday[2] >= 2010) {
     //   return alert("You are not eligible to register to Facebook!");
     // } else {
     try {
       const response = await axios.post("/auth/register", {
-        name: "yash sharma fitness",
-        email: "sharma@yahoo.in",
-        password: "12345",
-        // DOB: birthday,
-        gender: "male",
+        name,
+        email,
+        password,
+        DOB,
+        gender,
       });
 
-      // response.data && window.location.replace("/login");
+      response.data && window.location.replace("/login");
       console.log(response);
     } catch (error) {
       console.log("error while registering");

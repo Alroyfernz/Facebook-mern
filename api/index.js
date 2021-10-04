@@ -11,7 +11,7 @@ mongoose
   .connect(process.env.MONGO_URL)
   .then(() => console.log("connection to database succesfull"))
   .catch((error) => {
-    console.log("Error while connecting to database");
+    console.log("error while connecting to database");
   });
 app.use(express.json());
 app.use("/api/auth", authRouter);
