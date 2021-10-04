@@ -6,6 +6,11 @@ import { loginAction } from "../Redux/Actions/userActions";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import {
+  USER_LOGIN_FAIL,
+  USER_LOGIN_REQUEST,
+  USER_LOGIN_SUCCESS,
+} from "../Redux/Constaints/userCons";
 
 function Login() {
   const history = useHistory("");
@@ -24,11 +29,17 @@ function Login() {
   const login = async (event) => {
     event.preventDefault();
     // dispatch(loginAction(email, password));
+    dispatch({ type: USER_LOGIN_REQUEST });
     try {
-      const res = await axios.post("/auth/login", email, password);
-      console.log(res.data);
+      const { data } = await axios.post("/auth/login", { email, password });
+      console.log(data);
+      dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+      localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
       console.log(error);
+      dispatch({
+        type: USER_LOGIN_FAIL,
+      });
     }
   };
 
