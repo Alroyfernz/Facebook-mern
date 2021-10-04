@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./homeheader.css";
-
+import { useDispatch } from "react-redux";
 import { AiFillCaretDown } from "react-icons/ai";
 import { BsArrowBarLeft, BsArrowBarRight, BsGrid3X3Gap } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
 import { BiArrowBack } from "react-icons/bi";
 import { Avatar } from "@material-ui/core";
+import { USER_LOGOUT } from "../Redux/Constaints/userCons";
 const Homeheader = ({ selected }) => {
   const [toggle, setToggle] = useState(false);
   const [users, setUsers] = useState([]);
   const user = null;
+  const dispatch = useDispatch();
   const [rightO, setRightO] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
 
-  const logout = () => {};
+  const logout = () => {
+    dispatch({ type: USER_LOGOUT });
+    localStorage.removeItem("userInfo");
+  };
   const renderProfile = () => {};
   const collapseInput = () => {
     document.getElementsByClassName("homeHeader__logo")[0].style.display =

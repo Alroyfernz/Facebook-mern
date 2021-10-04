@@ -5,23 +5,21 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./app.css";
 import Profile from "./components/Profile";
+import { useSelector } from "react-redux";
 function App() {
+  const { userInfo } = useSelector((state) => state.userLogin);
   return (
     <div>
       <Router>
         <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
+          <Route path="/login">{userInfo ? <Home /> : <Login />}</Route>
           <Route path="/profile/:username">
             <Profile />
           </Route>
           <Route path="/" exact>
-            <Home />
+            {userInfo !== null ? <Home /> : <Login />}
           </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
+          <Route path="/register">{userInfo ? <Home /> : <Register />}</Route>
         </Switch>
       </Router>
     </div>
