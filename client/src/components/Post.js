@@ -1,12 +1,44 @@
 import { Avatar } from "@material-ui/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { AiFillDelete } from "react-icons/ai";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import "./post.css";
 
 const Post = ({ post }) => {
   const [user, setUser] = useState({});
   const [likes, setLikes] = useState(post.likes.length);
-  const handleLike = () => {};
+  const [isLiked, setIsLiked] = useState(false);
+  const { userInfo } = useSelector((state) => state.userLogin);
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete("/api/posts/" + post._id, userInfo._id);
+    } catch (error) {
+      console.log("error while deleting post");
+    }
+  };
+
+  const handleLike = async () => {
+    if (!isLiked) {
+      setLikes(likes + 1);
+      setIsLiked(!isLiked);
+      try {
+        axios.put("/api/posts/like/" + post._id, userInfo._id);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setLikes(likes - 1);
+      setIsLiked(!isLiked);
+      try {
+        axios.put("/api/posts/like" + post._id, userInfo._id);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -30,10 +62,16 @@ const Post = ({ post }) => {
               : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53Y7PzUEawis7VUgB5IIoP16my0F7OxeJDg&usqp=CAU"
           }
         />
-        <h3>{user.name}</h3>
-        <i className="post__verified" />
+        <Link to={`/profile/${post.userId}`} className="dom_links">
+          <h3>{user.name}</h3>
+        </Link>
+
+        {/* <i className="post__verified" /> */}
+        {userInfo._id === post._id && (
+          <AiFillDelete onClick={handleDelete} className="deleteIcon" />
+        )}
       </div>
-      <h4 className="post__tex5"></h4>
+      <h4 className="post__tex5">my new post</h4>
       <img src={post.photo} alt="" className="post__image" />
       <div className="post__likeandlove">
         <img
@@ -82,6 +120,20 @@ const Post = ({ post }) => {
         </div>
         <p className="pressEnterToPost">Press Enter to post</p>
       </form>
+      {/* {
+                comments.map((comment) => (
+                    <div className={`comments__show ${comment.username == postUser?.displayName && 'myself'}`}>
+                        <Avatar
+                            className="post__avatar2"
+                            alt=""
+                            src={comment.photoURL}
+                        />
+                        <div class="container__comments">
+                            <p><span>{comment.username}</span><i class="post__verified"></i>&nbsp;{comment.text}</p>
+                        </div>
+                    </div>
+                ))
+            } */}
     </div>
   );
 };

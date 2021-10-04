@@ -3,14 +3,19 @@ import Imageup from "./Imageup";
 import "./posts.css";
 import Post from "./Post";
 import Stories from "./Stories";
+import { useSelector } from "react-redux";
 import axios from "axios";
-const Posts = () => {
+const Posts = ({ profile }) => {
+  const { userInfo } = useSelector((state) => state.userLogin);
   const [postes, setPostes] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("posts/timeline/6150be33a78c8837e9232dd2");
+        const res =
+          profile === true
+            ? await axios.get("posts/" + userInfo.email)
+            : await axios.get("posts/timeline/" + userInfo._id);
         setPostes(res.data);
       } catch (error) {
         console.log(error);

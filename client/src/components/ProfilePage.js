@@ -6,7 +6,7 @@ const ProfilePage = () => {
   return (
     <div>
       <Homeheader />
-      <Profile />
+      <Profile profile="true" />
     </div>
   );
 };

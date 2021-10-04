@@ -49,7 +49,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id/like", async (req, res) => {
+router.put("/like/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post.likes.includes(req.body.userId)) {
@@ -86,6 +86,16 @@ router.get("/timeline/:userId", async (req, res) => {
     // res.status(200).json(currentUser);
   } catch (error) {
     res.status(500).send(error);
+  }
+});
+
+router.get("/posts/:email", async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.params.email });
+    const posts = await Post.find({ userId: user._id });
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 
