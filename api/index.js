@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
+const multer = require("multer");
+const path = require("path");
 
 dotenv.config();
 mongoose
@@ -14,6 +16,24 @@ mongoose
     console.log("error while connecting to database");
   });
 app.use(express.json());
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images");
+  },
+  fileName: (req, file, cb) => {
+    cb(null, req.body.name);
+  },
+});
+const upload = multer({ storage: storage });
+app.post("/api/upload", upload.single("file"), async (req, res) => {
+  try {
+    return res.status(200).json("File uploaded successfully");
+  } catch (error) {
+    console.log(error);
+  }
+});
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/posts", postRouter);

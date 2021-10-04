@@ -6,8 +6,8 @@ router.put("/", async (req, res) => {
     const newPost = new Post({
       userId: req.body.userId,
       photo: req.body.photo,
-      username: req.body.username,
-      desc: req.body.desc,
+
+      desc: req.body.caption,
     });
 
     const post = await newPost.save();

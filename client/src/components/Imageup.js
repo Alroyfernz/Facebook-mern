@@ -3,11 +3,15 @@ import Dialog from "@material-ui/core/Dialog";
 import CloseIcon from "@material-ui/icons/Close";
 import { FcVideoCall } from "react-icons/fc";
 import "./imageup.css";
+import axios from "axios";
+import { useSelector } from "react-redux";
 const Imageup = () => {
-  const user = null;
+  const { userInfo } = useSelector((state) => state.userLogin);
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState("");
-  const [imageURL, setImageURL] = useState("");
+  const [imageURL, setImageURL] = useState(null);
+  const [file, setFile] = useState({});
+
   const [caption, setCaption] = useState("");
   const progress = 0;
   const handleClickOpen = () => {};
@@ -15,6 +19,27 @@ const Imageup = () => {
   const handleChange = () => {};
   const uploadFileWithClick = () => {};
   const handleUpload = () => {};
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newPost = {
+      userId: userInfo._id,
+      caption,
+    };
+    // if (file) {
+    //   const data = new FormData();
+    //   const filename = Date.now() + file.name;
+    //   data.append("name", filename);
+    //   data.append("file", file.name);
+    //   newPost.photo = filename;
+    //   try {
+    //     await axios.post("/upload", data);
+    //   } catch (e) {}
+    // }
+    try {
+      const res = await axios.put("/posts", newPost);
+    } catch (error) {}
+  };
 
   return (
     <div className="imageupload">
@@ -25,7 +50,7 @@ const Imageup = () => {
         onClose={handleClose}
         scroll="false"
       >
-        <div class="makeStyles-paper-1">
+        <form class="makeStyles-paper-1" onSubmit={handleSubmit}>
           <div class="modalInit">
             <h1>Create Post</h1>
             <CloseIcon class="closeModalIcon" onClick={() => setOpen(!open)} />
@@ -39,12 +64,7 @@ const Imageup = () => {
             <h1>Alroy</h1>
           </div>
           <div class="inputForUpload">
-            <input
-              onChange={handleChange}
-              type="file"
-              accept="image/*"
-              className="four"
-            />
+            <input type="file" className="four" />
             <textarea
               value={caption}
               onChange={(e) => setCaption(e.target.value)}
@@ -52,8 +72,11 @@ const Imageup = () => {
               placeholder="Whats on your mind Alroy"
             />
           </div>
-          <div class={`previewImage ${!image && "vanish"}`}>
-            <img src={imageURL} className="previewImaage" />
+          <div class={`previewImage ${!file && "vanish"}`}>
+            <img
+              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
+              className="previewImaage"
+            />
           </div>
           <img
             alt=""
@@ -68,7 +91,16 @@ const Imageup = () => {
               <h1>Add to your post</h1>
             </div>
             <div class="right">
-              <i class="Icon roomIcon" onClick={uploadFileWithClick} />
+              <label htmlFor="fileInput">
+                <i class="Icon roomIcon" />
+              </label>
+
+              <input
+                type="file"
+                id="fileInput"
+                style={{ display: "none" }}
+                onChange={(e) => setFile(e.target.files[0])}
+              />
               <i class="Icon photoIcon" onClick={uploadFileWithClick} />
               <i class="Icon friendsIcon" />
               <i class="Icon feelingIcon" />
@@ -77,7 +109,6 @@ const Imageup = () => {
             </div>
           </div>
           <button
-            onClick={handleUpload}
             type="submit"
             class={`postButton ${caption.length < 1 && "disabled"} ${
               imageURL != "" && "visible"
@@ -85,7 +116,7 @@ const Imageup = () => {
           >
             Post
           </button>
-        </div>
+        </form>
       </Dialog>
 
       <div class="imageupload__container">
