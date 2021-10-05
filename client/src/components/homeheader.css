@@ -257,6 +257,16 @@
     margin-top: 10px;
     border-radius: 10px;
   }
+  .setIconColor{
+    color: #fff !important;
+   
+  }
+
+  .feedback{
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yw/r/XcIzTLHbJ6w.png) !important;
+    background-position: 0px -262px !important;
+    background-size: 26px 584px !important;
+  }
   .dropdown-content3>#list li{
     margin-left: 0px !important;
   }
@@ -392,15 +402,13 @@
   }
   
   .logout {
-    vertical-align: -0.25em;
-    -webkit-filter: invert(62%) sepia(98%) saturate(12%) hue-rotate(175deg) brightness(90%) contrast(96%);
-    background-position: 0 -1011px;
-    background-image: url(https://facebook.com/rsrc.php/v3/y-/r/EOPZGFLdpJY.png);
-      background-size: 25px 2268px;
-      background-repeat: no-repeat;
-      display: inline-block;
-      height: 20px;
-      width: 20px;
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yw/r/XcIzTLHbJ6w.png);
+    background-position: 0px -284px;
+    background-size: 26px 584px;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    display: inline-block;
   }
   
   .iconDrop {
@@ -414,35 +422,32 @@
   }
   
   .darkMode {
-    vertical-align: -0.25em;
-    -webkit-filter: invert(62%) sepia(98%) saturate(12%) hue-rotate(175deg) brightness(90%) contrast(96%);
-    background-position: 0 -1179px;
-    background-image: url(https://facebook.com/rsrc.php/v3/y-/r/EOPZGFLdpJY.png);
-    background-size: 25px 2268px;
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yu/r/fABRMCzzfJI.png);
+    background-position: 0px -112px;
+    background-size: 34px 250px;
+    width: 20px;
+    height: 20px;
     background-repeat: no-repeat;
     display: inline-block;
-    height: 20px;
-    width: 20px;
   }
   
   .helpAndSupport {
-    vertical-align: -0.25em;
-    -webkit-filter: invert(62%) sepia(98%) saturate(12%) hue-rotate(175deg) brightness(90%) contrast(96%);
-    background-image: url(https://facebook.com/rsrc.php/v3/y-/r/EOPZGFLdpJY.png);
-      background-size: 25px 2268px;
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yw/r/XcIzTLHbJ6w.png);
+    background-position: 0px -394px;
+    background-size: 26px 584px;
       background-repeat: no-repeat;
       display: inline-block;
-      background-position: 0 -1326px;
+     
       height: 20px;
       width: 20px;
   }
   
   .settings {
-    vertical-align: -0.25em;
-    -webkit-filter: invert(62%) sepia(98%) saturate(12%) hue-rotate(175deg) brightness(90%) contrast(96%);
-    background-image: url(https://facebook.com/rsrc.php/v3/yH/r/hD_JBkCe96v.png);
-    background-size: 33px 1483px;
-    background-repeat: no-repeat;
+    
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yU/r/tBr7iKHYsZc.png);
+    background-position: -22px -438px;
+    background-size: 50px 576px;
+    
     display: inline-block;
     height: 20px !important;
     width: 20px !important;
