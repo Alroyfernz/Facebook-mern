@@ -8,24 +8,24 @@ import "./post.css";
 
 const Post = ({ post }) => {
   const [user, setUser] = useState({});
+  const [text, setText] = useState("");
+  const [comments, setComment] = useState([]);
   const [likes, setLikes] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const { userInfo } = useSelector((state) => state.userLogin);
 
   const handleDelete = async () => {
-    console.log("userInfo._id", userInfo._id);
-    console.log("post id", post._id);
-    const userId = userInfo._id;
     try {
-      await axios.delete("/posts/615be904523be3e0ffaf16f4", {
-        userId,
+      await axios.delete("/posts/" + post._id, {
+        userId: userInfo._id,
       });
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(post._id);
-  console.log(userInfo._id === post.userId);
+
+  // console.log(post._id);
+  // console.log(userInfo._id === post.userId);
   const handleLike = async () => {
     if (!isLiked) {
       setLikes(likes + 1);
@@ -45,6 +45,20 @@ const Post = ({ post }) => {
       }
     }
   };
+
+  const handleComment = async (e) => {
+    console.log("commentedd");
+    e.preventDefault();
+    try {
+      const res = await axios.post("/comments/", {
+        username: userInfo.name,
+        postId: post._id,
+        text,
+      });
+      console.log(res.data);
+      setComment(res.data);
+    } catch (error) {}
+  };
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -55,8 +69,20 @@ const Post = ({ post }) => {
         console.log(error);
       }
     };
+
     fetchUser();
   }, []);
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const res = await axios.get("/comments/" + post._id);
+        setComment(res.data);
+      } catch (error) {}
+    };
+    fetchComments();
+  }, []);
+
   return (
     <div className="post">
       <div className="post__header">
@@ -112,7 +138,7 @@ const Post = ({ post }) => {
           <h3>Share</h3>
         </div>
       </div>
-      <form>
+      <form onSubmit={handleComment}>
         <div className="commentBox">
           <Avatar
             className="post__avatar2"
@@ -123,25 +149,31 @@ const Post = ({ post }) => {
             className="commentInputBox"
             type="text"
             placeholder="Write a comment ... "
+            onChange={(e) => {
+              setText(e.target.value);
+            }}
           />
           <input type="submit" className="transparent__submit" />
         </div>
         <p className="pressEnterToPost">Press Enter to post</p>
       </form>
-      {/* {
-                comments.map((comment) => (
-                    <div className={`comments__show ${comment.username == postUser?.displayName && 'myself'}`}>
-                        <Avatar
-                            className="post__avatar2"
-                            alt=""
-                            src={comment.photoURL}
-                        />
-                        <div class="container__comments">
-                            <p><span>{comment.username}</span><i class="post__verified"></i>&nbsp;{comment.text}</p>
-                        </div>
-                    </div>
-                ))
-            } */}
+      {comments.map((comment) => {
+        return (
+          <div
+            className={`comments__show ${
+              comment.username == userInfo?.name && "myself"
+            }`}
+          >
+            <Avatar className="post__avatar2" alt="" src={comment.photoURL} />
+            <div class="container__comments">
+              <p>
+                <span>{comment.username}</span>
+                <i class="post__verified"></i>&nbsp;{comment.text}
+              </p>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
