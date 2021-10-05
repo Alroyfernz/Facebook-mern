@@ -5,15 +5,15 @@ const commentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  UserId: {
+  userId: {
     type: String,
     required: true,
   },
-  photoURL: { type: String },
+  photoURL: { type: String, default: "" },
   text: {
     type: String,
     required: true,
   },
 });
 
-module.exports = mongoose.model("comment", commentSchema);
+module.exports = mongoose.model("Comment", commentSchema);

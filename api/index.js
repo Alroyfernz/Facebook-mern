@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
+const commentRouter = require("./routes/comment");
+
 const multer = require("multer");
 const path = require("path");
 var bodyParser = require("body-parser");
@@ -44,6 +46,7 @@ app.use("/images", express.static(path.join(__dirname, "public/images")));
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/posts", postRouter);
+app.use("/api/comments", commentRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("Backend server running");
