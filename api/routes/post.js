@@ -6,7 +6,7 @@ const { uploadImage } = require("../imageUpload");
 router.put("/", async (req, res) => {
   const photo = req.body.photo;
   try {
-    const photoUrl = photo && uploadImage(photo);
+    const photoUrl = photo && (await uploadImage(photo));
     const newPost = new Post({
       userId: req.body.userId,
       photo: photoUrl,
