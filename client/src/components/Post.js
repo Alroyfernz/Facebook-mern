@@ -58,17 +58,19 @@ const Post = ({ post }) => {
   return (
     <div className="post">
       <div className="post__header">
-        <Avatar
-          className="post__avatar"
-          src={
-            user.profilePicture !== null
-              ? user.profilePicture
-              : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53Y7PzUEawis7VUgB5IIoP16my0F7OxeJDg&usqp=CAU"
-          }
-        />
-        {/* <Link to={`/profile/${post.userId}`} className="dom_links"> */}
-        <h3>{user.name}</h3>
-        {/* </Link> */}
+        <div className="post_div">
+          <Avatar
+            className="post__avatar"
+            src={
+              user.profilePicture !== null
+                ? user.profilePicture
+                : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53Y7PzUEawis7VUgB5IIoP16my0F7OxeJDg&usqp=CAU"
+            }
+          />
+          {/* <Link to={`/profile/${post.userId}`} className="dom_links"> */}
+          <h3>{user.name}</h3>
+          {/* </Link> */}
+        </div>
 
         {/* <i className="post__verified" /> */}
         {userInfo._id === post.userId && (
@@ -96,8 +98,8 @@ const Post = ({ post }) => {
 
       <div className="post__likeoptions">
         <div className="like" onClick={handleLike}>
-          <i />
-          <h3>Like</h3>
+          <i className={isLiked ? "like2_liked" : "like2"} />
+          <h3 className={isLiked ? "post_liked" : ""}>Like</h3>
         </div>
         <div className="comment">
           <i className="comment2" />

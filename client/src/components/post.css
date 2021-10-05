@@ -10,8 +10,26 @@
     list-style: none;
     color: inherit;
 }
-.delete_icon{
+.likeP{
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/cdYZWmQqxk3.png);
+    background-position: 0 -320px;
+    background-size: 26px 1120px;
+    width: 18px;
+    height: 18px;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+.deleteIcon{
     color: #fff;
+    margin-right: 10px;
+} 
+.post_div>h3{
+    color: #fff;
+    font-size: 14px;
+    
+}
+.deleteIcon:hover{
+    cursor: pointer;
 }
 .post__image {
     width: 100%;
@@ -92,10 +110,15 @@ user-select: none;
 .post__comments {
     padding: 20px;
 }
+.post_div{
+    display: flex;
+    align-items: center;
+}
 
 .post__header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding-top: 10px;
     padding-left: 10px;
     padding-bottom: 10px;
@@ -191,7 +214,9 @@ user-select: none;
     margin-right: 10px;
     margin-left: 10px;
 }
-
+.post_liked{
+    color: #4080FF !important;
+}
 .like2 {
     background-image: url(https://i.ibb.co/XLsnX3w/del.png);
     background-size: 20px 20px;
@@ -201,6 +226,16 @@ user-select: none;
     width: 18px;
     margin-right: 5px;
     -webkit-filter: brightness(0) invert(62%) sepia(98%) saturate(12%) hue-rotate(175deg) brightness(90%) contrast(96%);
+}
+.like2_liked{
+    background-image: url(https://i.ibb.co/XLsnX3w/del.png);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+    margin-right: 5px;
+    -webkit-filter: invert(40%) sepia(22%) saturate(5504%) hue-rotate(210deg) brightness(106%) contrast(106%);
 }
 
 
