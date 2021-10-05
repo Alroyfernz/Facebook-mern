@@ -7,6 +7,7 @@ const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
 const multer = require("multer");
 const path = require("path");
+var bodyParser = require("body-parser");
 
 dotenv.config();
 mongoose
@@ -15,6 +16,12 @@ mongoose
   .catch((error) => {
     console.log("error while connecting to database");
   });
+// bodyParser = {
+//   json: { limit: "50mb", extended: true },
+//   urlencoded: { limit: "50mb", extended: true },
+// };
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json());
 
 const storage = multer.diskStorage({

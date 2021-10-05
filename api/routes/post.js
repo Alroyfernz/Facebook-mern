@@ -1,16 +1,22 @@
 const router = require("express").Router();
 const Post = require("../models/Post");
 const User = require("../models/User");
+const { uploadImage } = require("../imageUpload");
+
 router.put("/", async (req, res) => {
+  const photo = req.body.photo;
   try {
+    const photoUrl = photo && uploadImage(photo);
     const newPost = new Post({
       userId: req.body.userId,
-      photo: req.body.photo,
-
+      photo: photoUrl,
       desc: req.body.caption,
     });
 
     const post = await newPost.save();
+    console.log(post);
+    console.log(photoUrl);
+
     // const updatedUser = User.findByIdAndUpdate(req.userId, {
     //   $push: { posts: post._id },
     // });

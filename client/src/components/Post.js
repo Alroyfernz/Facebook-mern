@@ -13,19 +13,23 @@ const Post = ({ post }) => {
   const { userInfo } = useSelector((state) => state.userLogin);
 
   const handleDelete = async () => {
+    console.log("userInfo._id", userInfo._id);
     try {
-      await axios.delete("/api/posts/" + post._id, userInfo._id);
+      await axios.delete("/posts/" + post._id, {
+        userId: userInfo._id,
+      });
     } catch (error) {
-      console.log("error while deleting post");
+      console.log(error);
     }
   };
-
+  console.log(post._id);
+  console.log(userInfo._id === post.userId);
   const handleLike = async () => {
     if (!isLiked) {
       setLikes(likes + 1);
       setIsLiked(!isLiked);
       try {
-        axios.put("/api/posts/like/" + post._id, userInfo._id);
+        axios.put("/posts/like/" + post._id, userInfo._id);
       } catch (error) {
         console.log(error);
       }
@@ -33,7 +37,7 @@ const Post = ({ post }) => {
       setLikes(likes - 1);
       setIsLiked(!isLiked);
       try {
-        axios.put("/api/posts/like" + post._id, userInfo._id);
+        axios.put("/posts/like" + post._id, userInfo._id);
       } catch (error) {
         console.log(error);
       }
@@ -62,12 +66,12 @@ const Post = ({ post }) => {
               : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53Y7PzUEawis7VUgB5IIoP16my0F7OxeJDg&usqp=CAU"
           }
         />
-        <Link to={`/profile/${post.userId}`} className="dom_links">
-          <h3>{user.name}</h3>
-        </Link>
+        {/* <Link to={`/profile/${post.userId}`} className="dom_links"> */}
+        <h3>{user.name}</h3>
+        {/* </Link> */}
 
         {/* <i className="post__verified" /> */}
-        {userInfo._id === post._id && (
+        {userInfo._id === post.userId && (
           <AiFillDelete onClick={handleDelete} className="deleteIcon" />
         )}
       </div>

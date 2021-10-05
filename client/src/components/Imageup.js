@@ -13,6 +13,7 @@ const Imageup = () => {
   const [file, setFile] = useState({});
 
   const [caption, setCaption] = useState("");
+  const [selectPhoto, setSelectPhoto] = useState("");
   const progress = 0;
   const handleClickOpen = () => {};
   const handleClose = () => {};
@@ -20,22 +21,18 @@ const Imageup = () => {
   const uploadFileWithClick = () => {};
   const handleUpload = () => {};
 
+  console.log(file);
+  console.log("size of cap is", caption.length);
+  console.log(selectPhoto);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newPost = {
       userId: userInfo._id,
       caption,
+      photo: selectPhoto,
     };
-    // if (file) {
-    //   const data = new FormData();
-    //   const filename = Date.now() + file.name;
-    //   data.append("name", filename);
-    //   data.append("file", file.name);
-    //   newPost.photo = filename;
-    //   try {
-    //     await axios.post("/upload", data);
-    //   } catch (e) {}
-    // }
+
     try {
       const res = await axios.put("/posts", newPost);
     } catch (error) {}
@@ -73,10 +70,7 @@ const Imageup = () => {
             />
           </div>
           <div class={`previewImage ${!file && "vanish"}`}>
-            <img
-              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
-              className="previewImaage"
-            />
+            <img src="" className="previewImaage" />
           </div>
           <img
             alt=""
@@ -99,7 +93,16 @@ const Imageup = () => {
                 type="file"
                 id="fileInput"
                 style={{ display: "none" }}
-                onChange={(e) => setFile(e.target.files[0])}
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onloadend = () => {
+                      setSelectPhoto(reader.result);
+                    };
+                  }
+                }}
               />
               <i class="Icon photoIcon" onClick={uploadFileWithClick} />
               <i class="Icon friendsIcon" />
@@ -111,7 +114,7 @@ const Imageup = () => {
           <button
             type="submit"
             class={`postButton ${caption.length < 1 && "disabled"} ${
-              imageURL != "" && "visible"
+              imageURL != null && "visible"
             }`}
           >
             Post

@@ -1,11 +1,13 @@
 import { Dialog } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./profile.css";
 import { useParams, useHistory } from "react-router-dom";
 import Posts from "./Posts.js";
 import Imageup from "./Imageup.js";
 import ProfileSidebar from "./ProfileSidebar.js";
 import Post from "./Post";
+import { useSelector } from "react-redux";
+import axios from "axios";
 const Profile = () => {
   const { username, uid } = useParams();
   const [open, setOpen] = useState(false);
@@ -19,6 +21,23 @@ const Profile = () => {
   const [bioPresent, setBioPresent] = useState(false);
   const handleUpload = () => {};
   const handleClose = () => {};
+  const { userInfo } = useSelector((state) => state.userLogin);
+  const [postes, setPostes] = useState([]);
+  const profile = true;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res =
+          profile === true
+            ? await axios.get("posts/" + userInfo.email)
+            : await axios.get("posts/timeline/" + userInfo._id);
+        setPostes(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="profile">
@@ -73,10 +92,9 @@ const Profile = () => {
         <ProfileSidebar />
         <div className="postAndWatch">
           <Imageup />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+          {postes.map((p) => {
+            return <Post id={p._id} post={p} />;
+          })}
         </div>
       </div>
     </div>
