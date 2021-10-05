@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./homeheader.css";
+import axios from "axios";
 import { useDispatch } from "react-redux";
 import { AiFillCaretDown } from "react-icons/ai";
 import { BsArrowBarLeft, BsArrowBarRight, BsGrid3X3Gap } from "react-icons/bs";
@@ -16,7 +17,6 @@ const Homeheader = ({ selected }) => {
   const [rightO, setRightO] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
-
   const logout = () => {
     dispatch({ type: USER_LOGOUT });
     localStorage.removeItem("userInfo");
@@ -43,13 +43,32 @@ const Homeheader = ({ selected }) => {
       "none";
     document.getElementsByClassName("searchBox")[0].style.display = "block";
   };
+
+  console.log(filteredUsers);
+  // console.log(searchTerm);
+  useEffect(() => {
+    const fetchAll = async () => {
+      try {
+        const res = await axios.get("/user/");
+        setUsers(res.data);
+      } catch (error) {
+        console.log("Error while fetching all users");
+      }
+    };
+
+    fetchAll();
+  }, []);
   const updateSearchResult = (e) => {
     setSearchTerm(e.target.value);
     document.getElementsByClassName("dropdown-content3")[0].style.display =
       "block";
+    // filteredUsers = users.filter((user) => user !== null);
+    setFilteredUsers(users.filter((user) => user.name === searchTerm));
+    console.log(searchTerm);
   };
 
-  useEffect(() => {}, []);
+  console.log(users);
+
   return (
     <div className="homeHeader">
       <div className="homeHeaderLogoAndSearch">
@@ -77,10 +96,10 @@ const Homeheader = ({ selected }) => {
             {users !== undefined &&
               filteredUsers.map((user1) => {
                 return (
-                  <li>
+                  <li onClick={collapseInput}>
                     <a onClick={collapseInput} href="/">
-                      {/* <Avatar className="searchAvatar"/> */}
-                      <h3 className="searchH3">Alroy</h3>
+                      <Avatar className="searchAvatar" />
+                      <h3 className="searchH3">{user1.name}</h3>
                     </a>
                   </li>
                 );

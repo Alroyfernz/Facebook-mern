@@ -46,6 +46,15 @@ router.get("/:id", async (req, res) => {
     res.status(500).json(error);
   }
 });
+router.get("/", async (req, res) => {
+  try {
+    const user = await User.find();
+    // const { password, updatedAt, ...other } = user._doc;
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 router.put("/:id/add", async (req, res) => {
   if (req.body.userId !== req.params.id) {

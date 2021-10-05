@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { useSelector } from "react-redux";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./post.css";
 
 const Post = ({ post }) => {

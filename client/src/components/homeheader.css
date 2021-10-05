@@ -257,7 +257,12 @@
     margin-top: 10px;
     border-radius: 10px;
   }
-  
+  .dropdown-content3>#list li{
+    margin-left: 0px !important;
+  }
+  /* .dropdown-content3>li{
+    margin-left: 0px !important;
+  } */
   .dropdown-content.block {
     display: block;
     position: absolute;
