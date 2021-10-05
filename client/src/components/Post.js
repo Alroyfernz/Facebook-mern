@@ -14,9 +14,11 @@ const Post = ({ post }) => {
 
   const handleDelete = async () => {
     console.log("userInfo._id", userInfo._id);
+    console.log("post id", post._id);
+    const userId = userInfo._id;
     try {
-      await axios.delete("/posts/" + post._id, {
-        userId: userInfo._id,
+      await axios.delete("/posts/615be904523be3e0ffaf16f4", {
+        userId,
       });
     } catch (error) {
       console.log(error);
