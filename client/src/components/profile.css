@@ -70,6 +70,16 @@ border-bottom: 1px solid gray;
 padding: 10px;
     
 }
+.RFriend{
+    background-color:rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.RFriend>img{
+    -webkit-filter:invert(100%);
+    margin-right: 3px;
+}
 .submit_btn{
     background-color:#4599ff;
     display: flex;

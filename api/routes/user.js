@@ -1,28 +1,29 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const { uploadImage } = require("../imageUpload");
 
-router.put("/:id", async (req, res) => {
-  if (req.body.userId === req.params.id) {
-    if (req.body.password) {
-      try {
-        req.body.password = await bcrypt.hash(req.body.password, 12);
-      } catch (error) {
-        return res.status(500).json("error in hash");
-      }
-    }
-    try {
-      const user = await User.findByIdAndUpdate(req.params.id, {
-        $set: req.body,
-      });
-      res.status(200).json("Account has been updated");
-    } catch (error) {
-      res.status(500).json("error while updating user");
-    }
-  } else {
-    return res.status(403).json("you can only update your account");
-  }
-});
+// router.put("/:id", async (req, res) => {
+//   if (req.body.userId === req.params.id) {
+//     if (req.body.password) {
+//       try {
+//         req.body.password = await bcrypt.hash(req.body.password, 12);
+//       } catch (error) {
+//         return res.status(500).json("error in hash");
+//       }
+//     }
+//     try {
+//       const user = await User.findByIdAndUpdate(req.params.id, {
+//         $set: req.body,
+//       });
+//       res.status(200).json("Account has been updated");
+//     } catch (error) {
+//       res.status(500).json("error while updating user");
+//     }
+//   } else {
+//     return res.status(403).json("you can only update your account");
+//   }
+// });
 
 router.delete("/:id", async (req, res) => {
   if (req.body.userId === req.params.id) {
@@ -56,7 +57,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.put("/:id/add", async (req, res) => {
+router.put("/add/:id", async (req, res) => {
   if (req.body.userId !== req.params.id) {
     try {
       const currentUser = await User.findById(req.params.id);
@@ -74,7 +75,7 @@ router.put("/:id/add", async (req, res) => {
   }
 });
 
-router.put("/:id/remove", async (req, res) => {
+router.put("/remove/:id", async (req, res) => {
   if (req.body.userId !== req.params.id) {
     try {
       const currentUser = await User.findById(req.params.id);
@@ -89,6 +90,19 @@ router.put("/:id/remove", async (req, res) => {
     } catch (error) {}
   } else {
     res.status(403).json("you cannot remove yourself");
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  const photo = req.body.imageURL;
+  try {
+    const photoUrl = photo && (await uploadImage(photo));
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+      $set: { profilePicture: photoUrl },
+    });
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(403).json(error);
   }
 });
 module.exports = router;

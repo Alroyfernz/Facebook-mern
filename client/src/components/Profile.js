@@ -10,13 +10,9 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { BsThreeDots } from "react-icons/bs";
 const Profile = () => {
-  const { username, uid } = useParams();
-  const [open, setOpen] = useState(false);
-  const [scroll, setScroll] = useState("paper");
   const [imageURL, setImageURL] = useState("");
-
-  const [progress, setProgress] = useState(0);
-  const [posts, setPosts] = useState([]);
+  const [file, setFile] = useState(null);
+  const [coverImgUrl, setCoverImgUrl] = useState("");
   const [profileUserData, setProfileUserData] = useState();
   const [bio, setBio] = useState("");
   const [bioPresent, setBioPresent] = useState(false);
@@ -25,9 +21,36 @@ const Profile = () => {
   const handleClose = () => {};
   const { userInfo } = useSelector((state) => state.userLogin);
   const [postes, setPostes] = useState([]);
+  const [openD, setOpenD] = useState(false);
   const profile = true;
 
   const history = useHistory();
+  console.log(imageURL);
+  console.log(file);
+  const handleUpdate = async () => {
+    setOpenD(!openD);
+    try {
+      await axios.put("/user/" + userInfo._id, { imageURL });
+      console.log("image uploded");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleFriend = async () => {
+    try {
+      await axios.put("/user/add/" + userInfo._id, { userId: user._id });
+      console.log("kelo re add!");
+    } catch (error) {
+      console.log("error while adding friend");
+    }
+  };
+  const handleNotFriend = async () => {
+    try {
+      await axios.put("/user/remove/" + userInfo._id, user._id);
+    } catch (error) {
+      console.log("error while deleting friend");
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,7 +83,7 @@ const Profile = () => {
   return (
     <div className="profile">
       <Dialog
-        open="false"
+        open={openD}
         // onClose={handleClose}
         // scroll={scroll}
         className="dialog2"
@@ -70,17 +93,36 @@ const Profile = () => {
             <div className="Dtitle">
               <h1>Edit Profile</h1>
             </div>
-            <div className="icon">
+            <div className="icon" onClick={() => setOpenD(!openD)}>
               <i className="closeIcon" />
             </div>
           </div>
           <div className="drop_bottom1">
             <div className="header1">
               <h4>Profile Picture</h4>
-              <span className="editlink">edit</span>
+              <label htmlFor="profileC">
+                <span className="editlink">edit</span>
+              </label>
+
+              <input
+                type="file"
+                id="profileC"
+                style={{ display: "none" }}
+                onChange={(e) => {
+                  setFile(e.target.files[0]);
+                  const file = e.target.files[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onloadend = () => {
+                      setImageURL(reader.result);
+                    };
+                  }
+                }}
+              />
             </div>
             <div className="profile_photo">
-              <Avatar className="profileUser" />
+              <Avatar src={user?.profilePicture} className="profileUser" />
             </div>
           </div>
           <div className="drop_bottom2">
@@ -92,7 +134,7 @@ const Profile = () => {
               <img src="" className="cover" />
             </div>
           </div>
-          <div className="submit_btn">
+          <div className="submit_btn" onClick={handleUpdate}>
             <h4>Edit Profile</h4>
           </div>
         </div>
@@ -125,44 +167,63 @@ const Profile = () => {
               </ul>
             </div>
             <div className="optionRight">
-              {/* <span className="addFriend">
-                {" "}
-                <img
-                  src="https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/33EToHSZ94f.png"
-                  width="16px"
-                  height="16px"
-                  alt=""
-                />{" "}
-                <h4 className="text">Add Friend</h4>
-              </span> */}
-              <span className="addStory">
-                {" "}
-                <img
-                  src="https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/33EToHSZ94f.png"
-                  width="16px"
-                  height="16px"
-                  alt=""
-                />{" "}
-                <h4 className="text">Add Story</h4>
-              </span>
-              {/* <span className="messenger">
-                <img
-                  src="https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/YIxFfN5ecJG.png"
-                  width="16px"
-                  height="16px"
-                  alt=""
-                />
-                <h4 className="text">Message</h4>
-              </span> */}
-              <span className="edit">
-                <img
-                  src="https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/YIxFfN5ecJG.png"
-                  width="16px"
-                  height="16px"
-                  alt=""
-                />
-                <h4 className="text">Edit profile</h4>
-              </span>
+              {userInfo?._id === user?._id ? (
+                <span className="addStory">
+                  {" "}
+                  <img
+                    src="https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/33EToHSZ94f.png"
+                    width="16px"
+                    height="16px"
+                    alt=""
+                  />{" "}
+                  <h4 className="text">Add Story</h4>
+                </span>
+              ) : userInfo?.friends.includes(user?._id) === false ? (
+                <span className="addFriend" onClick={handleFriend}>
+                  {" "}
+                  <img
+                    src="https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/33EToHSZ94f.png"
+                    width="16px"
+                    height="16px"
+                    alt=""
+                  />{" "}
+                  <h4 className="text">Add Friend</h4>
+                </span>
+              ) : (
+                <span className="RFriend" onClick={handleFriend}>
+                  {" "}
+                  <img
+                    src="https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/c9BbXR9AzI1.png"
+                    width="16px"
+                    height="16px"
+                    alt=""
+                  />{" "}
+                  <h4 className="text"> Friends</h4>
+                </span>
+              )}
+
+              {userInfo?._id === user?._id ? (
+                <span className="edit" onClick={() => setOpenD(!openD)}>
+                  <img
+                    src="https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/YIxFfN5ecJG.png"
+                    width="16px"
+                    height="16px"
+                    alt=""
+                  />
+                  <h4 className="text">Edit profile</h4>
+                </span>
+              ) : (
+                <span className="messenger">
+                  <img
+                    src="https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/YIxFfN5ecJG.png"
+                    width="16px"
+                    height="16px"
+                    alt=""
+                  />
+                  <h4 className="text">Message</h4>
+                </span>
+              )}
+
               <span className="more">
                 <BsThreeDots />
               </span>
