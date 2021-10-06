@@ -13,7 +13,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/login">{userInfo ? <Home /> : <Login />}</Route>
-          <Route path="/profile/:username">
+          <Route path="/profile/:id">
             <Profile />
           </Route>
           <Route path="/" exact>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./homeheader.css";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillCaretDown } from "react-icons/ai";
@@ -22,6 +23,7 @@ const Homeheader = ({ selected }) => {
     dispatch({ type: USER_LOGOUT });
     localStorage.removeItem("userInfo");
   };
+  const history = useHistory();
   const renderProfile = () => {};
   const collapseInput = () => {
     document.getElementsByClassName("homeHeader__logo")[0].style.display =
@@ -163,7 +165,12 @@ const Homeheader = ({ selected }) => {
         }
         // className="homeHeader__otherIcons"
       >
-        <div class="round profile">
+        <div
+          class="round profile"
+          onClick={() => {
+            history.push(`/profile/${userInfo._id}`);
+          }}
+        >
           <a href="#" style={{ textDecoration: "none" }}>
             <Avatar className="ProfileAvatar" src="" />
             <p>{userInfo.name}</p>

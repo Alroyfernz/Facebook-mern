@@ -14,6 +14,7 @@
 }
 
 .profileAvatar {
+    margin-bottom: 20px !important;
     margin-left: 42%;
     height: 160px !important;
     width: 160px !important;
