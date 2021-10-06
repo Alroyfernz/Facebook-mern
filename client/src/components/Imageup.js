@@ -70,7 +70,7 @@ const Imageup = () => {
             />
           </div>
           <div class={`previewImage ${!file && "vanish"}`}>
-            <img src="" className="previewImaage" />
+            <img src={selectPhoto} className="previewImaage" />
           </div>
           <img
             alt=""
@@ -94,6 +94,7 @@ const Imageup = () => {
                 id="fileInput"
                 style={{ display: "none" }}
                 onChange={(e) => {
+                  setFile(e.target.files[0]);
                   const file = e.target.files[0];
                   if (file) {
                     const reader = new FileReader();
@@ -113,6 +114,7 @@ const Imageup = () => {
           </div>
           <button
             type="submit"
+            onClick={() => setOpen(!open)}
             class={`postButton ${caption.length < 1 && "disabled"} ${
               imageURL != null && "visible"
             }`}

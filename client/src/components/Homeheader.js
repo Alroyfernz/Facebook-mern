@@ -68,7 +68,7 @@ const Homeheader = ({ selected }) => {
     console.log(searchTerm);
   };
 
-  console.log(users);
+  console.log(userInfo);
 
   return (
     <div className="homeHeader">

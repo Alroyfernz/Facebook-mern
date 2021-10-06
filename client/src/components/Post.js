@@ -30,16 +30,20 @@ const Post = ({ post }) => {
     if (!isLiked) {
       setLikes(likes + 1);
       setIsLiked(!isLiked);
+      console.log("post liked");
       try {
-        axios.put("/posts/like/" + post._id, userInfo._id);
+        const res = await axios.put("/posts/like/" + post._id, userInfo._id);
+        console.log(res);
       } catch (error) {
         console.log(error);
       }
     } else {
       setLikes(likes - 1);
       setIsLiked(!isLiked);
+      console.log("post disliked");
       try {
-        axios.put("/posts/like" + post._id, userInfo._id);
+        await axios.put("/posts/like/" + post._id, userInfo._id);
+        console.log("post disliked in backend");
       } catch (error) {
         console.log(error);
       }

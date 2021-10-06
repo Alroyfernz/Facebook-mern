@@ -6,11 +6,11 @@ import Sidebar2 from "../components/Sidebar2";
 import "./home.css";
 
 const Home = () => {
-  useEffect(() => {
-    window.onunload = () => {
-      localStorage.removeItem("userInfo");
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.onunload = () => {
+  //     localStorage.removeItem("userInfo");
+  //   };
+  // }, []);
   return (
     <div>
       <Homeheader selected />
