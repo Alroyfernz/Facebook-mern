@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./sidebar.css";
 import { Link } from "react-router-dom";
 import SidebarRow from "./SidebarRow";
+import { useSelector } from "react-redux";
+import axios from "axios";
 const Sidebar = () => {
+  const [user, setUser] = useState(null);
+  const { userInfo } = useSelector((state) => state.userLogin);
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get("/user/" + userInfo._id);
+        setUser(res.data);
+      } catch (error) {}
+    };
+    fetchUser();
+  }, []);
+
   return (
     <div className="sidebar">
-      <Link to="/">
+      <Link to={`/profile/${user?._id}`}>
         <SidebarRow
           avatar
-          ImageLink="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
-          title="Alroy"
+          ImageLink={user?.profilePicture}
+          title={user?.name}
         />
       </Link>
       <SidebarRow

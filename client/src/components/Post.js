@@ -68,7 +68,6 @@ const Post = ({ post }) => {
       try {
         const res = await axios.get(`/user/${post.userId}`);
         setUser(res.data);
-        console.log(res);
       } catch (error) {
         console.log(error);
       }

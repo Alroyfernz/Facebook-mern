@@ -13,7 +13,7 @@ import { USER_LOGOUT } from "../Redux/Constaints/userCons";
 const Homeheader = ({ selected }) => {
   const [toggle, setToggle] = useState(false);
   const [users, setUsers] = useState([]);
-  const user = null;
+  const [user, setUser] = useState(null);
   const dispatch = useDispatch();
   const [rightO, setRightO] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,6 +26,7 @@ const Homeheader = ({ selected }) => {
   const history = useHistory();
   const renderProfile = () => {};
   const collapseInput = () => {
+    history.push();
     document.getElementsByClassName("homeHeader__logo")[0].style.display =
       "block";
     document.getElementsByClassName("homeHeader__searchBack")[0].style.display =
@@ -47,7 +48,7 @@ const Homeheader = ({ selected }) => {
     document.getElementsByClassName("searchBox")[0].style.display = "block";
   };
 
-  console.log(filteredUsers);
+  // console.log(filteredUsers);
   // console.log(searchTerm);
   useEffect(() => {
     const fetchAll = async () => {
@@ -61,6 +62,17 @@ const Homeheader = ({ selected }) => {
 
     fetchAll();
   }, []);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get("/user/" + userInfo._id);
+        setUser(res.data);
+      } catch (error) {}
+    };
+    fetchUser();
+  }, []);
+
   const updateSearchResult = (e) => {
     setSearchTerm(e.target.value);
     document.getElementsByClassName("dropdown-content3")[0].style.display =
@@ -69,13 +81,13 @@ const Homeheader = ({ selected }) => {
     setFilteredUsers(users.filter((user) => user.name === searchTerm));
     console.log(searchTerm);
   };
-
-  console.log(userInfo);
+  // console.log(user, "from main page log bro");
+  // console.log(userInfo);
 
   return (
     <div className="homeHeader">
       <div className="homeHeaderLogoAndSearch">
-        <Link>
+        <Link to="/">
           <img
             src="https://i.ibb.co/72dN4JJ/Facebook-icon-2019-1.png"
             className="homeHeader__logo"
@@ -100,8 +112,11 @@ const Homeheader = ({ selected }) => {
               filteredUsers.map((user1) => {
                 return (
                   <li onClick={collapseInput}>
-                    <a onClick={collapseInput} href="/">
-                      <Avatar className="searchAvatar" />
+                    <a onClick={collapseInput} href={`/profile/${user1._id}`}>
+                      <Avatar
+                        src={user1.profilePicture}
+                        className="searchAvatar"
+                      />
                       <h3 className="searchH3">{user1.name}</h3>
                     </a>
                   </li>
@@ -172,7 +187,11 @@ const Homeheader = ({ selected }) => {
           }}
         >
           <a href="#" style={{ textDecoration: "none" }}>
-            <Avatar className="ProfileAvatar" src="" />
+            <Avatar
+              src={user?.profilePicture}
+              className="ProfileAvatar"
+              src=""
+            />
             <p>{userInfo?.name}</p>
           </a>
         </div>
@@ -284,12 +303,9 @@ const Homeheader = ({ selected }) => {
           >
             <a href="#">
               <div class="optionDrop">
-                <img
-                  src="https://i.ibb.co/1zmBtwr/84241059-189132118950875-4138507100605120512-n.jpg"
-                  class="Avatar"
-                />
+                <img src={user?.profilePicture} class="Avatar" />
                 <div class="sideinfoDropAvatar">
-                  <h1>{userInfo.name}</h1>
+                  <h1>{userInfo?.name}</h1>
                   <p>See your profile</p>
                 </div>
               </div>

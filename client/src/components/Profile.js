@@ -9,6 +9,7 @@ import Post from "./Post";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { BsThreeDots } from "react-icons/bs";
+import Homeheader from "./Homeheader";
 const Profile = () => {
   const [imageURL, setImageURL] = useState("");
   const [file, setFile] = useState(null);
@@ -82,6 +83,7 @@ const Profile = () => {
 
   return (
     <div className="profile">
+      <Homeheader />
       <Dialog
         open={openD}
         // onClose={handleClose}
