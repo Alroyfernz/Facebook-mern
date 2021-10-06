@@ -47,7 +47,7 @@ const Profile = () => {
   };
   const handleNotFriend = async () => {
     try {
-      await axios.put("/user/remove/" + userInfo._id, user._id);
+      await axios.put("/user/remove/" + userInfo._id, { userId: user._id });
     } catch (error) {
       console.log("error while deleting friend");
     }
@@ -82,6 +82,7 @@ const Profile = () => {
     fetchUser();
   }, []);
 
+  console.log(userInfo?.friends.includes(user?._id), "from friends bro");
   return (
     <div className="profile">
       <Homeheader />
@@ -196,7 +197,7 @@ const Profile = () => {
                   <h4 className="text">Add Friend</h4>
                 </span>
               ) : (
-                <span className="RFriend" onClick={handleFriend}>
+                <span className="RFriend" onClick={handleNotFriend}>
                   {" "}
                   <img
                     src="https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/c9BbXR9AzI1.png"

@@ -75,6 +75,9 @@ padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 8px;
+    padding:7px;
+    margin-right: 10px;
 }
 .RFriend>img{
     -webkit-filter:invert(100%);
