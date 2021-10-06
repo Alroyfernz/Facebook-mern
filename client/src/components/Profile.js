@@ -73,6 +73,7 @@ const Profile = () => {
       try {
         const res = await axios.get("/user/" + id);
         setUser(res.data);
+        // localStorage.setItem("userInfo", res.data);
         console.log(res);
       } catch (error) {
         console.log("error while fetching the user");
@@ -124,7 +125,10 @@ const Profile = () => {
               />
             </div>
             <div className="profile_photo">
-              <Avatar src={user?.profilePicture} className="profileUser" />
+              <Avatar
+                src={file ? imageURL : user?.profilePicture}
+                className="profileUser"
+              />
             </div>
           </div>
           <div className="drop_bottom2">

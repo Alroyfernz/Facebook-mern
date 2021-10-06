@@ -86,6 +86,7 @@ const Post = ({ post }) => {
     fetchComments();
   }, []);
 
+  console.log(comments);
   return (
     <div className="post">
       <div className="post__header">
@@ -143,11 +144,7 @@ const Post = ({ post }) => {
       </div>
       <form onSubmit={handleComment}>
         <div className="commentBox">
-          <Avatar
-            className="post__avatar2"
-            alt=""
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
-          />
+          <Avatar className="post__avatar2" alt="" src="" />
           <input
             className="commentInputBox"
             type="text"
