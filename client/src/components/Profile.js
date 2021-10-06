@@ -8,6 +8,7 @@ import ProfileSidebar from "./ProfileSidebar.js";
 import Post from "./Post";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { BsThreeDots } from "react-icons/bs";
 const Profile = () => {
   const { username, uid } = useParams();
   const [open, setOpen] = useState(false);
@@ -42,7 +43,7 @@ const Profile = () => {
   return (
     <div className="profile">
       <Dialog
-        // open={open}
+        // open="true"
         // onClose={handleClose}
         // scroll={scroll}
         className="dialog2"
@@ -84,6 +85,61 @@ const Profile = () => {
           <div className="cancelAndSaveButtons">
             <button>Cancel</button>
             <button className="saveButton">Save</button>
+          </div>
+        </div>
+        <div className="profileOptions">
+          <div className="options_wrapper">
+            <div className="optionLeft">
+              <ul className="optionList">
+                <li className="listItem">Posts</li>
+                <li className="listItem">About</li>
+                <li className="listItem">Friends 99</li>
+                <li className="listItem">Photos</li>
+              </ul>
+            </div>
+            <div className="optionRight">
+              {/* <span className="addFriend">
+                {" "}
+                <img
+                  src="https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/33EToHSZ94f.png"
+                  width="16px"
+                  height="16px"
+                  alt=""
+                />{" "}
+                <h4 className="text">Add Friend</h4>
+              </span> */}
+              <span className="addStory">
+                {" "}
+                <img
+                  src="https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/33EToHSZ94f.png"
+                  width="16px"
+                  height="16px"
+                  alt=""
+                />{" "}
+                <h4 className="text">Add Story</h4>
+              </span>
+              {/* <span className="messenger">
+                <img
+                  src="https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/YIxFfN5ecJG.png"
+                  width="16px"
+                  height="16px"
+                  alt=""
+                />
+                <h4 className="text">Message</h4>
+              </span> */}
+              <span className="edit">
+                <img
+                  src="https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/YIxFfN5ecJG.png"
+                  width="16px"
+                  height="16px"
+                  alt=""
+                />
+                <h4 className="text">Edit profile</h4>
+              </span>
+              <span className="more">
+                <BsThreeDots />
+              </span>
+            </div>
           </div>
         </div>
       </div>

@@ -167,7 +167,97 @@ margin-bottom: 0px !important;
     margin-left: 10px !important;
 }
 
+.profileOptions{
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.options_wrapper{
+border-top: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+}
+.optionLeft{
+margin-right: 40px;
+}
+.optionList{
+    margin:5px 0 5px 0;
 
+    display: flex;
+}
+.listItem{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    text-align: center;
+    color: #b0b3b8;
+    margin:unset;
+    margin-left: 5px;
+    height: 40px;
+  
+    
+
+}
+.listItem:hover{
+    background-color: #2F3031;
+    border-radius: 10px;
+}
+.optionRight{
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.addFriend{
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    background-color: #2d88ff;
+    padding:7px;
+    margin-right: 10px;
+}
+.addFriend>img{
+    -webkit-filter:invert(100%);
+}
+.text{
+    margin-left: 5px;
+    color: #fff;
+    font-size: 15px;
+}
+.messenger>img{
+    -webkit-filter:invert(100%)
+}
+.messenger{
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255,255,255,0.1);
+    padding:7px;
+}
+.edit{
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255,255,255,0.1);
+    padding:7px;
+}
+.addStory{
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    background-color: #2d88ff;
+    padding:7px;
+    margin-right: 10px;
+    border: none;
+    
+}
+.addStory>img{
+    -webkit-filter:invert(100%)
+}
+.edit>img{
+
+}
 .rect p {
     color: white;
     width: 80px;
