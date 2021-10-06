@@ -173,7 +173,7 @@ const Homeheader = ({ selected }) => {
         >
           <a href="#" style={{ textDecoration: "none" }}>
             <Avatar className="ProfileAvatar" src="" />
-            <p>{userInfo.name}</p>
+            <p>{userInfo?.name}</p>
           </a>
         </div>
         <div

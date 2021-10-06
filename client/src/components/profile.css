@@ -11,8 +11,115 @@
     border-bottom-right-radius: 10px;
     padding-top: 190px;
     z-index: 0;
+    /* background-image: url("https://images.unsplash.com/photo-1414390579679-7d6cc7b20436?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHNjZW5lcnl8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60") ; */
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+.drop_bottom1{
+    
+    margin-top: 10px;
+}
+.header1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header1>h4{
+ margin-left: 10px;
+ color: #fff;
+ font-size: 17px !important;
+}
+.editlink{
+    color: #4599ff !important;
+    margin-right: 10px;
+}
+.profile_photo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.drop_bottom2{
+    margin-top: 10px;
+}
+.header2{
+    display: flex;
+    justify-content: space-between;
+}
+.header2>h4{
+    margin-left: 10px;
+ color: #fff;
+ font-size: 17px !important;
+}
+.cover_photo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profileUser{
+    width: 168px !important;
+    height: 168px !important;
 }
 
+.drop_top{
+   min-width: 600px;
+   width: 100%;
+    display: flex;
+
+    /* justify-content: space-around; */
+border-bottom: 1px solid gray;
+padding: 10px;
+    
+}
+.submit_btn{
+    background-color:#4599ff;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    justify-content: center;
+    margin: 10px;
+    border-radius:5px;
+}
+.submit_btn>h4{
+    font-size: 15px;
+    color: #fff;
+}
+.Dtitle {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Dtitle>h1{
+    color: #fff;
+    font-size: 18px;
+    
+}
+.icon{
+    justify-self: flex-end;
+    width: 30px;
+    height: 30px;
+    border-radius:50%;
+    align-self:flex-end;
+    background-color: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end !important;
+}
+.closeIcon{
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yK/r/ZOBPkpI0klM.png);
+    background-position: -110px -110px;
+    background-size: 190px 194px;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    -webkit-filter: invert(100%);
+}
+.dialog2{
+    border-radius: 8px !important;
+    border: unset !important;
+}
 .profileAvatar {
     margin-bottom: 20px !important;
     margin-left: 42%;

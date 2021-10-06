@@ -60,27 +60,40 @@ const Profile = () => {
   return (
     <div className="profile">
       <Dialog
-        // open="true"
+        open="false"
         // onClose={handleClose}
         // scroll={scroll}
         className="dialog2"
       >
         <div class="makeStyles-paper-1">
-          <div class="profileHead2">
-            <p>
-              Are you sure you want to change your profile picture ? Changes
-              cannot be reverted{" "}
-            </p>
-            <progress
-              // value={progress}
-              max="100"
-              style={{ display: "none" }}
-              className="progress"
-            />
-            <div className="buttons">
-              <button onClick={handleUpload}>Yes</button>
-              <button onClick={handleClose}>No</button>
+          <div class="drop_top">
+            <div className="Dtitle">
+              <h1>Edit Profile</h1>
             </div>
+            <div className="icon">
+              <i className="closeIcon" />
+            </div>
+          </div>
+          <div className="drop_bottom1">
+            <div className="header1">
+              <h4>Profile Picture</h4>
+              <span className="editlink">edit</span>
+            </div>
+            <div className="profile_photo">
+              <Avatar className="profileUser" />
+            </div>
+          </div>
+          <div className="drop_bottom2">
+            <div className="header2">
+              <h4>Cover Picture</h4>
+              <span className="editlink">edit</span>
+            </div>
+            <div className="cover_photo">
+              <img src="" className="cover" />
+            </div>
+          </div>
+          <div className="submit_btn">
+            <h4>Edit Profile</h4>
           </div>
         </div>
       </Dialog>
