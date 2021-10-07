@@ -1,10 +1,10 @@
 .messenger{
-    height: calc(100vh-70px);
+    height: 100vh;
     display: flex;
     background-color: #242526;
 }
 .sidebarRow{
-    height: 100% !important;
+    height: auto !important;
     padding: 4px;
     margin-left: 0px;
 }
@@ -15,12 +15,16 @@
 .chatMenu{
     flex:3;
     border-right: 1px solid gray;
+    overflow-y: hidden;
 }
 .chatBox{
     flex: 5.5;
+    /* height: 100vh; */
+    overflow-y:scroll;
 }
 .chatOnline{
     flex: 3;
+    overflow: hidden;
 }
 .headerMenu{
     display: flex;
