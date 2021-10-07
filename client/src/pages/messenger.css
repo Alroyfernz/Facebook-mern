@@ -1,0 +1,111 @@
+.messenger{
+    height: calc(100vh-70px);
+    display: flex;
+    background-color: #242526;
+}
+.chatMenu{
+    flex:3;
+    border-right: 1px solid gray;
+}
+.chatBox{
+    flex: 5.5;
+}
+.chatOnline{
+    flex: 3;
+}
+.headerMenu{
+    display: flex;
+    justify-content: space-between;
+}
+.searchChatInput{
+    
+}
+.headerLeft{
+margin-left: 10px;
+display: flex;
+align-items: center;
+}
+.chat{
+    color: #fff;font-size: 20px;
+}
+.headerRight{
+    display: flex;
+    margin-right: 10px;
+}
+.round{
+    margin-left: 5px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:rgba(255,255,255,0.1);
+}
+.more{
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yK/r/ZOBPkpI0klM.png);
+    background-position: -132px -110px;
+    background-size: 190px 194px;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    /* -webkit-filter:invert(89%)sepia(6%)hue-rotate(185deg); */
+}
+.video{
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/y5/r/kYkjqw1T16g.png);
+    background-position: 0px -236px;
+    background-size: 26px 1490px;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    /* -webkit-filter:invert(89%)sepia(6%)hue-rotate(185deg); */
+}
+.edit{
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yK/r/ZOBPkpI0klM.png);
+    background-position: -88px -110px;
+    background-size: 190px 194px;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    /* -webkit-filter:invert(89%)sepia(6%)hue-rotate(185deg); */
+}
+.chatMenuWrapper,.chatBoxWrapper,.chatOnlineWrapper{
+padding: 10px;
+height: 100%;
+
+}
+.input{
+display: flex;
+/* justify-content: center;
+align-items: center; */
+margin-bottom: 20px;
+}
+.inputWrapper{
+    width: 90%;
+    padding: 10px;
+border-radius: 30px;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+background-color:rgba(255,255,255,0.1);
+}
+.searchIcon{
+    /* -webkit-filter:invert(100%); */
+    margin: unset;
+  margin-left: 5px;
+}
+.searchicond{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.chatMenuInput{
+    width: 90%;
+    margin-left: 20px;
+
+   background-color:transparent;
+    border: none;
+    
+}

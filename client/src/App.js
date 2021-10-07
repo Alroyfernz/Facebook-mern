@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import "./app.css";
 import Profile from "./components/Profile";
 import { useSelector } from "react-redux";
+import Messenger from "./pages/Messenger";
 function App() {
   const { userInfo } = useSelector((state) => state.userLogin);
   return (
@@ -15,6 +16,9 @@ function App() {
           <Route path="/login">{userInfo ? <Home /> : <Login />}</Route>
           <Route path="/profile/:id">
             <Profile />
+          </Route>
+          <Route path="/messenger">
+            <Messenger />
           </Route>
           <Route path="/" exact>
             {userInfo !== null ? <Home /> : <Login />}
