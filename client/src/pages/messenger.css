@@ -3,6 +3,15 @@
     display: flex;
     background-color: #242526;
 }
+.sidebarRow{
+    height: 100% !important;
+    padding: 4px;
+    margin-left: 0px;
+}
+.sidebarRow__icon.avatar{
+    width: 56px !important;
+    height: 56px !important;
+}
 .chatMenu{
     flex:3;
     border-right: 1px solid gray;
@@ -41,7 +50,7 @@ align-items: center;
     justify-content: center;
     background-color:rgba(255,255,255,0.1);
 }
-.more{
+.moreM{
     background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yK/r/ZOBPkpI0klM.png);
     background-position: -132px -110px;
     background-size: 190px 194px;
@@ -49,7 +58,8 @@ align-items: center;
     height: 20px;
     background-repeat: no-repeat;
     display: inline-block;
-    /* -webkit-filter:invert(89%)sepia(6%)hue-rotate(185deg); */
+    vertical-align: -0.25em;
+    -webkit-filter:invert(89%)sepia(6%)hue-rotate(185deg);
 }
 .video{
     background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/y5/r/kYkjqw1T16g.png);
@@ -59,9 +69,9 @@ align-items: center;
     height: 20px;
     background-repeat: no-repeat;
     display: inline-block;
-    /* -webkit-filter:invert(89%)sepia(6%)hue-rotate(185deg); */
+    -webkit-filter:invert(89%)sepia(6%)hue-rotate(185deg);
 }
-.edit{
+.editM{
     background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yK/r/ZOBPkpI0klM.png);
     background-position: -88px -110px;
     background-size: 190px 194px;
@@ -69,7 +79,7 @@ align-items: center;
     height: 20px;
     background-repeat: no-repeat;
     display: inline-block;
-    /* -webkit-filter:invert(89%)sepia(6%)hue-rotate(185deg); */
+    -webkit-filter:invert(89%)sepia(6%)hue-rotate(185deg);
 }
 .chatMenuWrapper,.chatBoxWrapper,.chatOnlineWrapper{
 padding: 10px;

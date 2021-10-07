@@ -16,13 +16,13 @@ const Messenger = () => {
               </div>
               <div className="headerRight">
                 <div className="round">
-                  <i className="more" />
+                  <i className="moreM" />
                 </div>
                 <div className="round">
                   <i className="video" />
                 </div>
                 <div className="round">
-                  <i className="edit" />
+                  <i className="editM" />
                 </div>
               </div>
             </div>
