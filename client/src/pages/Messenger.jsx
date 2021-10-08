@@ -47,6 +47,8 @@ const Messenger = () => {
         <div className="chatBox">
           <div className="chatBoxWrapper">
             <MessageHeader />
+            <div className="chatBoxTop"></div>
+            <div className="chatBoxBottom"></div>
           </div>
         </div>
         <div className="chatOnline">

@@ -1,7 +1,8 @@
 .messenger{
-    height: 100vh;
+    height: 90vh;
     display: flex;
     background-color: #242526;
+    align-items: unset;
 }
 .sidebarRow{
     height: auto !important;
@@ -36,7 +37,7 @@
 .headerLeft{
 margin-left: 10px;
 display: flex;
-align-items: center;
+/* align-items: center; */
 }
 .chat{
     color: #fff;font-size: 20px;
@@ -95,6 +96,9 @@ display: flex;
 /* justify-content: center;
 align-items: center; */
 margin-bottom: 20px;
+}
+.chatMenuInput:focus{
+    outline: none;
 }
 .inputWrapper{
     width: 90%;
