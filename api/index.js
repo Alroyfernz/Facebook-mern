@@ -6,6 +6,7 @@ const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
 const commentRouter = require("./routes/comment");
+const conversationRouter = require("./routes/conversations");
 
 const multer = require("multer");
 const path = require("path");
@@ -47,6 +48,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/posts", postRouter);
 app.use("/api/comments", commentRouter);
+app.use("/api/conversation", conversationRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("Backend server running");
