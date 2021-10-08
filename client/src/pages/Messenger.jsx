@@ -1,6 +1,7 @@
 import React from "react";
 import { BsSearch } from "react-icons/bs";
 import Homeheader from "../components/Homeheader";
+import Message from "../components/Message";
 import MessageHeader from "../components/MessageHeader";
 import SidebarRow from "../components/SidebarRow";
 import "./messenger.css";
@@ -45,9 +46,15 @@ const Messenger = () => {
           </div>
         </div>
         <div className="chatBox">
+          <MessageHeader />
           <div className="chatBoxWrapper">
-            <MessageHeader />
-            <div className="chatBoxTop"></div>
+            <div className="chatBoxTop">
+              <Message />
+              <Message />
+              <Message own />
+              <Message own />
+              <Message own />
+            </div>
             <div className="chatBoxBottom"></div>
           </div>
         </div>

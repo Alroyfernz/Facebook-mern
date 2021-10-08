@@ -3,7 +3,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* position: fixed; */
+    position: fixed;
+  /* width: 480px; */
+ width: 65%;
     background-color: #242526;
     /* top: 70px !important;
     right:100px !important; */
