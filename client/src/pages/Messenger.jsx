@@ -69,16 +69,22 @@ const Messenger = () => {
                 </div>
                 <div className="inputSend">
                   <div className="inputSendWrapper">
-                    <input
-                      type="text"
-                      placeholder="Type.."
-                      className="toSend"
-                    ></input>
+                    <form
+                    // onSubmit={() => {
+                    //   window.alert("message send");
+                    // }}
+                    >
+                      <input
+                        type="text"
+                        placeholder="Type.."
+                        className="toSend"
+                      ></input>
+                    </form>
                   </div>
                 </div>
-                <span className="sendIcon">
+                <button className="sendIcon" type="submit">
                   <IoSend className="iconSend" />
-                </span>
+                </button>
               </div>
             </div>
           </div>
