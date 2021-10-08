@@ -204,6 +204,6 @@ form{
     margin-bottom: 5px;
     -webkit-filter: invert(41%) sepia(48%) saturate(6613%) hue-rotate(196deg) brightness(104%) contrast(104%);
 }
-/* .iconSend:hover{
+.iconSend:hover{
     cursor: pointer;
-} */
+}
