@@ -1,5 +1,8 @@
 import React from "react";
 import { BsSearch } from "react-icons/bs";
+import { IoIosAddCircle, IoMdPhotos } from "react-icons/io";
+import { IoSend } from "react-icons/io5";
+import { RiChatSmileFill } from "react-icons/ri";
 import Homeheader from "../components/Homeheader";
 import Message from "../components/Message";
 import MessageHeader from "../components/MessageHeader";
@@ -55,7 +58,29 @@ const Messenger = () => {
               <Message own />
               <Message own />
             </div>
-            <div className="chatBoxBottom"></div>
+            <div className="chatBoxBottom">
+              <div className="chatBoxBottomWrapper">
+                <div className="inputIcons">
+                  <div className="iconsWrapper">
+                    <IoIosAddCircle className="iconInput" />
+                    <IoMdPhotos className="iconInput" />
+                    <RiChatSmileFill className="iconInput" />
+                  </div>
+                </div>
+                <div className="inputSend">
+                  <div className="inputSendWrapper">
+                    <input
+                      type="text"
+                      placeholder="Type.."
+                      className="toSend"
+                    ></input>
+                  </div>
+                </div>
+                <span className="sendIcon">
+                  <IoSend className="iconSend" />
+                </span>
+              </div>
+            </div>
           </div>
         </div>
         <div className="chatOnline">

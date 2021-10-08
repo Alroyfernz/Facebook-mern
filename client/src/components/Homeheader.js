@@ -217,6 +217,9 @@ const Homeheader = ({ selected }) => {
             width: "56px",
             height: "40px",
           }}
+          onClick={() => {
+            history.push("/messenger");
+          }}
         >
           <svg
             viewBox="0 0 28 28"
