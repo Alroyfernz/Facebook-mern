@@ -70,9 +70,9 @@ const Messenger = () => {
                 <div className="inputSend">
                   <div className="inputSendWrapper">
                     <form
-                    // onSubmit={() => {
-                    //   window.alert("message send");
-                    // }}
+                      onSubmit={() => {
+                        window.alert("message send");
+                      }}
                     >
                       <input
                         type="text"
