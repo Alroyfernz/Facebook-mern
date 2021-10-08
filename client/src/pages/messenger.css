@@ -133,7 +133,10 @@ background-color:rgba(255,255,255,0.1);
 }
 .chatBoxBottom{
 display: flex;
-
+position: sticky;
+width: 100%;
+bottom: 0;
+background-color: #242526;
 padding: 2px;
 }
 .chatBoxBottomWrapper{
