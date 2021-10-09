@@ -1,7 +1,14 @@
 import { Avatar } from "@material-ui/core";
 import React from "react";
 import "./sidebarrow.css";
-const SidebarRow = ({ conversation, ImageLink, title, dropdown, avatar }) => {
+const SidebarRow = ({
+  currentUser,
+  conversation,
+  ImageLink,
+  title,
+  dropdown,
+  avatar,
+}) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {

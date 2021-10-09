@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 import { IoIosAddCircle, IoMdPhotos } from "react-icons/io";
 import { IoSend } from "react-icons/io5";
@@ -12,6 +12,8 @@ import SidebarRow from "../components/SidebarRow";
 import "./messenger.css";
 const Messenger = () => {
   const [conversations, setConversations] = useState([]);
+  const [currentChats, setCurrentChats] = useState(null);
+  const [messages, setMessages] = useState([]);
 
   const { userInfo } = useSelector((state) => state.userLogin);
 
@@ -27,6 +29,18 @@ const Messenger = () => {
 
     getConversation();
   }, [userInfo._id]);
+
+  useEffect(() => {
+    const getMessages = async () => {
+      try {
+        const res = await axios.get("/messages/" + conversation._id);
+        setMessages(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getMessages();
+  }, [currentChats]);
   return (
     <>
       <Homeheader />
@@ -63,12 +77,15 @@ const Messenger = () => {
             </div>
             {conversations.map((c) => {
               return (
-                <SidebarRow
-                  conversation={c}
-                  avatar
-                  ImageLink=""
-                  title="Alroy"
-                />
+                <div onClick={() => setCurrentChats(c)}>
+                  <SidebarRow
+                    currentUser={userInfo}
+                    conversation={c}
+                    avatar
+                    ImageLink=""
+                    title="Alroy"
+                  />
+                </div>
               );
             })}
 
@@ -77,45 +94,56 @@ const Messenger = () => {
           </div>
         </div>
         <div className="chatBox">
-          <MessageHeader />
-          <div className="chatBoxWrapper">
-            <div className="chatBoxTop">
-              <Message />
-              <Message />
-              <Message own />
-              <Message own />
-              <Message own />
-            </div>
-            <div className="chatBoxBottom">
-              <div className="chatBoxBottomWrapper">
-                <div className="inputIcons">
-                  <div className="iconsWrapper">
-                    <IoIosAddCircle className="iconInput" />
-                    <IoMdPhotos className="iconInput" />
-                    <RiChatSmileFill className="iconInput" />
+          {currentChats ? (
+            <>
+              <div className="chatBoxWrapper">
+                <MessageHeader />
+                <div className="chatBoxTop">
+                  {messages.map((m) => {
+                    return (
+                      <Message message={m} own={m.sender === userInfo._id} />
+                    );
+                  })}
+
+                  {/* <Message />
+                  <Message own />
+                  <Message own />
+                  <Message own /> */}
+                </div>
+                <div className="chatBoxBottom">
+                  <div className="chatBoxBottomWrapper">
+                    <div className="inputIcons">
+                      <div className="iconsWrapper">
+                        <IoIosAddCircle className="iconInput" />
+                        <IoMdPhotos className="iconInput" />
+                        <RiChatSmileFill className="iconInput" />
+                      </div>
+                    </div>
+                    <div className="inputSend">
+                      <div className="inputSendWrapper">
+                        <form
+                          onSubmit={() => {
+                            window.alert("message send");
+                          }}
+                        >
+                          <input
+                            type="text"
+                            placeholder="Type.."
+                            className="toSend"
+                          ></input>
+                        </form>
+                      </div>
+                    </div>
+                    <button className="sendIcon" type="submit">
+                      <IoSend className="iconSend" />
+                    </button>
                   </div>
                 </div>
-                <div className="inputSend">
-                  <div className="inputSendWrapper">
-                    <form
-                      onSubmit={() => {
-                        window.alert("message send");
-                      }}
-                    >
-                      <input
-                        type="text"
-                        placeholder="Type.."
-                        className="toSend"
-                      ></input>
-                    </form>
-                  </div>
-                </div>
-                <button className="sendIcon" type="submit">
-                  <IoSend className="iconSend" />
-                </button>
               </div>
-            </div>
-          </div>
+            </>
+          ) : (
+            <span>open to start chatting</span>
+          )}
         </div>
         <div className="chatOnline">
           <div className="chatOnlineWrapper">online</div>
