@@ -1,14 +1,30 @@
+import axios from "axios";
 import React from "react";
 import { BsSearch } from "react-icons/bs";
 import { IoIosAddCircle, IoMdPhotos } from "react-icons/io";
 import { IoSend } from "react-icons/io5";
 import { RiChatSmileFill } from "react-icons/ri";
+import { useSelector } from "react-redux";
 import Homeheader from "../components/Homeheader";
 import Message from "../components/Message";
 import MessageHeader from "../components/MessageHeader";
 import SidebarRow from "../components/SidebarRow";
 import "./messenger.css";
 const Messenger = () => {
+  const [conversations, setConversations] = useState([]);
+
+  const { userInfo } = useSelector((state) => state.userLogin);
+
+  useEffect(() => {
+    const getConversation = async () => {
+      try {
+        const res = await axios.get("/conversation/" + userInfo._id);
+        setConversations(res.data);
+      } catch (error) {}
+    };
+
+    getConversation();
+  }, [userInfo._id]);
   return (
     <>
       <Homeheader />
