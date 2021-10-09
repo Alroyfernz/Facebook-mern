@@ -20,7 +20,9 @@ const Messenger = () => {
       try {
         const res = await axios.get("/conversation/" + userInfo._id);
         setConversations(res.data);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     getConversation();
@@ -59,7 +61,17 @@ const Messenger = () => {
                 />
               </div>
             </div>
-            <SidebarRow avatar ImageLink="" title="Alroy" />
+            {conversations.map((c) => {
+              return (
+                <SidebarRow
+                  conversation={c}
+                  avatar
+                  ImageLink=""
+                  title="Alroy"
+                />
+              );
+            })}
+
             <SidebarRow avatar ImageLink="" title="Raj" />
             <SidebarRow avatar ImageLink="" title="clarrisa" />
           </div>

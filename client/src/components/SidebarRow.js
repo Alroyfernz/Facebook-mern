@@ -1,7 +1,23 @@
 import { Avatar } from "@material-ui/core";
 import React from "react";
 import "./sidebarrow.css";
-const SidebarRow = ({ ImageLink, title, dropdown, avatar }) => {
+const SidebarRow = ({ conversation, ImageLink, title, dropdown, avatar }) => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const friendId = conversation.member.find((m) => m !== currentUser._id);
+
+    const getUser = async(() => {
+      try {
+        const res = await axios.get("/user" + friendId);
+        setUser(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+    getUser();
+  }, []);
+
   return (
     <div className="sidebarRow">
       <Avatar
