@@ -14,7 +14,7 @@ const Imageup = () => {
 
   const [caption, setCaption] = useState("");
   const [selectPhoto, setSelectPhoto] = useState("");
-  const progress = 0;
+  const progress = 1;
   const handleClickOpen = () => {};
   const handleClose = () => {};
   const handleChange = () => {};
