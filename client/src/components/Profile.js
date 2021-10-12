@@ -6,11 +6,13 @@ import Posts from "./Posts.js";
 import Imageup from "./Imageup.js";
 import ProfileSidebar from "./ProfileSidebar.js";
 import Post from "./Post";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { BsThreeDots } from "react-icons/bs";
 import Homeheader from "./Homeheader";
+import { USER_UPDATE } from "../Redux/Constaints/userCons";
 const Profile = () => {
+  const dispatch = useDispatch();
   const [imageURL, setImageURL] = useState("");
   const [file, setFile] = useState(null);
   const [coverImgUrl, setCoverImgUrl] = useState("");
@@ -31,7 +33,8 @@ const Profile = () => {
   const handleUpdate = async () => {
     setOpenD(!openD);
     try {
-      await axios.put("/user/" + userInfo._id, { imageURL });
+      const res = await axios.put("/user/" + userInfo._id, { imageURL });
+      setUser(res.data);
       console.log("image uploded");
     } catch (error) {
       console.log(error);
@@ -40,19 +43,26 @@ const Profile = () => {
 
   const setNewConvo = async () => {
     try {
-      const res = await axios.post("/conversation", {
-        senderId: userInfo.id,
-        receiverId: friendId,
-      });
+      const res = await axios.get("/conversation/12345");
+      console.log(res);
+      console.log("in catch");
       // setConversations(res.data._id);
     } catch (error) {
-      console.log("error while creating an conversation");
+      const res = await axios.post("/conversation", {
+        senderId: userInfo._id,
+        receiverId: "615a838e1afe3bd12429d88d",
+      });
+      console.log(res.data);
+      console.log("done lol");
     }
   };
 
   const handleFriend = async () => {
     try {
-      await axios.put("/user/add/" + userInfo._id, { userId: user._id });
+      const res = await axios.put("/user/add/" + userInfo._id, {
+        userId: user._id,
+      });
+      setUser(res.data);
       console.log("kelo re add!");
     } catch (error) {
       console.log("error while adding friend");
@@ -65,6 +75,10 @@ const Profile = () => {
       console.log("error while deleting friend");
     }
   };
+
+  useEffect(() => {
+    dispatch({ type: USER_UPDATE, payload: user });
+  }, [user]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -234,7 +248,7 @@ const Profile = () => {
                 </span>
               ) : (
                 <Link to="/messenger/123456">
-                  <span className="messengerI">
+                  <span className="messengerI" onClick={setNewConvo}>
                     <img
                       src="https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/YIxFfN5ecJG.png"
                       width="16px"

@@ -3,6 +3,7 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  USER_UPDATE,
 } from "../Constaints/userCons";
 
 const initialState = {
@@ -27,7 +28,12 @@ export const userLoginReducer = (state = initialState, action) => {
         error: false,
         isFetching: false,
       };
-
+    case USER_UPDATE:
+      return {
+        userInfo: action.payload,
+        error: false,
+        isFetching: false,
+      };
     default:
       return state;
   }
