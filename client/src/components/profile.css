@@ -349,12 +349,13 @@ align-items: center;
 .messenger>img{
     -webkit-filter:invert(100%)
 }
-.messenger{
+.messengerI{
     border-radius: 8px;
     display: flex;
     align-items: center;
     background-color: rgba(255,255,255,0.1);
     padding:7px;
+    height: auto !important;
 }
 .edit{
     border-radius: 8px;

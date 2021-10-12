@@ -1,7 +1,7 @@
 import { Avatar, Dialog } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import "./profile.css";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import Posts from "./Posts.js";
 import Imageup from "./Imageup.js";
 import ProfileSidebar from "./ProfileSidebar.js";
@@ -24,7 +24,7 @@ const Profile = () => {
   const [postes, setPostes] = useState([]);
   const [openD, setOpenD] = useState(false);
   const profile = true;
-
+  const friendId = null;
   const history = useHistory();
   console.log(imageURL);
   console.log(file);
@@ -37,6 +37,19 @@ const Profile = () => {
       console.log(error);
     }
   };
+
+  const setNewConvo = async () => {
+    try {
+      const res = await axios.post("/conversation", {
+        senderId: userInfo.id,
+        receiverId: friendId,
+      });
+      // setConversations(res.data._id);
+    } catch (error) {
+      console.log("error while creating an conversation");
+    }
+  };
+
   const handleFriend = async () => {
     try {
       await axios.put("/user/add/" + userInfo._id, { userId: user._id });
@@ -220,15 +233,17 @@ const Profile = () => {
                   <h4 className="text">Edit profile</h4>
                 </span>
               ) : (
-                <span className="messenger">
-                  <img
-                    src="https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/YIxFfN5ecJG.png"
-                    width="16px"
-                    height="16px"
-                    alt=""
-                  />
-                  <h4 className="text">Message</h4>
-                </span>
+                <Link to="/messenger/123456">
+                  <span className="messengerI">
+                    <img
+                      src="https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/YIxFfN5ecJG.png"
+                      width="16px"
+                      height="16px"
+                      alt=""
+                    />
+                    <h4 className="text">Message</h4>
+                  </span>
+                </Link>
               )}
 
               <span className="more">

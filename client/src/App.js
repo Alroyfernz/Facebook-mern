@@ -17,7 +17,7 @@ function App() {
           <Route path="/profile/:id">
             <Profile />
           </Route>
-          <Route path="/messenger">
+          <Route path="/messenger/:convoId">
             <Messenger />
           </Route>
           <Route path="/" exact>

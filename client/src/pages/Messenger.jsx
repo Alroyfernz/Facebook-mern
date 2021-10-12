@@ -14,8 +14,20 @@ const Messenger = () => {
   const [conversations, setConversations] = useState([]);
   const [currentChats, setCurrentChats] = useState(null);
   const [messages, setMessages] = useState([]);
-
+  const [newConversations, setNewConversation] = useState();
   const { userInfo } = useSelector((state) => state.userLogin);
+  const friendId = null;
+  const setNewConvo = async () => {
+    try {
+      const res = await axios.post("/conversation", {
+        senderId: userInfo.id,
+        receiverId: friendId,
+      });
+      setConversations(res.data);
+    } catch (error) {
+      console.log("error while creating an conversation");
+    }
+  };
 
   useEffect(() => {
     const getConversation = async () => {
@@ -94,7 +106,7 @@ const Messenger = () => {
           </div>
         </div>
         <div className="chatBox">
-          {currentChats === null ? (
+          {currentChats ? (
             <>
               <div className="chatBoxWrapper">
                 <MessageHeader />
