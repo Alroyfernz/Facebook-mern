@@ -77,14 +77,16 @@ const Profile = () => {
   };
 
   useEffect(async () => {
-    try {
-      const res = await axios.get("/user/" + userInfo._id);
-      console.log(res, "from update in redux");
-      setUser(res.data);
+    if (user?._id === userInfo?._id) {
+      try {
+        const res = await axios.get("/user/" + user._id);
+        console.log(res, "from update in redux");
+        setUser(res.data);
 
-      dispatch({ type: USER_UPDATE, payload: res.data });
-    } catch (error) {}
-  }, [userInfo]);
+        dispatch({ type: USER_UPDATE, payload: user });
+      } catch (error) {}
+    }
+  }, [user]);
 
   useEffect(() => {
     const fetchData = async () => {
