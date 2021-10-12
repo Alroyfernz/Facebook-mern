@@ -6,7 +6,7 @@ import {
 } from "../Constaints/userCons";
 
 const initialState = {
-  userInfo: null,
+  userInfo: JSON.parse(localStorage.getItem("userInfo")) || null,
   isFetching: false,
   error: false,
 };
