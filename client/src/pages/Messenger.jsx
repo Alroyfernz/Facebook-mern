@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { IoIosAddCircle, IoMdPhotos } from "react-icons/io";
 import { IoSend } from "react-icons/io5";
@@ -33,8 +33,8 @@ const Messenger = () => {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get("/messages/" + conversation._id);
-        setMessages(res.data);
+        // const res = await axios.get("/messages/" + conversation._id);
+        // setMessages(res.data);
       } catch (error) {
         console.log(error);
       }
@@ -75,7 +75,7 @@ const Messenger = () => {
                 />
               </div>
             </div>
-            {conversations.map((c) => {
+            {/* {conversations.map((c) => {
               return (
                 <div onClick={() => setCurrentChats(c)}>
                   <SidebarRow
@@ -87,28 +87,28 @@ const Messenger = () => {
                   />
                 </div>
               );
-            })}
+            })} */}
 
             <SidebarRow avatar ImageLink="" title="Raj" />
             <SidebarRow avatar ImageLink="" title="clarrisa" />
           </div>
         </div>
         <div className="chatBox">
-          {currentChats ? (
+          {currentChats === null ? (
             <>
               <div className="chatBoxWrapper">
                 <MessageHeader />
                 <div className="chatBoxTop">
-                  {messages.map((m) => {
+                  {/* {messages.map((m) => {
                     return (
                       <Message message={m} own={m.sender === userInfo._id} />
                     );
-                  })}
+                  })} */}
 
-                  {/* <Message />
+                  <Message />
                   <Message own />
                   <Message own />
-                  <Message own /> */}
+                  <Message own />
                 </div>
                 <div className="chatBoxBottom">
                   <div className="chatBoxBottomWrapper">
