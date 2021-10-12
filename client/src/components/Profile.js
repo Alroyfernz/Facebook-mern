@@ -34,7 +34,7 @@ const Profile = () => {
     setOpenD(!openD);
     try {
       const res = await axios.put("/user/" + userInfo._id, { imageURL });
-      setUser(res.data);
+
       console.log("image uploded");
     } catch (error) {
       console.log(error);
@@ -62,7 +62,7 @@ const Profile = () => {
       const res = await axios.put("/user/add/" + userInfo._id, {
         userId: user._id,
       });
-      setUser(res.data);
+
       console.log("kelo re add!");
     } catch (error) {
       console.log("error while adding friend");
@@ -76,9 +76,15 @@ const Profile = () => {
     }
   };
 
-  useEffect(() => {
-    dispatch({ type: USER_UPDATE, payload: user });
-  }, [user]);
+  useEffect(async () => {
+    try {
+      const res = await axios.get("/user/" + userInfo._id);
+      console.log(res, "from update in redux");
+      setUser(res.data);
+
+      dispatch({ type: USER_UPDATE, payload: res.data });
+    } catch (error) {}
+  }, [userInfo]);
 
   useEffect(() => {
     const fetchData = async () => {

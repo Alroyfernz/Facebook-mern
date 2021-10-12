@@ -46,6 +46,15 @@
     display: none;
     transition: 0.1s;
   }
+  .round.profile>a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 0 5px 0;
+  }
+  .round.profile a p{
+    margin-top:unset!important;
+  }
   
   .homeHeader__searchBack:hover {
     background-color: #3A3B3C;
@@ -643,8 +652,9 @@
   .ProfileAvatar {
     width: 30px !important;
     height: 30px !important;
-    margin-top :5px;
+    
     margin-left: 3px;
+    border-radius: 50%;
   }
   
   @media screen and (max-width: 1280px) {

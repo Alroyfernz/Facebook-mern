@@ -58,7 +58,7 @@ const Imageup = () => {
               src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
               className="Avatar"
             />
-            <h1>Alroy</h1>
+            <h1>{userInfo?.name}</h1>
           </div>
           <div class="inputForUpload">
             <input type="file" className="four" />
@@ -126,10 +126,7 @@ const Imageup = () => {
 
       <div class="imageupload__container">
         <div class="postArea">
-          <img
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
-            class="Avatar"
-          />
+          <img src={userInfo?.profilePicture} class="Avatar" />
           <input
             value={caption}
             onChange={(e) => setCaption(e.target.value)}

@@ -187,10 +187,19 @@ const Homeheader = ({ selected }) => {
           }}
         >
           <a href="#" style={{ textDecoration: "none" }}>
-            <Avatar
-              src={user?.profilePicture}
+            {/* <Avatar
+              src="https://res.cloudinary.com/dsolobwu0/image/upload/v1633544297/facebookImages/xgs2tjsqy33hb5ube65p.png"
               className="ProfileAvatar"
               src=""
+            /> */}
+            <img
+              src={
+                userInfo?.profilePicture !== null
+                  ? userInfo?.profilePicture
+                  : "https://i.redd.it/dh5otp8kcf741.png"
+              }
+              alt=""
+              className="ProfileAvatar"
             />
             <p>{userInfo?.name}</p>
           </a>
