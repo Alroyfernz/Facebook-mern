@@ -1,9 +1,10 @@
 import { Avatar } from "@material-ui/core";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./sidebarrow.css";
 const SidebarRow = ({
   currentUser,
-
+  conversation,
   ImageLink,
   title,
   dropdown,
@@ -11,24 +12,24 @@ const SidebarRow = ({
 }) => {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    // const friendId = conversation.member.find((m) => m !== currentUser._id);
+  // useEffect(() => {
+  //   const friendId = conversation.members.find((m) => m !== currentUser._id);
 
-    const getUser = async () => {
-      try {
-        // const res = await axios.get("/user/" + friendId);
-        // setUser(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getUser();
-  }, []);
+  //   const getUser = async () => {
+  //     try {
+  //       const res = await axios.get("/user/" + friendId);
+  //       setUser(res.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getUser();
+  // }, []);
 
   return (
     <div className="sidebarRow">
       <Avatar
-        src={ImageLink}
+        src={conversation ? user?.profilePicture : ImageLink}
         alt=""
         className={`sidebarRow__icon ${avatar && "avatar"} ${
           dropdown && "vanish"
@@ -37,7 +38,9 @@ const SidebarRow = ({
       <div className={`dropdownDiv ${dropdown && "display"}`}>
         <i className={`dropdown ${dropdown && "display"}`} />
       </div>
-      <h2 className={`sidebarRow__title`}>{title}</h2>
+      <h2 className={`sidebarRow__title`}>
+        {conversation ? user?.name : title}
+      </h2>
     </div>
   );
 };

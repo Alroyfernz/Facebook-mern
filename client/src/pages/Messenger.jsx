@@ -58,6 +58,7 @@ const Messenger = () => {
     };
     setChat();
   }
+  console.log(currentChats);
   const handleSend = async (e) => {
     e.preventDefault();
     console.log("in send func");
@@ -119,7 +120,7 @@ const Messenger = () => {
                 />
               </div>
             </div>
-            {/* {conversations.map((c) => {
+            {conversations.map((c) => {
               return (
                 <div onClick={() => setCurrentChats(c)}>
                   <SidebarRow
@@ -131,21 +132,17 @@ const Messenger = () => {
                   />
                 </div>
               );
-            })} */}
+            })}
 
-            <SidebarRow avatar ImageLink="" title="Raj" />
-            <SidebarRow avatar ImageLink="" title="clarrisa" />
+            {/* <SidebarRow avatar ImageLink="" title="Raj" />
+            <SidebarRow avatar ImageLink="" title="clarrisa" /> */}
           </div>
         </div>
         <div className="chatBox">
           {currentChats ? (
             <>
               <div className="chatBoxWrapper">
-                <MessageHeader
-                  name={currentChats.members.filter(
-                    (mm) => mm !== userInfo._id
-                  )}
-                />
+                <MessageHeader convo={currentChats} />
                 <div className="chatBoxTop">
                   {messages.map((m) => {
                     return (
