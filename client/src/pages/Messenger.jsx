@@ -61,8 +61,8 @@ const Messenger = () => {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        // const res = await axios.get("/messages/" + conversation._id);
-        // setMessages(res.data);
+        const res = await axios.get("/messages/" + currentChats._id);
+        setMessages(res.data);
       } catch (error) {
         console.log(error);
       }
