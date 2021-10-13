@@ -47,8 +47,17 @@ const Messenger = () => {
   const id = history.location.pathname.split("/")[2];
 
   if (id !== null) {
-    const response = await axios;
+    const setChat = async () => {
+      try {
+        const response = await axios.get("/conversation/single/" + id);
+        setCurrentChats(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    setChat();
   }
+
   useEffect(() => {
     const getMessages = async () => {
       try {

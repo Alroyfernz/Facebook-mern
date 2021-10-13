@@ -13,6 +13,14 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/single/:id", async (req, res) => {
+  try {
+    const prevConvo = await Conversation.findById(req.params.id);
+    res.status(200).json(prevConvo);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 router.get("/:userId", async (req, res) => {
   try {
     const conversation = await Conversation.find({
