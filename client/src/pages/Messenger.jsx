@@ -18,6 +18,7 @@ const Messenger = () => {
   const [messages, setMessages] = useState([]);
   const [newConversations, setNewConversation] = useState();
   const { userInfo } = useSelector((state) => state.userLogin);
+  const [messageText, setMessageText] = useState("");
   const friendId = null;
   const setNewConvo = async () => {
     try {
@@ -57,7 +58,22 @@ const Messenger = () => {
     };
     setChat();
   }
-
+  const handleSend = async (e) => {
+    e.preventDefault();
+    console.log("in send func");
+    try {
+      const msg = {
+        members: currentChats.members,
+        conversationId: currentChats._id,
+        sender: userInfo._id,
+        text: messageText,
+      };
+      const res = await axios.post("/message/", msg);
+      console.log(res, "messgae send bro");
+    } catch (error) {
+      console.log(error, "error while sending message");
+    }
+  };
   useEffect(() => {
     const getMessages = async () => {
       try {
@@ -153,21 +169,20 @@ const Messenger = () => {
                     </div>
                     <div className="inputSend">
                       <div className="inputSendWrapper">
-                        <form
-                          onSubmit={() => {
-                            window.alert("message send");
-                          }}
-                        >
+                        <form onSubmit={handleSend}>
                           <input
                             type="text"
                             placeholder="Type.."
                             className="toSend"
+                            onChange={(e) => {
+                              setMessageText(e.target.value);
+                            }}
                           ></input>
                         </form>
                       </div>
                     </div>
                     <button className="sendIcon" type="submit">
-                      <IoSend className="iconSend" />
+                      <IoSend className="iconSend" onClick={handleSend} />
                     </button>
                   </div>
                 </div>
