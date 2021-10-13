@@ -46,7 +46,9 @@ const Messenger = () => {
 
   const id = history.location.pathname.split("/")[2];
 
-  console.log(id !== null, "convoId");
+  if (id !== null) {
+    const response = await axios;
+  }
   useEffect(() => {
     const getMessages = async () => {
       try {
