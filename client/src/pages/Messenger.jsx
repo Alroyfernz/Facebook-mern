@@ -5,12 +5,14 @@ import { IoIosAddCircle, IoMdPhotos } from "react-icons/io";
 import { IoSend } from "react-icons/io5";
 import { RiChatSmileFill } from "react-icons/ri";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import Homeheader from "../components/Homeheader";
 import Message from "../components/Message";
 import MessageHeader from "../components/MessageHeader";
 import SidebarRow from "../components/SidebarRow";
 import "./messenger.css";
 const Messenger = () => {
+  const history = useHistory();
   const [conversations, setConversations] = useState([]);
   const [currentChats, setCurrentChats] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -42,6 +44,9 @@ const Messenger = () => {
     getConversation();
   }, [userInfo._id]);
 
+  const id = history.location.pathname.split("/")[2];
+
+  console.log(id !== null, "convoId");
   useEffect(() => {
     const getMessages = async () => {
       try {
