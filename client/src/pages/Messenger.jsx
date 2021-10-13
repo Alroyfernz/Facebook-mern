@@ -61,7 +61,7 @@ const Messenger = () => {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get("/messages/" + currentChats._id);
+        const res = await axios.get("/message/" + currentChats._id);
         setMessages(res.data);
       } catch (error) {
         console.log(error);
@@ -125,18 +125,22 @@ const Messenger = () => {
           {currentChats ? (
             <>
               <div className="chatBoxWrapper">
-                <MessageHeader />
+                <MessageHeader
+                  name={currentChats.members.filter(
+                    (mm) => mm !== userInfo._id
+                  )}
+                />
                 <div className="chatBoxTop">
-                  {/* {messages.map((m) => {
+                  {messages.map((m) => {
                     return (
                       <Message message={m} own={m.sender === userInfo._id} />
                     );
-                  })} */}
+                  })}
 
-                  <Message />
+                  {/* <Message />
                   <Message own />
                   <Message own />
-                  <Message own />
+                  <Message own /> */}
                 </div>
                 <div className="chatBoxBottom">
                   <div className="chatBoxBottomWrapper">
