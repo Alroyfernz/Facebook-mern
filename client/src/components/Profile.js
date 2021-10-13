@@ -44,18 +44,22 @@ const Profile = () => {
 
   const setNewConvo = async () => {
     try {
-      const res = await axios.get("/conversation/12345");
+      const res = await axios.get("/conversation/" + user._id);
       console.log(res);
-      console.log("in catch");
+
+      if (res.data.length === 0) {
+        const response = await axios.post("/conversation", {
+          senderId: userInfo._id,
+          receiverId: user._id,
+        });
+        console.log("created convo");
+        history.push("/messenger/" + response.data._id);
+      } else {
+        console.log("prev convo");
+        history.push("/messenger/" + res.data[0]._id);
+      }
       // setConversations(res.data._id);
-    } catch (error) {
-      const res = await axios.post("/conversation", {
-        senderId: userInfo._id,
-        receiverId: "615a838e1afe3bd12429d88d",
-      });
-      console.log(res.data);
-      console.log("done lol");
-    }
+    } catch (error) {}
   };
 
   const handleFriend = async () => {
