@@ -5,12 +5,13 @@ import {
   USER_LOGOUT,
   USER_UPDATE,
 } from "../Constaints/userCons";
-
+import Store from "../Store";
 const initialState = {
   userInfo: JSON.parse(localStorage.getItem("userInfo")) || null,
   isFetching: false,
   error: false,
 };
+console.log(Store?.getState());
 export const userLoginReducer = (state = initialState, action) => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:

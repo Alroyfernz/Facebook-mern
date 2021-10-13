@@ -34,7 +34,8 @@ const Profile = () => {
     setOpenD(!openD);
     try {
       const res = await axios.put("/user/" + userInfo._id, { imageURL });
-
+      console.log(res.data);
+      // dispatch({ type: USER_UPDATE, payload: res.data });
       console.log("image uploded");
     } catch (error) {
       console.log(error);
@@ -76,17 +77,15 @@ const Profile = () => {
     }
   };
 
-  useEffect(async () => {
-    if (user?._id === userInfo?._id) {
-      try {
-        const res = await axios.get("/user/" + user._id);
-        console.log(res, "from update in redux");
-        setUser(res.data);
-
-        dispatch({ type: USER_UPDATE, payload: user });
-      } catch (error) {}
-    }
-  }, [user]);
+  // useEffect(async () => {
+  //   if (user?._id === userInfo?._id) {
+  //     try {
+  //       const res = await axios.get("/user/" + user._id);
+  //       // console.log(res, "from update in redux");
+  //       setUser(res.data);
+  //     } catch (error) {}
+  //   }
+  // }, [user]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -117,7 +116,7 @@ const Profile = () => {
     fetchUser();
   }, []);
 
-  console.log(userInfo?.friends.includes(user?._id), "from friends bro");
+  // console.log(userInfo?.friends.includes(user?._id), "from friends bro");
   return (
     <div className="profile">
       <Homeheader />
