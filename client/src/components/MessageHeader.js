@@ -27,7 +27,7 @@ const MessageHeader = ({ convo }) => {
   return (
     <div className="messageheader">
       <div className="headerLeft">
-        <Avatar className="messageUser" />
+        <Avatar className="messageUser" src={user.profilePicture} />
         <div className="naming">
           <h2 className="headerName">{user?.name}</h2>
           <span className="isActive">Active now</span>

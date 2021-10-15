@@ -12,19 +12,19 @@ const SidebarRow = ({
 }) => {
   const [user, setUser] = useState(null);
 
-  // useEffect(() => {
-  //   const friendId = conversation.members.find((m) => m !== currentUser._id);
+  useEffect(() => {
+    const friendId = conversation.members.find((m) => m !== currentUser._id);
 
-  //   const getUser = async () => {
-  //     try {
-  //       const res = await axios.get("/user/" + friendId);
-  //       setUser(res.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   getUser();
-  // }, []);
+    const getUser = async () => {
+      try {
+        const res = await axios.get("/user/" + friendId);
+        setUser(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUser();
+  }, []);
 
   return (
     <div className="sidebarRow">
