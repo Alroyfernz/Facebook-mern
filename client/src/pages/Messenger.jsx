@@ -17,6 +17,7 @@ const Messenger = () => {
   const [currentChats, setCurrentChats] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newConversations, setNewConversation] = useState();
+  const [click, setClick] = useState(false);
   const { userInfo } = useSelector((state) => state.userLogin);
   const [messageText, setMessageText] = useState("");
   const friendId = null;
@@ -47,7 +48,7 @@ const Messenger = () => {
 
   const id = history.location.pathname.split("/")[2];
 
-  if (id !== null) {
+  if (id !== null && click === false) {
     const setChat = async () => {
       try {
         const response = await axios.get("/conversation/single/" + id);
@@ -58,7 +59,7 @@ const Messenger = () => {
     };
     setChat();
   }
-  console.log(currentChats);
+  // console.log(click);
   const handleSend = async (e) => {
     e.preventDefault();
     console.log("in send func");
@@ -122,7 +123,13 @@ const Messenger = () => {
             </div>
             {conversations.map((c) => {
               return (
-                <div onClick={() => setCurrentChats(c)}>
+                <div
+                  onClick={() => {
+                    setCurrentChats(c);
+                    setClick(!click);
+                    history.push("/messenger/" + c._id);
+                  }}
+                >
                   <SidebarRow
                     currentUser={userInfo}
                     conversation={c}
