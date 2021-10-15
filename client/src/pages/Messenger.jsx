@@ -10,6 +10,7 @@ import Homeheader from "../components/Homeheader";
 import Message from "../components/Message";
 import MessageHeader from "../components/MessageHeader";
 import SidebarRow from "../components/SidebarRow";
+import SidebarRoww from "../components/SidebarRoww";
 import "./messenger.css";
 const Messenger = () => {
   const history = useHistory();
@@ -130,7 +131,7 @@ const Messenger = () => {
                     // history.push("/messenger/" + c._id);
                   }}
                 >
-                  <SidebarRow
+                  <SidebarRoww
                     currentUser={userInfo}
                     conversation={c}
                     avatar
