@@ -227,7 +227,7 @@ const Homeheader = ({ selected }) => {
             height: "40px",
           }}
           onClick={() => {
-            history.push("/messenger");
+            history.push("/messenger/null");
           }}
         >
           <svg

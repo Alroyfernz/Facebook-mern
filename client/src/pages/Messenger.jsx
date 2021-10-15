@@ -127,7 +127,7 @@ const Messenger = () => {
                   onClick={() => {
                     setCurrentChats(c);
                     setClick(!click);
-                    history.push("/messenger/" + c._id);
+                    // history.push("/messenger/" + c._id);
                   }}
                 >
                   <SidebarRow
