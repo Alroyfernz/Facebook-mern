@@ -95,10 +95,13 @@ router.put("/remove/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   const photo = req.body.imageURL;
+  const photo2 = req.body.coverURL;
   try {
     const photoUrl = photo && (await uploadImage(photo));
+    const photoUrl2 = photo2 && (await uploadImage(photo2));
     const updatedUser = await User.findByIdAndUpdate(req.params.id, {
       $set: { profilePicture: photoUrl },
+      $set: { coverPicture: photoUrl2 },
     });
     res.status(200).json(updatedUser);
   } catch (error) {

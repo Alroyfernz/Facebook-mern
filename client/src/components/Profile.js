@@ -15,6 +15,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [imageURL, setImageURL] = useState("");
   const [file, setFile] = useState(null);
+  const [file1, setFile1] = useState(null);
   const [coverImgUrl, setCoverImgUrl] = useState("");
   const [profileUserData, setProfileUserData] = useState();
   const [bio, setBio] = useState("");
@@ -33,7 +34,10 @@ const Profile = () => {
   const handleUpdate = async () => {
     setOpenD(!openD);
     try {
-      const res = await axios.put("/user/" + userInfo._id, { imageURL });
+      const res = await axios.put("/user/" + userInfo._id, {
+        imageURL,
+        coverURL: coverImgUrl,
+      });
       console.log(res.data);
       // dispatch({ type: USER_UPDATE, payload: res.data });
       console.log("image uploded");
@@ -173,10 +177,28 @@ const Profile = () => {
           <div className="drop_bottom2">
             <div className="header2">
               <h4>Cover Picture</h4>
-              <span className="editlink">edit</span>
+              <label htmlFor="profileCover">
+                <span className="editlink">edit</span>
+              </label>
+              <input
+                type="file"
+                id="profileCover"
+                style={{ display: "none" }}
+                onChange={(e) => {
+                  setFile1(e.target.files[0]);
+                  const file = e.target.files[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onloadend = () => {
+                      setCoverImgUrl(reader.result);
+                    };
+                  }
+                }}
+              />
             </div>
             <div className="cover_photo">
-              <img src="" className="cover" />
+              {file1 && <img src={coverImgUrl} className="cover" />}
             </div>
           </div>
           <div className="submit_btn" onClick={handleUpdate}>
@@ -185,7 +207,11 @@ const Profile = () => {
         </div>
       </Dialog>
       <div className="profile__topSection">
-        <div className="profile__coverPhoto">
+        <div
+          className="profile__coverPhoto"
+          style={{ backgroundImage: `url(${user?.coverPicture})` }}
+        >
+          {/* <img src={user?.coverPicture} alt="cover" className="coverPic" /> */}
           <Avatar src={user?.profilePicture} className="profileAvatar" />
           <input type="file" accept="image/*" className="inputImage" />
         </div>
