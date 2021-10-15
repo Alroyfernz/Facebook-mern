@@ -21,7 +21,9 @@ const MessageHeader = ({ convo }) => {
       }
     };
     getUser();
-  }, []);
+  }, [convo._id]);
+
+  console.log(user?.name, "from header");
   return (
     <div className="messageheader">
       <div className="headerLeft">

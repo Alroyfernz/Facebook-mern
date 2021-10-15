@@ -59,7 +59,7 @@ const Messenger = () => {
     };
     setChat();
   }
-  // console.log(click);
+  console.log(conversations);
   const handleSend = async (e) => {
     e.preventDefault();
     console.log("in send func");
