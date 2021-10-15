@@ -98,10 +98,8 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res =
-          profile === true
-            ? await axios.get("posts/" + userInfo.email)
-            : await axios.get("posts/timeline/" + userInfo._id);
+        const res = await axios.get("/posts/posts/" + userInfo._id);
+        console.log(res.data);
         setPostes(res.data);
       } catch (error) {
         console.log(error);
@@ -116,14 +114,14 @@ const Profile = () => {
         const res = await axios.get("/user/" + id);
         setUser(res.data);
         // localStorage.setItem("userInfo", res.data);
-        console.log(res);
+        // console.log(res);
       } catch (error) {
         console.log("error while fetching the user");
       }
     };
     fetchUser();
   }, []);
-
+  console.log(postes);
   // console.log(userInfo?.friends.includes(user?._id), "from friends bro");
   return (
     <div className="profile">

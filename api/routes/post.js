@@ -94,11 +94,11 @@ router.get("/timeline/:userId", async (req, res) => {
   }
 });
 
-router.get("/posts/:email", async (req, res) => {
+router.get("/posts/:id", async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.params.email });
-    const posts = await Post.find({ userId: user._id });
-    res.status(200).json(posts);
+    // const user = await User.findOne({ id: req.params.id });
+    const posts = await Post.find({ userId: req.params.id });
+    res.send(posts);
   } catch (error) {
     res.status(500).json(error);
   }
