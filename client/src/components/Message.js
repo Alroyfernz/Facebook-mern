@@ -1,5 +1,6 @@
 import { Avatar } from "@material-ui/core";
 import React from "react";
+import { format } from "timeago.js";
 import "./message.css";
 const Message = ({ message, own }) => {
   return (
@@ -11,7 +12,7 @@ const Message = ({ message, own }) => {
         </p>
       </div>
       <div className="messageBottom">
-        <span className="time">1 hr ago</span>
+        <span className="time">{format(message.createdAt)}</span>
       </div>
     </div>
   );
