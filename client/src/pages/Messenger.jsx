@@ -36,7 +36,7 @@ const Messenger = () => {
       console.log("error while creating an conversation");
     }
   };
-  console.log(searchTerm);
+  // console.log(searchTerm);
   useEffect(() => {
     const getConversation = async () => {
       try {
@@ -64,19 +64,19 @@ const Messenger = () => {
   }, []);
 
   const id = history.location.pathname.split("/")[2];
-
-  if (id !== null && click === false) {
-    const setChat = async () => {
-      try {
-        const response = await axios.get("/conversation/single/" + id);
-        setCurrentChats(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    setChat();
-  }
   console.log(conversations);
+  // if (id !== null && click === false) {
+  //   const setChat = async () => {
+  //     try {
+  //       const response = await axios.get("/conversation/single/" + id);
+  //       setCurrentChats(response.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   setChat();
+  // }
+  // console.log(conversations);
   const handleSend = async (e) => {
     e.preventDefault();
     console.log("in send func");

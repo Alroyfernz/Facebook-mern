@@ -48,7 +48,9 @@ const Profile = () => {
 
   const setNewConvo = async () => {
     try {
-      const res = await axios.get("/conversation/" + user._id);
+      const res = await axios.get("/conversation/" + user._id, {
+        logged: userInfo._id,
+      });
       console.log(res);
 
       if (res.data.length === 0) {
