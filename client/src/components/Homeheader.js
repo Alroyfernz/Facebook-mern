@@ -22,6 +22,7 @@ const Homeheader = ({ selected }) => {
   const logout = () => {
     dispatch({ type: USER_LOGOUT });
     localStorage.removeItem("userInfo");
+    history.push("/login");
   };
   const history = useHistory();
   const renderProfile = () => {};

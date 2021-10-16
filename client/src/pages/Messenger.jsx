@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
+import { Avatar } from "@material-ui/core";
 import { IoIosAddCircle, IoMdPhotos } from "react-icons/io";
 import { IoSend } from "react-icons/io5";
 import { RiChatSmileFill } from "react-icons/ri";
@@ -22,6 +23,8 @@ const Messenger = () => {
   const { userInfo } = useSelector((state) => state.userLogin);
   const [messageText, setMessageText] = useState("");
   const friendId = null;
+  const [searchTerm, setSearchTerm] = useState("");
+  const [users, setUsers] = useState([]);
   const setNewConvo = async () => {
     try {
       const res = await axios.post("/conversation", {
@@ -33,7 +36,7 @@ const Messenger = () => {
       console.log("error while creating an conversation");
     }
   };
-
+  console.log(searchTerm);
   useEffect(() => {
     const getConversation = async () => {
       try {
@@ -46,6 +49,19 @@ const Messenger = () => {
 
     getConversation();
   }, [userInfo._id]);
+
+  useEffect(() => {
+    const fetchAll = async () => {
+      try {
+        const res = await axios.get("/user/");
+        setUsers(res.data);
+      } catch (error) {
+        console.log("Error while fetching all users");
+      }
+    };
+
+    fetchAll();
+  }, []);
 
   const id = history.location.pathname.split("/")[2];
 
@@ -88,6 +104,20 @@ const Messenger = () => {
     };
     getMessages();
   }, [currentChats]);
+
+  const collapseInput = () => {
+    // history.push();
+    // document.getElementsByClassName("homeHeader__logo")[0].style.display =
+    //   "block";
+    // document.getElementsByClassName("homeHeader__searchBack")[0].style.display =
+    //   "none";
+    // document.getElementsByClassName("searchBox")[0].style.display = "none";
+    // document.getElementsByClassName("homeHeader__search")[0].style.display =
+    //   "block";
+    document.getElementsByClassName("dropdown-content3")[0].style.display =
+      "none";
+    // document.getElementsByClassName("searchBox")[0].value = "";
+  };
   return (
     <>
       <Homeheader />
@@ -102,7 +132,7 @@ const Messenger = () => {
                 <div className="round">
                   <i className="moreM" />
                 </div>
-                <div className="round">
+                <div className="round" onClick={collapseInput}>
                   <i className="video" />
                 </div>
                 <div className="round">
@@ -119,8 +149,45 @@ const Messenger = () => {
                   type="text"
                   placeholder="Search for friends"
                   className="chatMenuInput"
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    document.getElementsByClassName(
+                      "dropdown-content3"
+                    )[0].style.display = "block";
+                  }}
                 />
               </div>
+            </div>
+            <div className="dropdown-content3" onClick={collapseInput}>
+              <ul id="list">
+                {users !== undefined &&
+                  users
+                    .filter((value) => {
+                      if (searchTerm === "") {
+                        return value;
+                      } else if (value.name === searchTerm) {
+                        return value;
+                      }
+                    })
+                    .map((user1) => {
+                      return (
+                        <li
+                          onClick={collapseInput}
+                          onClick={() => {
+                            history.push(`/profile/${user1._id}`);
+                          }}
+                        >
+                          <a onClick={collapseInput}>
+                            <Avatar
+                              src={user1.profilePicture}
+                              className="searchAvatar"
+                            />
+                            <h3 className="searchH3">{user1.name}</h3>
+                          </a>
+                        </li>
+                      );
+                    })}
+              </ul>
             </div>
             {conversations.map((c) => {
               return (
