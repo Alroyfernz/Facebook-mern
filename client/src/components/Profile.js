@@ -98,7 +98,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("/posts/posts/" + userInfo._id);
+        const res = await axios.get("/posts/posts/" + user._id);
         console.log(res.data);
         setPostes(res.data);
       } catch (error) {

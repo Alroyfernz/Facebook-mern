@@ -73,14 +73,14 @@ const Homeheader = ({ selected }) => {
     fetchUser();
   }, []);
 
-  const updateSearchResult = (e) => {
-    setSearchTerm(e.target.value);
-    document.getElementsByClassName("dropdown-content3")[0].style.display =
-      "block";
-    // filteredUsers = users.filter((user) => user !== null);
-    setFilteredUsers(users.filter((user) => user.name === searchTerm));
-    console.log(searchTerm);
-  };
+  // const updateSearchResult = (e) => {
+  //   setSearchTerm(e.target.value);
+  //   document.getElementsByClassName("dropdown-content3")[0].style.display =
+  //     "block";
+  //   // filteredUsers = users.filter((user) => user !== null);
+  //   setFilteredUsers(users.filter((user) => user.name === searchTerm));
+  //   console.log(searchTerm);
+
   // console.log(user, "from main page log bro");
   // console.log(userInfo);
 
@@ -104,24 +104,43 @@ const Homeheader = ({ selected }) => {
           type="text"
           placeholder="Search Facebook"
           className="searchBox"
-          onChange={updateSearchResult}
+          // onChange={updateSearchResult}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            document.getElementsByClassName(
+              "dropdown-content3"
+            )[0].style.display = "block";
+          }}
         />
         <div className="dropdown-content3">
           <ul id="list">
             {users !== undefined &&
-              filteredUsers.map((user1) => {
-                return (
-                  <li onClick={collapseInput}>
-                    <a onClick={collapseInput} href={`/profile/${user1._id}`}>
-                      <Avatar
-                        src={user1.profilePicture}
-                        className="searchAvatar"
-                      />
-                      <h3 className="searchH3">{user1.name}</h3>
-                    </a>
-                  </li>
-                );
-              })}
+              users
+                .filter((value) => {
+                  if (searchTerm == "") {
+                    return value;
+                  } else if (value.name === searchTerm) {
+                    return value;
+                  }
+                })
+                .map((user1) => {
+                  return (
+                    <li
+                      onClick={collapseInput}
+                      onClick={() => {
+                        history.push(`/profile/${user1._id}`);
+                      }}
+                    >
+                      <a onClick={collapseInput}>
+                        <Avatar
+                          src={user1.profilePicture}
+                          className="searchAvatar"
+                        />
+                        <h3 className="searchH3">{user1.name}</h3>
+                      </a>
+                    </li>
+                  );
+                })}
           </ul>
         </div>
       </div>
