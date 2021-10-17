@@ -3,12 +3,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
+    position: sticky;
   /* width: 480px; */
 margin-bottom: 10px;
  min-width: 78%;
     background-color: #242526;
-     top: 62px !important;
+     top:0;
     /* /* right:100px !important;  */
     /* z-index: 999 !important; */
 
