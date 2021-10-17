@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { Avatar } from "@material-ui/core";
 import { IoIosAddCircle, IoMdPhotos } from "react-icons/io";
@@ -25,6 +25,7 @@ const Messenger = () => {
   const friendId = null;
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUsers] = useState([]);
+  const scrollRef = useRef();
   const setNewConvo = async () => {
     try {
       const res = await axios.post("/conversation", {
@@ -118,6 +119,10 @@ const Messenger = () => {
       "none";
     // document.getElementsByClassName("searchBox")[0].value = "";
   };
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  });
   return (
     <>
       <Homeheader />
@@ -216,12 +221,15 @@ const Messenger = () => {
         <div className="chatBox">
           {currentChats ? (
             <>
+              {" "}
+              <MessageHeader convo={currentChats} />
               <div className="chatBoxWrapper">
-                <MessageHeader convo={currentChats} />
                 <div className="chatBoxTop">
                   {messages.map((m) => {
                     return (
-                      <Message message={m} own={m.sender === userInfo._id} />
+                      <div ref={scrollRef}>
+                        <Message message={m} own={m.sender === userInfo._id} />
+                      </div>
                     );
                   })}
 
