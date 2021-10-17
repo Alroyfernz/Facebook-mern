@@ -12,8 +12,10 @@ import Message from "../components/Message";
 import MessageHeader from "../components/MessageHeader";
 import SidebarRow from "../components/SidebarRow";
 import SidebarRoww from "../components/SidebarRoww";
+import { io } from "socket.io-client";
 import "./messenger.css";
 const Messenger = () => {
+  const [socket, setSocket] = useState(null);
   const history = useHistory();
   const [conversations, setConversations] = useState([]);
   const [currentChats, setCurrentChats] = useState(null);
@@ -119,7 +121,9 @@ const Messenger = () => {
       "none";
     // document.getElementsByClassName("searchBox")[0].value = "";
   };
-
+  useEffect(() => {
+    setSocket(io("ws://localhost:8900"));
+  }, []);
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   });
