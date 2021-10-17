@@ -15,16 +15,18 @@ import SidebarRoww from "../components/SidebarRoww";
 import { io } from "socket.io-client";
 import "./messenger.css";
 const Messenger = () => {
-  const [socket, setSocket] = useState(null);
   const history = useHistory();
   const [conversations, setConversations] = useState([]);
   const [currentChats, setCurrentChats] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+
   const [newConversations, setNewConversation] = useState();
   const [click, setClick] = useState(false);
   const { userInfo } = useSelector((state) => state.userLogin);
   const [messageText, setMessageText] = useState("");
   const friendId = null;
+  const socket = useRef();
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUsers] = useState([]);
   const scrollRef = useRef();
@@ -83,19 +85,31 @@ const Messenger = () => {
   const handleSend = async (e) => {
     e.preventDefault();
     console.log("in send func");
+    const msg = {
+      members: currentChats.members,
+      conversationId: currentChats._id,
+      sender: userInfo._id,
+      text: messageText,
+    };
+
+    const receiverId = currentChats.members.find(
+      (member) => member.id !== userInfo._id
+    );
+
+    socket.current.emit("sendMessage", {
+      senderId: userInfo._id,
+      receiverId,
+      text: messageText,
+    });
     try {
-      const msg = {
-        members: currentChats.members,
-        conversationId: currentChats._id,
-        sender: userInfo._id,
-        text: messageText,
-      };
       const res = await axios.post("/message/", msg);
       console.log(res, "messgae send bro");
+      setMessages([...messages, res.data]);
     } catch (error) {
       console.log(error, "error while sending message");
     }
   };
+
   useEffect(() => {
     const getMessages = async () => {
       try {
@@ -121,12 +135,34 @@ const Messenger = () => {
       "none";
     // document.getElementsByClassName("searchBox")[0].value = "";
   };
+
   useEffect(() => {
-    setSocket(io("ws://localhost:8900"));
+    socket.current?.emit("addUser", userInfo._id);
+    socket.current?.on("getUsers", (users) => {
+      console.log(users);
+    });
+  }, [userInfo]);
+
+  useEffect(() => {
+    arrivalMessage &&
+      currentChats?.members.includes(arrivalMessage) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, currentChats]);
+
+  useEffect(() => {
+    socket.current = io("ws://localhost:8900");
+    socket.current.on("getMessage", (data) => {
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
   }, []);
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   });
+
   return (
     <>
       <Homeheader />
