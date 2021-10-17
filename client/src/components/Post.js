@@ -32,7 +32,7 @@ const Post = ({ post }) => {
       setIsLiked(!isLiked);
       console.log("post liked");
       try {
-        const res = await axios.put("/posts/like/" + post._id, userInfo._id);
+        const res = await axios.post("/posts/like/" + post._id, userInfo._id);
         console.log(res);
       } catch (error) {
         console.log(error);

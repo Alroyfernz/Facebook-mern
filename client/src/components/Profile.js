@@ -107,8 +107,10 @@ const Profile = () => {
         console.log(error);
       }
     };
+
     fetchData();
-  }, []);
+  }, [user?._id]);
+
   useEffect(() => {
     const id = history.location.pathname.split("/")[2];
     const fetchUser = async () => {
