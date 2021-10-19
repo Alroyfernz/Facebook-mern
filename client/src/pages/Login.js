@@ -20,15 +20,9 @@ function Login() {
   const userLogin = useSelector((state) => state.userLogin);
   const { isFetching, error, userInfo } = userLogin;
 
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     history.push("/");
-  //   }
-  // });
-
   const login = async (event) => {
     event.preventDefault();
-    // dispatch(loginAction(email, password));
+
     dispatch({ type: USER_LOGIN_REQUEST });
     try {
       const { data } = await axios.post("/auth/login", { email, password });
