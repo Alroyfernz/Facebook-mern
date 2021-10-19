@@ -13,7 +13,7 @@ const Post = ({ post }) => {
   const [likes, setLikes] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const { userInfo } = useSelector((state) => state.userLogin);
-
+  console.log(comments);
   const handleDelete = async () => {
     try {
       await axios.delete("/posts/" + post._id, {
@@ -60,7 +60,7 @@ const Post = ({ post }) => {
         text,
       });
       console.log(res.data);
-      setComment(res.data);
+      setComment([...comments, res.data]);
     } catch (error) {}
   };
   useEffect(() => {
