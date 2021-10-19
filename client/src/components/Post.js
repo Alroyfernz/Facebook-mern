@@ -99,9 +99,9 @@ const Post = ({ post }) => {
                 : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53Y7PzUEawis7VUgB5IIoP16my0F7OxeJDg&usqp=CAU"
             }
           />
-          {/* <Link to={`/profile/${post.userId}`} className="dom_links"> */}
-          <h3>{user.name}</h3>
-          {/* </Link> */}
+          <Link to={`/profile/${post.userId}`} className="dom_links">
+            <h3>{user?.name}</h3>
+          </Link>
         </div>
 
         {/* <i className="post__verified" /> */}

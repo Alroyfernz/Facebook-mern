@@ -20,11 +20,11 @@ function Login() {
   const userLogin = useSelector((state) => state.userLogin);
   const { isFetching, error, userInfo } = userLogin;
 
-  useEffect(() => {
-    if (userInfo) {
-      history.push("/");
-    }
-  });
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     history.push("/");
+  //   }
+  // });
 
   const login = async (event) => {
     event.preventDefault();
@@ -35,6 +35,7 @@ function Login() {
       console.log(data);
       dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
+      history.push("/");
     } catch (error) {
       console.log(error);
       dispatch({
