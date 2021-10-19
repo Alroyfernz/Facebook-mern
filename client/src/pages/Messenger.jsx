@@ -263,7 +263,12 @@ const Messenger = () => {
           {currentChats ? (
             <>
               {" "}
-              <MessageHeader convo={currentChats} />
+              <MessageHeader
+                convo={currentChats}
+                isOpen={open}
+                open={open}
+                setOpen={setOpen}
+              />
               <div className="chatBoxWrapper">
                 <div className="chatBoxTop">
                   {messages.map((m) => {

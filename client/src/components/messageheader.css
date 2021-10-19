@@ -5,7 +5,7 @@
     align-items: center;
     position: sticky;
   /* width: 480px; */
-margin-bottom: 10px;
+padding-top: 10px;
  min-width: 78%;
     background-color: #242526;
      top:0;
@@ -54,4 +54,17 @@ margin-bottom: 10px;
     width: 30px;
     height: 30px;
     -webkit-filter: invert(41%) sepia(48%) saturate(6613%) hue-rotate(196deg) brightness(104%) contrast(104%);
+}
+.backIcon{
+    display: none;
+}
+
+@media screen and (max-width:768px) {
+    .backIcon{
+        display:block;
+        color: #fff;
+        margin-right: 8px;
+        width: 20px;height: 20px;
+    }
+    
 }

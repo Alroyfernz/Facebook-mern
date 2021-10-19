@@ -1,8 +1,9 @@
 .messenger{
-    height: 90vh;
+    height: 91.5vh;
     display: flex;
     background-color: #242526;
     align-items: unset;
+    
 }
 .sidebarRow{
     height: auto !important;
@@ -254,5 +255,19 @@ form{
     }
     .chatMenu.close{
         display: none;
+        width: 100%;
+    }
+    .iconInput{
+margin: unset;
+width: 22px;
+margin-right: 4px;
+height: 22px;
+    }
+    .sendIcon{
+        width: auto;
+    }
+    .iconSend{
+        width: 22px;
+        height: 22px;
     }
 }
