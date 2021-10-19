@@ -20,7 +20,7 @@ const Messenger = () => {
   const [currentChats, setCurrentChats] = useState(null);
   const [messages, setMessages] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
-
+  const [open, setOpen] = useState(false);
   const [newConversations, setNewConversation] = useState();
   const [click, setClick] = useState(false);
   const { userInfo } = useSelector((state) => state.userLogin);
@@ -167,7 +167,7 @@ const Messenger = () => {
     <>
       <Homeheader />
       <div className="messenger">
-        <div className="chatMenu">
+        <div className={open ? "chatMenu close" : "chatMenu open"}>
           <div className="chatMenuWrapper">
             <div className="headerMenu">
               <div className="headerLeft">
@@ -240,6 +240,7 @@ const Messenger = () => {
                   onClick={() => {
                     setCurrentChats(c);
                     setClick(!click);
+                    setOpen(!open);
                     // history.push("/messenger/" + c._id);
                   }}
                 >
@@ -258,7 +259,7 @@ const Messenger = () => {
             <SidebarRow avatar ImageLink="" title="clarrisa" /> */}
           </div>
         </div>
-        <div className="chatBox">
+        <div className={open ? "chatBox open" : "chatBox close"}>
           {currentChats ? (
             <>
               {" "}

@@ -244,3 +244,15 @@ form{
 .iconSend:hover{
     cursor: pointer;
 }
+
+@media  screen and (max-width: 768px){
+    .chatBox.close{
+        display: none;
+    }
+    .chatBox.open{
+        display: block
+    }
+    .chatMenu.close{
+        display: none;
+    }
+}
