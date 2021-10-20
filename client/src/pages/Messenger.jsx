@@ -145,11 +145,12 @@ const Messenger = () => {
   }, [userInfo]);
 
   useEffect(() => {
+    console.log(arrivalMessage);
     arrivalMessage &&
-      currentChats?.members.includes(arrivalMessage.sender) &&
+      currentChats.members.includes(arrivalMessage.sender) &&
       setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage, currentChats]);
-
+  console.log(messages);
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
     socket.current.on("getMessage", (data) => {
