@@ -137,9 +137,9 @@ const Messenger = () => {
   };
 
   useEffect(() => {
-    socket.current?.emit("addUser", userInfo._id);
+    socket.current.emit("addUser", userInfo._id);
     console.log("adding users");
-    socket.current?.on("getUsers", (users) => {
+    socket.current.on("getUsers", (users) => {
       console.log(users);
     });
   }, [userInfo]);
@@ -153,7 +153,7 @@ const Messenger = () => {
   console.log(messages);
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
-    socket.current?.on("getMessage", (data) => {
+    socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
