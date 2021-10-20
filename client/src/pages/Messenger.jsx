@@ -30,6 +30,25 @@ const Messenger = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUsers] = useState([]);
   const scrollRef = useRef();
+
+  useEffect(() => {
+    socket.current = io("ws://localhost:8900");
+    socket.current.on("getMessage", (data) => {
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log(arrivalMessage);
+    arrivalMessage &&
+      currentChats.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, currentChats]);
+
   const setNewConvo = async () => {
     try {
       const res = await axios.post("/conversation", {
@@ -41,6 +60,14 @@ const Messenger = () => {
       console.log("error while creating an conversation");
     }
   };
+
+  useEffect(() => {
+    socket.current.emit("addUser", userInfo._id);
+    console.log("adding users");
+    socket.current.on("getUsers", (users) => {
+      console.log(users);
+    });
+  }, [userInfo]);
   // console.log(searchTerm);
   useEffect(() => {
     const getConversation = async () => {
@@ -93,9 +120,10 @@ const Messenger = () => {
     };
 
     const receiverId = currentChats.members.find(
-      (member) => member.id !== userInfo._id
+      (member) => member !== userInfo._id
     );
-
+    console.log("zata re send");
+    console.log(receiverId);
     socket.current.emit("sendMessage", {
       senderId: userInfo._id,
       receiverId,
@@ -103,7 +131,7 @@ const Messenger = () => {
     });
     try {
       const res = await axios.post("/message/", msg);
-      console.log(res, "messgae send bro");
+      // console.log(res, "messgae send bro");
       setMessages([...messages, res.data]);
     } catch (error) {
       console.log(error, "error while sending message");
@@ -135,32 +163,9 @@ const Messenger = () => {
     // "none";
     // document.getElementsByClassName("searchBox")[0].value = "";
   };
+  // console.log(currentChats);
+  // console.log(messages);
 
-  useEffect(() => {
-    socket.current.emit("addUser", userInfo._id);
-    console.log("adding users");
-    socket.current.on("getUsers", (users) => {
-      console.log(users);
-    });
-  }, [userInfo]);
-
-  useEffect(() => {
-    console.log(arrivalMessage);
-    arrivalMessage &&
-      currentChats.members.includes(arrivalMessage.sender) &&
-      setMessages((prev) => [...prev, arrivalMessage]);
-  }, [arrivalMessage, currentChats]);
-  console.log(messages);
-  useEffect(() => {
-    socket.current = io("ws://localhost:8900");
-    socket.current.on("getMessage", (data) => {
-      setArrivalMessage({
-        sender: data.senderId,
-        text: data.text,
-        createdAt: Date.now(),
-      });
-    });
-  }, []);
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   });
