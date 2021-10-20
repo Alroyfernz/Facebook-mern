@@ -131,8 +131,8 @@ const Messenger = () => {
     // document.getElementsByClassName("searchBox")[0].style.display = "none";
     // document.getElementsByClassName("homeHeader__search")[0].style.display =
     //   "block";
-    document.getElementsByClassName("dropdown-content3")[0].style.display =
-      "none";
+    // document.getElementsByClassName("dropdown-content3")[0].style.display =
+    // "none";
     // document.getElementsByClassName("searchBox")[0].value = "";
   };
 
