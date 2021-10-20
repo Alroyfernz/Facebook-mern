@@ -451,4 +451,7 @@ user-select: none;
     .post__image{
         height: 400px;
     }
+    .post{
+        width: 98%;
+    }
 }

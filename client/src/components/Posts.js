@@ -28,7 +28,11 @@ const Posts = ({ profile }) => {
       <Stories />
       <Imageup />
       {postes.map((p) => {
-        return <Post id={p._id} post={p} />;
+        return (
+          <div className="postWrapper">
+            <Post id={p._id} post={p} />
+          </div>
+        );
       })}
       {/* <Post />
       <Post /> */}

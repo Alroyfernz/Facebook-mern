@@ -157,23 +157,25 @@ const Post = ({ post }) => {
         </div>
         <p className="pressEnterToPost">Press Enter to post</p>
       </form>
-      {comments.map((comment) => {
-        return (
-          <div
-            className={`comments__show ${
-              comment.username == userInfo?.name && "myself"
-            }`}
-          >
-            <Avatar className="post__avatar2" alt="" src={comment.photoURL} />
-            <div class="container__comments">
-              <p>
-                <span>{comment.username}</span>
-                <i class="post__verified"></i>&nbsp;{comment.text}
-              </p>
+      <div className="commentsSection">
+        {comments.map((comment) => {
+          return (
+            <div
+              className={`comments__show ${
+                comment.username == userInfo?.name && "myself"
+              }`}
+            >
+              <Avatar className="post__avatar2" alt="" src={comment.photoURL} />
+              <div class="container__comments">
+                <p>
+                  <span>{comment.username}</span>
+                  <i class="post__verified"></i>&nbsp;{comment.text}
+                </p>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };
