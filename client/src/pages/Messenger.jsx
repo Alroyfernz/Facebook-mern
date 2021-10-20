@@ -138,6 +138,7 @@ const Messenger = () => {
 
   useEffect(() => {
     socket.current?.emit("addUser", userInfo._id);
+    console.log("adding users");
     socket.current?.on("getUsers", (users) => {
       console.log(users);
     });
@@ -145,7 +146,7 @@ const Messenger = () => {
 
   useEffect(() => {
     arrivalMessage &&
-      currentChats?.members.includes(arrivalMessage) &&
+      currentChats?.members.includes(arrivalMessage.sender) &&
       setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage, currentChats]);
 
@@ -162,7 +163,7 @@ const Messenger = () => {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   });
-
+  // console.log(arrivalMessage);
   return (
     <>
       <Homeheader />
