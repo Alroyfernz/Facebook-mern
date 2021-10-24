@@ -69,8 +69,8 @@ const Messenger = () => {
     socket.current.on("getUsers", (users) => {
       console.log(users);
     });
-    return () => socket.close();
-  }, [userInfo]);
+    // return () => socket.close();
+  });
   // console.log(searchTerm);
   useEffect(() => {
     const getConversation = async () => {

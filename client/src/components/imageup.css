@@ -346,12 +346,14 @@ Dialog{
     z-index: 100 !important;
 }
 .makeStyles-paper-1 {
+    width: 100%;
     display: flex;
     flex-direction: column;
     background-color: #242526;
     border: 2px solid #2A2B2C;
     z-index: 100 !important;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
+
 }
 
 .left > h1 {
