@@ -16,7 +16,9 @@ function App() {
     <div>
       <Router>
         <Switch>
-          <Route path="/login">{userInfo ? <Home /> : <Login />}</Route>
+          <Route path="/login">
+            {userInfo !== null ? <Home /> : <Login />}
+          </Route>
           <Route path="/profile/:id">
             <Profile />
           </Route>
@@ -24,11 +26,7 @@ function App() {
             <Messenger />
           </Route>
           <Route path="/" exact>
-            {userInfo?.token?.find((ele) => ele.token === cookie) !== null ? (
-              <Home />
-            ) : (
-              <Login />
-            )}
+            {userInfo !== null ? <Home /> : <Login />}
           </Route>
           <Route path="/register">{userInfo ? <Home /> : <Register />}</Route>
         </Switch>

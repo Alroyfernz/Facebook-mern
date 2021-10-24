@@ -28,7 +28,7 @@ function Login() {
       const { data } = await axios.post("/auth/login", { email, password });
       console.log(data);
       dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      sessionStorage.setItem("userInfo", JSON.stringify(data));
       history.push("/");
     } catch (error) {
       console.log(error);
