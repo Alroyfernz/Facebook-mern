@@ -22,7 +22,7 @@ const Sidebar = () => {
       <Link to={`/profile/${user?._id}`}>
         <SidebarRow
           avatar
-          ImageLink={user?.profilePicture}
+          ImageLink={userInfo?.profilePicture}
           title={user?.name}
         />
       </Link>

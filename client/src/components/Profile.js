@@ -310,10 +310,12 @@ const Profile = () => {
       <div className="postsAndIntro">
         <ProfileSidebar />
         <div className="postAndWatch">
-          <Imageup />
-          {postes.map((p) => {
-            return <Post id={p._id} post={p} />;
-          })}
+          {userInfo?._id === user?._id && <Imageup />}
+          <div style={{ marginTop: "10px" }}>
+            {postes.map((p) => {
+              return <Post id={p._id} post={p} />;
+            })}
+          </div>
         </div>
       </div>
     </div>
