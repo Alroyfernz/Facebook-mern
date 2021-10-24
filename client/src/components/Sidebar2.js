@@ -5,7 +5,7 @@ import "./sidebar2.css";
 import Sidebar2row from "./Sidebar2row";
 const Sidebar2 = () => {
   const { userInfo } = useSelector((state) => state.userLogin);
-  const friends = userInfo.friends;
+  const friends = userInfo?.friends;
   return (
     <div className="sidebar2">
       <div className="hr" />
@@ -14,7 +14,7 @@ const Sidebar2 = () => {
         <BsSearch className="searchIcon2" />
       </div>
       <div className="contacts">
-        {friends.map((friend) => {
+        {friends?.map((friend) => {
           return <Sidebar2row id={friend} />;
         })}
       </div>

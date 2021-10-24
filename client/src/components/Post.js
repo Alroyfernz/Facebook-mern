@@ -57,6 +57,7 @@ const Post = ({ post }) => {
       const res = await axios.post("/comments/", {
         username: userInfo.name,
         postId: post._id,
+        photoURL: userInfo.profilePicture,
         text,
       });
       console.log(res.data);
@@ -144,7 +145,11 @@ const Post = ({ post }) => {
       </div>
       <form onSubmit={handleComment}>
         <div className="commentBox">
-          <Avatar className="post__avatar2" alt="" src="" />
+          <Avatar
+            className="post__avatar2"
+            alt=""
+            src={userInfo.profilePicture}
+          />
           <input
             className="commentInputBox"
             type="text"

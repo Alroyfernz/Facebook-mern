@@ -186,7 +186,9 @@
     .market, .groups,.homeHeader__pages {
       display: none;
     }
-
+.homeHeader{
+  position: fixed;
+}
     .homeHeader__otherIcons{
       display:none;
     }

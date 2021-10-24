@@ -39,7 +39,8 @@ const Profile = () => {
         coverURL: coverImgUrl,
       });
       console.log(res.data);
-      // dispatch({ type: USER_UPDATE, payload: res.data });
+      dispatch({ type: USER_UPDATE, payload: res.data });
+      sessionStorage.setItem("userInfo", JSON.stringify(res.data));
       console.log("image uploded");
     } catch (error) {
       console.log(error);
@@ -73,15 +74,22 @@ const Profile = () => {
       const res = await axios.put("/user/add/" + userInfo._id, {
         userId: user._id,
       });
-
+      console.log(res);
       console.log("kelo re add!");
+      dispatch({ type: USER_UPDATE, payload: res.data });
+      sessionStorage.setItem("userInfo", JSON.stringify(res.data));
     } catch (error) {
       console.log("error while adding friend");
     }
   };
   const handleNotFriend = async () => {
     try {
-      await axios.put("/user/remove/" + userInfo._id, { userId: user._id });
+      const res = await axios.put("/user/remove/" + userInfo._id, {
+        userId: user._id,
+      });
+      console.log(res);
+      // dispatch({ type: USER_UPDATE, payload: res.data });
+      // sessionStorage.setItem("userInfo", JSON.stringify(res.data));
     } catch (error) {
       console.log("error while deleting friend");
     }

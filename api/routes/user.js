@@ -63,9 +63,12 @@ router.put("/add/:id", async (req, res) => {
       const currentUser = await User.findById(req.params.id);
       const user = await User.findById(req.body.userId);
       if (!currentUser.friends.includes(req.body.userId)) {
-        await currentUser.updateOne({ $push: { friends: req.body.userId } });
+        await currentUser.updateOne(
+          { $push: { friends: req.body.userId } },
+          { new: true }
+        );
         await user.updateOne({ $push: { friends: req.params.id } });
-        res.status(200).send("user added to friends list");
+        res.status(200).send(currentUser);
       } else {
         res.status(403).json("You are already friends with this user");
       }
@@ -81,9 +84,13 @@ router.put("/remove/:id", async (req, res) => {
       const currentUser = await User.findById(req.params.id);
       const user = await User.findById(req.body.userId);
       if (currentUser.friends.includes(req.body.userId)) {
-        await currentUser.updateOne({ $pull: { friends: req.body.userId } });
+        await currentUser.updateOne(
+          { $pull: { friends: req.body.userId } },
+          { new: true }
+        );
         await user.updateOne({ $pull: { friends: req.params.id } });
-        res.status(200).send("user removed from friends list");
+        console.log(currentUser);
+        res.status(200).send(currentUser);
       } else {
         res.status(403).json("you arent friends");
       }
@@ -99,10 +106,14 @@ router.put("/:id", async (req, res) => {
   try {
     const photoUrl = photo && (await uploadImage(photo));
     const photoUrl2 = photo2 && (await uploadImage(photo2));
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, {
-      $set: { profilePicture: photoUrl },
-      $set: { coverPicture: photoUrl2 },
-    });
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: { profilePicture: photoUrl },
+        $set: { coverPicture: photoUrl2 },
+      },
+      { new: true }
+    );
     res.status(200).json(updatedUser);
   } catch (error) {
     res.status(403).json(error);
