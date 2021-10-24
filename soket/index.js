@@ -28,7 +28,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("sendMessage", ({ senderId, receiverId, text }) => {
+    console.log(receiverId, "uska id");
+    console.log(users);
     const user = getUser(receiverId);
+    console.log(text);
     console.log(user, "friend");
     io.to(user?.socketId).emit("getMessage", { senderId, text });
   });

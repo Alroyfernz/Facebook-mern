@@ -16,6 +16,7 @@ import { io } from "socket.io-client";
 import "./messenger.css";
 const Messenger = () => {
   const history = useHistory();
+
   const [conversations, setConversations] = useState([]);
   const [currentChats, setCurrentChats] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -62,11 +63,13 @@ const Messenger = () => {
   };
 
   useEffect(() => {
+    // const ac = new AbortController();
     socket.current.emit("addUser", userInfo._id);
     console.log("adding users");
     socket.current.on("getUsers", (users) => {
       console.log(users);
     });
+    return () => socket.close();
   }, [userInfo]);
   // console.log(searchTerm);
   useEffect(() => {
@@ -78,7 +81,6 @@ const Messenger = () => {
         console.log(error);
       }
     };
-
     getConversation();
   }, [userInfo._id]);
 
