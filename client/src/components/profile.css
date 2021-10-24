@@ -509,5 +509,6 @@ align-items: center;
       .postAndWatch{
           margin: unset;
          width: 100% !important;
+         flex: 1;
       }
   }
