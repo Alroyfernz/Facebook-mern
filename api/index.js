@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
+const storyRouter = require("./routes/story");
 const commentRouter = require("./routes/comment");
 const conversationRouter = require("./routes/conversations");
 const messageRouter = require("./routes/messages");
@@ -51,6 +52,7 @@ app.use("/api/posts", postRouter);
 app.use("/api/comments", commentRouter);
 app.use("/api/conversation", conversationRouter);
 app.use("/api/message", messageRouter);
+app.use("/api/story", storyRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("Backend server running");
