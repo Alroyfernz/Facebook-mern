@@ -11,8 +11,8 @@ router.post("/register", async (req, res) => {
       // gender: req.body.gender,
     });
     const user = await newUser.save();
-    // const token = await User.generateAuthToken();
-    // console.log(token);
+    const token = await user.generateAuthToken();
+    console.log(token);
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json(error);

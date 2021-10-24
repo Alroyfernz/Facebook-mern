@@ -66,9 +66,19 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+userSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 12);
+  }
+  next();
+});
+
 userSchema.methods.generateAuthToken = async function () {
   try {
-    let token = await jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+    let token = await jwt.sign(
+      { _id: this._id },
+      "qwertyuiopasdfghjklzxcvbnmqwertyuioasdfghjklzxcvbnmqwertyuiopasdfghjkl"
+    );
     this.tokens = this.tokens.concat({ token: token });
     await this.save();
     return token;
@@ -76,12 +86,5 @@ userSchema.methods.generateAuthToken = async function () {
     console.log(error);
   }
 };
-
-userSchema.pre("save", async function (next) {
-  if (this.isModified("password")) {
-    this.password = await bcrypt.hash(this.password, 12);
-  }
-  next();
-});
 
 module.exports = mongoose.model("User", userSchema);
