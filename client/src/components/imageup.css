@@ -382,6 +382,20 @@ progress {
         margin-left: unset!important;
         margin-top: 10%!important;
     }
+    .options{
+        margin-left: 0;
+    }
+    .liveVideo{
+        flex: unset;
+        margin-left: 50px;
+    }
+    .photo{
+        flex: unset;
+    }
+    .feeling{
+        flex: unset;
+       
+    }
     .MuiDialog-container{
         width: 100% !important
     }
