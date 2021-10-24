@@ -119,8 +119,8 @@ const Profile = () => {
     fetchData();
   }, [user?._id]);
 
+  const id = history.location.pathname.split("/")[2];
   useEffect(() => {
-    const id = history.location.pathname.split("/")[2];
     const fetchUser = async () => {
       try {
         const res = await axios.get("/user/" + id);
@@ -132,7 +132,7 @@ const Profile = () => {
       }
     };
     fetchUser();
-  }, []);
+  }, [id]);
   console.log(postes);
   // console.log(userInfo?.friends.includes(user?._id), "from friends bro");
   return (

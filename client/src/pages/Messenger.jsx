@@ -99,17 +99,17 @@ const Messenger = () => {
 
   const id = history.location.pathname.split("/")[2];
   // console.log(conversations);
-  // if (id !== null && click === false) {
-  //   const setChat = async () => {
-  //     try {
-  //       const response = await axios.get("/conversation/single/" + id);
-  //       setCurrentChats(response.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   setChat();
-  // }
+  if (id !== null && click === false) {
+    const setChat = async () => {
+      try {
+        const response = await axios.get("/conversation/single/" + id);
+        setCurrentChats(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    setChat();
+  }
   // console.log(conversations);
   const handleSend = async (e) => {
     e.preventDefault();
@@ -250,7 +250,7 @@ const Messenger = () => {
                     setCurrentChats(c);
                     setClick(!click);
                     setOpen(!open);
-                    // history.push("/messenger/" + c._id);
+                    history.push("/messenger/null");
                   }}
                 >
                   <SidebarRoww
