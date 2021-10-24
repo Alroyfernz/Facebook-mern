@@ -497,6 +497,15 @@ align-items: center;
          margin-left: unset;
         
       }
+      .optionLeft{
+          display: none;
+      }
+      .optionRight{
+          padding: 8px 0 8px 0;
+      }
+      .addFriend,.addStory,.RFriend,.addFriend,.edit,.messengerI{
+          height: 25px;
+      }
       .postAndWatch{
           margin: unset;
          width: 100% !important;

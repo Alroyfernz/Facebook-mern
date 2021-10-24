@@ -11,8 +11,7 @@ router.post("/register", async (req, res) => {
       // gender: req.body.gender,
     });
     const user = await newUser.save();
-    const token = await user.generateAuthToken();
-    console.log(token);
+
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json(error);
@@ -29,6 +28,12 @@ router.post("/login", async (req, res) => {
     );
     console.log(confirmedPassword);
     // !confirmedPassword && res.status(404).json("wrong password");
+    const token = await user.generateAuthToken();
+    console.log(token);
+    res.cookie("jwtoken", token, {
+      expires: new Date(Date.now() + 7200000),
+      httpOnly: true,
+    });
     res.status(200).send(user);
     console.log("login success");
   } catch (error) {
