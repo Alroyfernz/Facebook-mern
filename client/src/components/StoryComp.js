@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./storycomp.css";
-const StoryComp = ({ remove, slide }) => {
+const StoryComp = ({ remove, slide, idx }) => {
   return (
     <div
-      className={remove == true ? "comp remove" : "comp"}
+      className={idx === 3 ? "comp remove" : "comp"}
       style={{ backgroundImage: `url(${slide.photo})` }}
     >
       <span className="userP" />

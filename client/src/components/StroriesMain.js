@@ -2,9 +2,12 @@ import { Avatar, Divider } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
+import { VscChromeClose } from "react-icons/vsc";
 import Homeheader from "./Homeheader";
+import { useHistory } from "react-router-dom";
 import "./story.css";
 const StroriesMain = () => {
+  const history = useHistory();
   const [slides, setSlides] = useState([]);
   const [current, setCurrent] = useState(0);
   const length = slides.length;
@@ -34,6 +37,10 @@ const StroriesMain = () => {
     <div>
       <Homeheader />
       <section className="slider">
+        <VscChromeClose
+          className="close_icon"
+          onClick={() => history.push("/")}
+        />
         <FaArrowAltCircleLeft className="left-arrow" onClick={prevSlide} />
         <FaArrowAltCircleRight className="right-arrow" onClick={nextSlide} />
         {slides.map((slide, index) => {
@@ -52,9 +59,7 @@ const StroriesMain = () => {
               >
                 <div className="userCred">
                   <Avatar src={slide?.profile} className="userPhoto" />
-                  <span className="userName">
-                    <h5>Alroy fernandes</h5>
-                  </span>
+                  <span className="userName">Alroy Fernandes</span>
                 </div>
               </div>
             </div>

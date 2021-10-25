@@ -35,11 +35,7 @@ const Stories = () => {
               console.log("clicked");
             }}
           >
-            <StoryComp
-              key={index}
-              slide={slide}
-              remove={index === 3 ? "true" : "false"}
-            />
+            <StoryComp key={index} slide={slide} idx={index} />
           </div>
         );
       })}
