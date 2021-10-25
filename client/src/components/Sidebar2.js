@@ -14,8 +14,8 @@ const Sidebar2 = () => {
         <BsSearch className="searchIcon2" />
       </div>
       <div className="contacts">
-        {friends?.map((friend) => {
-          return <Sidebar2row id={friend} />;
+        {friends?.map((friend, index) => {
+          return <Sidebar2row key={index} id={friend} />;
         })}
       </div>
     </div>

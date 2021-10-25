@@ -112,13 +112,14 @@ const Homeheader = ({ selected }) => {
                     return value;
                   }
                 })
-                .map((user1) => {
+                .map((user1, index) => {
                   return (
                     <li
                       onClick={collapseInput}
                       onClick={() => {
                         history.push(`/profile/${user1._id}`);
                       }}
+                      key={index}
                     >
                       <a onClick={collapseInput}>
                         <Avatar
@@ -266,55 +267,55 @@ const Homeheader = ({ selected }) => {
             onClick={() => setRightO(!rightO)}
           >
             <a href="#">
-              <div class="optionDrop">
-                <img src={user?.profilePicture} class="Avatar" />
-                <div class="sideinfoDropAvatar">
+              <div className="optionDrop">
+                <img src={user?.profilePicture} className="Avatar" />
+                <div className="sideinfoDropAvatar">
                   <h1>{userInfo?.name}</h1>
                   <p>See your profile</p>
                 </div>
               </div>
             </a>
-            <div class="hr" />
+            <div className="hr" />
             <a href="#">
-              <div class="optionDrop">
-                <div class="iconDrop">
-                  <i class="feedback" />
+              <div className="optionDrop">
+                <div className="iconDrop">
+                  <i className="feedback" />
                 </div>
-                <div class="sideinfoDrop">
+                <div className="sideinfoDrop">
                   <h1>Give Feedback</h1>
                   <p>Help us improve the new Facebook</p>
                 </div>
               </div>
             </a>
-            <div class="hr" />
+            <div className="hr" />
             <a href="#">
-              <div class="optionDrop">
-                <div class="iconDrop">
-                  <i class="settings" />
+              <div className="optionDrop">
+                <div className="iconDrop">
+                  <i className="settings" />
                 </div>
                 <h1>Settings & Privacy</h1>
               </div>
             </a>
             <a href="#">
-              <div class="optionDrop">
-                <div class="iconDrop">
-                  <i class="helpAndSupport" />
+              <div className="optionDrop">
+                <div className="iconDrop">
+                  <i className="helpAndSupport" />
                 </div>
                 <h1>Help & Support</h1>
               </div>
             </a>
             <a href="#">
-              <div class="optionDrop">
-                <div class="iconDrop">
-                  <i class="darkMode" />
+              <div className="optionDrop">
+                <div className="iconDrop">
+                  <i className="darkMode" />
                 </div>
                 <h1>Dark Mode</h1>
               </div>
             </a>
             <a href="#">
-              <div onClick={logout} class="optionDrop">
-                <div class="iconDrop">
-                  <i class="logout" />
+              <div onClick={logout} className="optionDrop">
+                <div className="iconDrop">
+                  <i className="logout" />
                 </div>
                 <h1>Log out</h1>
               </div>

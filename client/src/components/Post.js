@@ -157,12 +157,13 @@ const Post = ({ post }) => {
         <p className="pressEnterToPost">Press Enter to post</p>
       </form>
       <div className="commentsSection">
-        {comments.map((comment) => {
+        {comments.map((comment, index) => {
           return (
             <div
               className={`comments__show ${
                 comment.username == userInfo?.name && "myself"
               }`}
+              key={index}
             >
               <Avatar className="post__avatar2" alt="" src={comment.photoURL} />
               <div class="container__comments">

@@ -1,7 +1,7 @@
 import { Avatar, Dialog } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import "./profile.css";
-import { useParams, useHistory, Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import Posts from "./Posts.js";
 import Imageup from "./Imageup.js";
 import ProfileSidebar from "./ProfileSidebar.js";
@@ -18,20 +18,15 @@ const Profile = () => {
   const [story, isStory] = useState(false);
   const [file1, setFile1] = useState(null);
   const [coverImgUrl, setCoverImgUrl] = useState("");
-  const [profileUserData, setProfileUserData] = useState();
-  const [bio, setBio] = useState("");
-  const [bioPresent, setBioPresent] = useState(false);
+
   const [user, setUser] = useState(null);
-  const handleUpload = () => {};
-  const handleClose = () => {};
+
   const { userInfo } = useSelector((state) => state.userLogin);
   const [postes, setPostes] = useState([]);
   const [openD, setOpenD] = useState(false);
-  const profile = true;
-  const friendId = null;
+
   const history = useHistory();
-  console.log(imageURL);
-  console.log(file);
+
   const handleUpdate = async () => {
     setOpenD(!openD);
     if (story === false) {
@@ -40,7 +35,7 @@ const Profile = () => {
           imageURL,
           coverURL: coverImgUrl,
         });
-        console.log(res.data);
+
         dispatch({ type: USER_UPDATE, payload: res.data });
         sessionStorage.setItem("userInfo", JSON.stringify(res.data));
         console.log("image uploded");
@@ -55,7 +50,6 @@ const Profile = () => {
           name: userInfo.name,
           profile: userInfo.profilePictue,
         });
-        console.log("added story to backend");
       } catch (error) {
         console.log(error);
       }
@@ -69,7 +63,6 @@ const Profile = () => {
       const res = await axios.get("/conversation/" + user._id, {
         logged: userInfo._id,
       });
-      console.log(res);
 
       if (res.data.length === 0) {
         const response = await axios.post("/conversation", {
@@ -91,10 +84,10 @@ const Profile = () => {
       const res = await axios.put("/user/add/" + userInfo._id, {
         userId: user._id,
       });
-      console.log(res);
+
       console.log("kelo re add!");
-      dispatch({ type: USER_UPDATE, payload: res.data });
-      sessionStorage.setItem("userInfo", JSON.stringify(res.data));
+      // dispatch({ type: USER_UPDATE, payload: res.data });
+      // sessionStorage.setItem("userInfo", JSON.stringify(res.data));
     } catch (error) {
       console.log("error while adding friend");
     }
@@ -104,7 +97,7 @@ const Profile = () => {
       const res = await axios.put("/user/remove/" + userInfo._id, {
         userId: user._id,
       });
-      console.log(res);
+
       // dispatch({ type: USER_UPDATE, payload: res.data });
       // sessionStorage.setItem("userInfo", JSON.stringify(res.data));
     } catch (error) {
@@ -112,21 +105,11 @@ const Profile = () => {
     }
   };
 
-  // useEffect(async () => {
-  //   if (user?._id === userInfo?._id) {
-  //     try {
-  //       const res = await axios.get("/user/" + user._id);
-  //       // console.log(res, "from update in redux");
-  //       setUser(res.data);
-  //     } catch (error) {}
-  //   }
-  // }, [user]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await axios.get("/posts/posts/" + user._id);
-        console.log(res.data);
+
         setPostes(res.data);
       } catch (error) {
         console.log(error);
@@ -142,16 +125,13 @@ const Profile = () => {
       try {
         const res = await axios.get("/user/" + id);
         setUser(res.data);
-        // localStorage.setItem("userInfo", res.data);
-        // console.log(res);
       } catch (error) {
         console.log("error while fetching the user");
       }
     };
     fetchUser();
   }, [id]);
-  console.log(postes);
-  // console.log(userInfo?.friends.includes(user?._id), "from friends bro");
+
   return (
     <div className="profile">
       <Homeheader />

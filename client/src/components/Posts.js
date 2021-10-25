@@ -27,10 +27,10 @@ const Posts = ({ profile }) => {
     <div className="posts">
       <Stories />
       <Imageup />
-      {postes.map((p) => {
+      {postes.map((p, index) => {
         return (
           <div className="postWrapper">
-            <Post id={p._id} post={p} />
+            <Post key={index} id={p._id} post={p} />
           </div>
         );
       })}
