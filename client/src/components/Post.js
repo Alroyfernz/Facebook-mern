@@ -13,7 +13,7 @@ const Post = ({ post }) => {
   const [likes, setLikes] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const { userInfo } = useSelector((state) => state.userLogin);
-  console.log(comments);
+
   const handleDelete = async () => {
     try {
       await axios.delete("/posts/" + post._id, {
@@ -24,26 +24,22 @@ const Post = ({ post }) => {
     }
   };
 
-  // console.log(post._id);
-  // console.log(userInfo._id === post.userId);
   const handleLike = async () => {
     if (!isLiked) {
       setLikes(likes + 1);
       setIsLiked(!isLiked);
-      console.log("post liked");
+
       try {
         const res = await axios.post("/posts/like/" + post._id, userInfo._id);
-        console.log(res);
       } catch (error) {
         console.log(error);
       }
     } else {
       setLikes(likes - 1);
       setIsLiked(!isLiked);
-      console.log("post disliked");
+
       try {
         await axios.put("/posts/like/" + post._id, userInfo._id);
-        console.log("post disliked in backend");
       } catch (error) {
         console.log(error);
       }
@@ -51,7 +47,6 @@ const Post = ({ post }) => {
   };
 
   const handleComment = async (e) => {
-    console.log("commentedd");
     e.preventDefault();
     try {
       const res = await axios.post("/comments/", {
@@ -60,7 +55,7 @@ const Post = ({ post }) => {
         photoURL: userInfo.profilePicture,
         text,
       });
-      console.log(res.data);
+
       setComment([...comments, res.data]);
     } catch (error) {}
   };
@@ -87,7 +82,6 @@ const Post = ({ post }) => {
     fetchComments();
   }, []);
 
-  console.log(comments);
   return (
     <div className="post">
       <div className="post__header">
