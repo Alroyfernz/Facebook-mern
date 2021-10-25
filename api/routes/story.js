@@ -8,7 +8,7 @@ router.post("/", async (req, res) => {
     const photoUrl = photo && (await uploadImage(photo));
     const StoryCreated = new Story({
       userId: req.body.userId,
-      photoUrl: photoUrl,
+      photo: photoUrl,
     });
     const story = await StoryCreated.save();
     res.status(200).json(story);
