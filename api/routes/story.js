@@ -1,11 +1,13 @@
 const router = require("express").Router();
 const Story = require("../models/Story");
+const { uploadImage } = require("../imageUpload");
+
 router.post("/", async (req, res) => {
   const photo = req.body.photo;
   try {
     const photoUrl = photo && (await uploadImage(photo));
     const StoryCreated = new Story({
-      userId: req.user.id,
+      userId: req.body.userId,
       photoUrl: photoUrl,
     });
     const story = await StoryCreated.save();

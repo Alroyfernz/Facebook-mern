@@ -15,6 +15,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [imageURL, setImageURL] = useState("");
   const [file, setFile] = useState(null);
+  const [story, isStory] = useState(false);
   const [file1, setFile1] = useState(null);
   const [coverImgUrl, setCoverImgUrl] = useState("");
   const [profileUserData, setProfileUserData] = useState();
@@ -33,18 +34,32 @@ const Profile = () => {
   console.log(file);
   const handleUpdate = async () => {
     setOpenD(!openD);
-    try {
-      const res = await axios.put("/user/" + userInfo._id, {
-        imageURL,
-        coverURL: coverImgUrl,
-      });
-      console.log(res.data);
-      dispatch({ type: USER_UPDATE, payload: res.data });
-      sessionStorage.setItem("userInfo", JSON.stringify(res.data));
-      console.log("image uploded");
-    } catch (error) {
-      console.log(error);
+    if (story === false) {
+      try {
+        const res = await axios.put("/user/" + userInfo._id, {
+          imageURL,
+          coverURL: coverImgUrl,
+        });
+        console.log(res.data);
+        dispatch({ type: USER_UPDATE, payload: res.data });
+        sessionStorage.setItem("userInfo", JSON.stringify(res.data));
+        console.log("image uploded");
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        const res = await axios.post("/story/", {
+          photo: imageURL,
+          userId: userInfo._id,
+        });
+        console.log("added story to backend");
+      } catch (error) {
+        console.log(error);
+      }
     }
+    setFile(null);
+    isStory(false);
   };
 
   const setNewConvo = async () => {
@@ -147,17 +162,29 @@ const Profile = () => {
         <div class="makeStyles-paper-1">
           <div class="drop_top">
             <div className="Dtitle">
-              <h1>Edit Profile</h1>
+              {story == true ? <h1>Add story</h1> : <h1>Edit profile</h1>}
             </div>
-            <div className="icon" onClick={() => setOpenD(!openD)}>
+            <div
+              className="icon"
+              onClick={() => {
+                setOpenD(!openD);
+                isStory(false);
+                setFile(null);
+              }}
+            >
               <i className="closeIcon" />
             </div>
           </div>
           <div className="drop_bottom1">
             <div className="header1">
-              <h4>Profile Picture</h4>
+              {story === true ? <h4>Story</h4> : <h4>Profile Picture</h4>}
+
               <label htmlFor="profileC">
-                <span className="editlink">edit</span>
+                {story === true ? (
+                  <span className="editlink">select</span>
+                ) : (
+                  <span className="editlink">edit</span>
+                )}
               </label>
 
               <input
@@ -178,41 +205,47 @@ const Profile = () => {
               />
             </div>
             <div className="profile_photo">
-              <Avatar
-                src={file ? imageURL : user?.profilePicture}
-                className="profileUser"
-              />
+              {story === true ? (
+                file && <img src={imageURL} className="storyImg" />
+              ) : (
+                <Avatar
+                  src={file ? imageURL : user?.profilePicture}
+                  className="profileUser"
+                />
+              )}
             </div>
           </div>
-          <div className="drop_bottom2">
-            <div className="header2">
-              <h4>Cover Picture</h4>
-              <label htmlFor="profileCover">
-                <span className="editlink">edit</span>
-              </label>
-              <input
-                type="file"
-                id="profileCover"
-                style={{ display: "none" }}
-                onChange={(e) => {
-                  setFile1(e.target.files[0]);
-                  const file = e.target.files[0];
-                  if (file) {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(file);
-                    reader.onloadend = () => {
-                      setCoverImgUrl(reader.result);
-                    };
-                  }
-                }}
-              />
+          {story === false && (
+            <div className="drop_bottom2">
+              <div className="header2">
+                <h4>Cover Picture</h4>
+                <label htmlFor="profileCover">
+                  <span className="editlink">edit</span>
+                </label>
+                <input
+                  type="file"
+                  id="profileCover"
+                  style={{ display: "none" }}
+                  onChange={(e) => {
+                    setFile1(e.target.files[0]);
+                    const file = e.target.files[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.readAsDataURL(file);
+                      reader.onloadend = () => {
+                        setCoverImgUrl(reader.result);
+                      };
+                    }
+                  }}
+                />
+              </div>
+              <div className="cover_photo">
+                {file1 && <img src={coverImgUrl} className="cover" />}
+              </div>
             </div>
-            <div className="cover_photo">
-              {file1 && <img src={coverImgUrl} className="cover" />}
-            </div>
-          </div>
+          )}
           <div className="submit_btn" onClick={handleUpdate}>
-            <h4>Edit Profile</h4>
+            {story === true ? <h4>Upload story</h4> : <h4>Edit Profile</h4>}
           </div>
         </div>
       </Dialog>
@@ -249,7 +282,13 @@ const Profile = () => {
             </div>
             <div className="optionRight">
               {userInfo?._id === user?._id ? (
-                <span className="addStory">
+                <span
+                  className="addStory"
+                  onClick={() => {
+                    isStory(!story);
+                    setOpenD(!openD);
+                  }}
+                >
                   {" "}
                   <img
                     src="https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/33EToHSZ94f.png"
