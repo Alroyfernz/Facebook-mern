@@ -8,6 +8,8 @@ import "./app.css";
 import Profile from "./components/Profile";
 import { useSelector } from "react-redux";
 import Messenger from "./pages/Messenger";
+import Stories from "./components/Stories";
+import StroriesMain from "./components/StroriesMain";
 function App() {
   const { userInfo } = useSelector((state) => state.userLogin);
   const cookie = Cookies.get();
@@ -27,6 +29,9 @@ function App() {
           </Route>
           <Route path="/" exact>
             {userInfo !== null ? <Home /> : <Login />}
+          </Route>
+          <Route path="">
+            <StroriesMain />
           </Route>
           <Route path="/register">{userInfo ? <Home /> : <Register />}</Route>
         </Switch>
