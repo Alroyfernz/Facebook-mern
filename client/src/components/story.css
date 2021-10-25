@@ -12,12 +12,14 @@
     border-radius: 10px;
   }
   .image.active {
+   
     width: 280px;
     height: 500px;
     border-radius: 10px;
     object-fit: cover;
   }
   .image{
+    position: relative;
    border-radius: 10px;
     height:300px;
     width: 170px;
@@ -47,11 +49,26 @@
   }
   
   .slide {
+   
    opacity: 1;
     transition-duration: 1s ease-in-out;
     margin: 0 10px 0 10px;
   }
-  
+  .userCred{
+    position: absolute;
+    top: 10px;
+   left: 10px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+    
+  }
+  .userName{
+   
+    margin-left: 5px;
+    width: fit-content;
+   
+  }
   .slide.active {
   opacity: 1;
     transition-duration: 1s;
@@ -60,7 +77,7 @@
 
 
   @media screen and (max-width: 600px) {
-      .slider{
+      /* .slider{
           width: 100%;
       }
       .image{
@@ -82,5 +99,34 @@
       }
       .image{
         display: none;
+      } */
+      .slide{
+        opacity: 0;
+        display: none;
+      }
+      .slider{
+        margin-top: 50px;
+      }
+      .image.active{
+        margin-top:50px;
+        width:85%;
+        height: 550px;
+        /* height: 70vh; */
+      }
+      .slide.active{
+        opacity: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+      }
+      .right-arrow{
+        right: 0;
+        font-size: 24px;
+      }
+      .left-arrow{
+        left: 0;
+        font-size: 24px;
       }
   }

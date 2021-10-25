@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./storycomp.css";
-const StoryComp = ({ remove }) => {
+const StoryComp = ({ remove, slide }) => {
   return (
-    <div className={remove == true ? "comp remove" : "comp"}>
+    <div
+      className={remove == true ? "comp remove" : "comp"}
+      style={{ backgroundImage: `url(${slide.photo})` }}
+    >
       <span className="userP" />
       {/* <img
         src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG90cmFpdHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"

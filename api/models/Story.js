@@ -6,7 +6,12 @@ const storySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
+    name: {
+      type: String,
+    },
+    profile: {
+      type: String,
+    },
     photo: {
       type: String,
     },

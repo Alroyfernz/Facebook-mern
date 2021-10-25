@@ -52,6 +52,8 @@ const Profile = () => {
         const res = await axios.post("/story/", {
           photo: imageURL,
           userId: userInfo._id,
+          name: userInfo.name,
+          profile: userInfo.profilePictue,
         });
         console.log("added story to backend");
       } catch (error) {
@@ -252,7 +254,10 @@ const Profile = () => {
       <div className="profile__topSection">
         <div
           className="profile__coverPhoto"
-          style={{ backgroundImage: `url(${user?.coverPicture})` }}
+          style={{
+            backgroundImage: `url(${user?.coverPicture})`,
+            backgroundSize: "contain",
+          }}
         >
           {/* <img src={user?.coverPicture} alt="cover" className="coverPic" /> */}
           <Avatar src={user?.profilePicture} className="profileAvatar" />

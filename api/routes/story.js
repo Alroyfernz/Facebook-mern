@@ -9,6 +9,8 @@ router.post("/", async (req, res) => {
     const StoryCreated = new Story({
       userId: req.body.userId,
       photo: photoUrl,
+      name: req.body.name,
+      profile: req.body.profile,
     });
     const story = await StoryCreated.save();
     res.status(200).json(story);

@@ -1,3 +1,4 @@
+import { Avatar, Divider } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
@@ -41,11 +42,21 @@ const StroriesMain = () => {
               className={index === current ? "slide active" : "slide"}
               key={index}
             >
-              <img
-                src={slide.photo}
+              <div
+                style={{
+                  backgroundImage: `url(${slide?.photo})`,
+                  backgroundSize: "cover",
+                }}
                 alt="travel image"
                 className={index === current ? "image active" : "image"}
-              />
+              >
+                <div className="userCred">
+                  <Avatar src={slide?.profile} className="userPhoto" />
+                  <span className="userName">
+                    <h5>Alroy fernandes</h5>
+                  </span>
+                </div>
+              </div>
             </div>
           );
         })}
