@@ -10,7 +10,9 @@
     top: 0;
     z-index: 1000;
   }
-  
+  .mobileHeader{
+    display: none;
+  }
   .homeHeaderLogoAndSearch {
     display: flex;
     flex-direction : row;
@@ -188,6 +190,12 @@
     }
 .homeHeader{
   position: fixed;
+}
+.mobileHeader{
+  display:block;
+}
+.homeHeader__logo{
+  display: none;
 }
     .homeHeader__otherIcons{
       display:none;

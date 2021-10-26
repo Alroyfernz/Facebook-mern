@@ -13,7 +13,7 @@ import StroriesMain from "./components/StroriesMain";
 import axios from "axios";
 function App() {
   const { userInfo } = useSelector((state) => state.userLogin);
-  setInterval(myFunction, 1000 * 60 * 60 * 48);
+
   const myFunction = async () => {
     try {
       await axios.delete("/story/" + userInfo._id);
@@ -21,6 +21,7 @@ function App() {
       console.log(error);
     }
   };
+  setInterval(myFunction, 1000 * 60 * 60 * 48);
   return (
     <div>
       <Router>

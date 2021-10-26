@@ -23,10 +23,6 @@ const Stories = () => {
   }
   return (
     <div className="story">
-      {/* <StoryComp remove={false} />
-      <StoryComp remove={false} />
-      <StoryComp remove={false} />
-      <StoryComp remove={true} /> */}
       {toDisplay.map((slide, index) => {
         return (
           <div

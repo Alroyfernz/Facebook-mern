@@ -79,6 +79,11 @@ const Homeheader = ({ selected }) => {
       <div className="homeHeaderLogoAndSearch">
         <Link to="/">
           <img
+            src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg"
+            alt=""
+            className="mobileHeader"
+          />
+          <img
             src="https://i.ibb.co/72dN4JJ/Facebook-icon-2019-1.png"
             className="homeHeader__logo"
           />
