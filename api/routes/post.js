@@ -17,10 +17,6 @@ router.put("/", async (req, res) => {
     console.log(post);
     console.log(photoUrl);
 
-    // const updatedUser = User.findByIdAndUpdate(req.userId, {
-    //   $push: { posts: post._id },
-    // });
-    // await updatedUser.save();
     res.send(post);
   } catch (error) {
     console.log("error while creating new post");

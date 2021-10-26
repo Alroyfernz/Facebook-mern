@@ -9,7 +9,7 @@ router.post("/register", async (req, res) => {
       email: req.body.email,
       password: req.body.password,
       DOB: req.body.birthday,
-      // gender: req.body.gender,
+      gender: req.body.gender,
     });
     const user = await newUser.save();
 
