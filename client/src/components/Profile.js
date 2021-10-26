@@ -11,6 +11,7 @@ import axios from "axios";
 import { BsThreeDots } from "react-icons/bs";
 import Homeheader from "./Homeheader";
 import { USER_UPDATE } from "../Redux/Constaints/userCons";
+import LoadingScreen from "./LoadingScreen";
 const Profile = () => {
   const dispatch = useDispatch();
   const [imageURL, setImageURL] = useState("");
@@ -18,7 +19,7 @@ const Profile = () => {
   const [story, isStory] = useState(false);
   const [file1, setFile1] = useState(null);
   const [coverImgUrl, setCoverImgUrl] = useState("");
-
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
   const { userInfo } = useSelector((state) => state.userLogin);
@@ -48,7 +49,7 @@ const Profile = () => {
           photo: imageURL,
           userId: userInfo._id,
           name: userInfo.name,
-          profile: userInfo.profilePictue,
+          profile: userInfo.profilePicture,
         });
       } catch (error) {
         console.log(error);
@@ -125,6 +126,9 @@ const Profile = () => {
       try {
         const res = await axios.get("/user/" + id);
         setUser(res.data);
+        if (res.status === 200) {
+          setLoading(!loading);
+        }
       } catch (error) {
         console.log("error while fetching the user");
       }
@@ -231,125 +235,134 @@ const Profile = () => {
           </div>
         </div>
       </Dialog>
-      <div className="profile__topSection">
-        <div
-          className="profile__coverPhoto"
-          style={{
-            backgroundImage: `url(${user?.coverPicture})`,
-            backgroundSize: "contain",
-          }}
-        >
-          {/* <img src={user?.coverPicture} alt="cover" className="coverPic" /> */}
-          <Avatar src={user?.profilePicture} className="profileAvatar" />
-          <input type="file" accept="image/*" className="inputImage" />
-        </div>
-
-        <h1 id="documentUsername">{user?.name}</h1>
-        <p className="bioText"></p>
-        <p className="bio">Add Bio</p>
-        <div className="bioFields">
-          <textarea placeholder="Describe who you are" className="bioInput" />
-          <p></p>
-          <div className="cancelAndSaveButtons">
-            <button>Cancel</button>
-            <button className="saveButton">Save</button>
-          </div>
-        </div>
-        <div className="profileOptions">
-          <div className="options_wrapper">
-            <div className="optionLeft">
-              <ul className="optionList">
-                <li className="listItem">Posts</li>
-                <li className="listItem">About</li>
-                <li className="listItem">Friends 99</li>
-                <li className="listItem">Photos</li>
-              </ul>
+      {loading === true ? (
+        <LoadingScreen />
+      ) : (
+        <>
+          <div className="profile__topSection">
+            <div
+              className="profile__coverPhoto"
+              style={{
+                backgroundImage: `url(${user?.coverPicture})`,
+                backgroundSize: "contain",
+              }}
+            >
+              {/* <img src={user?.coverPicture} alt="cover" className="coverPic" /> */}
+              <Avatar src={user?.profilePicture} className="profileAvatar" />
+              <input type="file" accept="image/*" className="inputImage" />
             </div>
-            <div className="optionRight">
-              {userInfo?._id === user?._id ? (
-                <span
-                  className="addStory"
-                  onClick={() => {
-                    isStory(!story);
-                    setOpenD(!openD);
-                  }}
-                >
-                  {" "}
-                  <img
-                    src="https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/33EToHSZ94f.png"
-                    width="16px"
-                    height="16px"
-                    alt=""
-                  />{" "}
-                  <h4 className="text">Add Story</h4>
-                </span>
-              ) : userInfo?.friends.includes(user?._id) === false ? (
-                <span className="addFriend" onClick={handleFriend}>
-                  {" "}
-                  <img
-                    src="https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/33EToHSZ94f.png"
-                    width="16px"
-                    height="16px"
-                    alt=""
-                  />{" "}
-                  <h4 className="text">Add Friend</h4>
-                </span>
-              ) : (
-                <span className="RFriend" onClick={handleNotFriend}>
-                  {" "}
-                  <img
-                    src="https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/c9BbXR9AzI1.png"
-                    width="16px"
-                    height="16px"
-                    alt=""
-                  />{" "}
-                  <h4 className="text"> Friends</h4>
-                </span>
-              )}
 
-              {userInfo?._id === user?._id ? (
-                <span className="edit" onClick={() => setOpenD(!openD)}>
-                  <img
-                    src="https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/YIxFfN5ecJG.png"
-                    width="16px"
-                    height="16px"
-                    alt=""
-                  />
-                  <h4 className="text">Edit profile</h4>
-                </span>
-              ) : (
-                <Link to="/messenger/123456">
-                  <span className="messengerI" onClick={setNewConvo}>
-                    <img
-                      src="https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/YIxFfN5ecJG.png"
-                      width="16px"
-                      height="16px"
-                      alt=""
-                    />
-                    <h4 className="text">Message</h4>
+            <h1 id="documentUsername">{user?.name}</h1>
+            <p className="bioText"></p>
+            <p className="bio">Add Bio</p>
+            <div className="bioFields">
+              <textarea
+                placeholder="Describe who you are"
+                className="bioInput"
+              />
+              <p></p>
+              <div className="cancelAndSaveButtons">
+                <button>Cancel</button>
+                <button className="saveButton">Save</button>
+              </div>
+            </div>
+            <div className="profileOptions">
+              <div className="options_wrapper">
+                <div className="optionLeft">
+                  <ul className="optionList">
+                    <li className="listItem">Posts</li>
+                    <li className="listItem">About</li>
+                    <li className="listItem">Friends 99</li>
+                    <li className="listItem">Photos</li>
+                  </ul>
+                </div>
+                <div className="optionRight">
+                  {userInfo?._id === user?._id ? (
+                    <span
+                      className="addStory"
+                      onClick={() => {
+                        isStory(!story);
+                        setOpenD(!openD);
+                      }}
+                    >
+                      {" "}
+                      <img
+                        src="https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/33EToHSZ94f.png"
+                        width="16px"
+                        height="16px"
+                        alt=""
+                      />{" "}
+                      <h4 className="text">Add Story</h4>
+                    </span>
+                  ) : userInfo?.friends.includes(user?._id) === false ? (
+                    <span className="addFriend" onClick={handleFriend}>
+                      {" "}
+                      <img
+                        src="https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/33EToHSZ94f.png"
+                        width="16px"
+                        height="16px"
+                        alt=""
+                      />{" "}
+                      <h4 className="text">Add Friend</h4>
+                    </span>
+                  ) : (
+                    <span className="RFriend" onClick={handleNotFriend}>
+                      {" "}
+                      <img
+                        src="https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/c9BbXR9AzI1.png"
+                        width="16px"
+                        height="16px"
+                        alt=""
+                      />{" "}
+                      <h4 className="text"> Friends</h4>
+                    </span>
+                  )}
+
+                  {userInfo?._id === user?._id ? (
+                    <span className="edit" onClick={() => setOpenD(!openD)}>
+                      <img
+                        src="https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/YIxFfN5ecJG.png"
+                        width="16px"
+                        height="16px"
+                        alt=""
+                      />
+                      <h4 className="text">Edit profile</h4>
+                    </span>
+                  ) : (
+                    <Link to="/messenger/123456">
+                      <span className="messengerI" onClick={setNewConvo}>
+                        <img
+                          src="https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/YIxFfN5ecJG.png"
+                          width="16px"
+                          height="16px"
+                          alt=""
+                        />
+                        <h4 className="text">Message</h4>
+                      </span>
+                    </Link>
+                  )}
+
+                  <span className="more">
+                    <BsThreeDots />
                   </span>
-                </Link>
-              )}
-
-              <span className="more">
-                <BsThreeDots />
-              </span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div className="postsAndIntro">
-        <ProfileSidebar />
-        <div className="postAndWatch">
-          {userInfo?._id === user?._id && <Imageup />}
-          <div style={{ marginTop: "10px" }}>
-            {postes.map((p) => {
-              return <Post id={p._id} post={p} />;
-            })}
+          <div className="postsAndIntro">
+            <ProfileSidebar />
+            <div className="postAndWatch">
+              {userInfo?._id === user?._id && <Imageup />}
+              <div style={{ marginTop: "10px" }}>
+                {postes.map((p) => {
+                  return <Post id={p._id} post={p} />;
+                })}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };

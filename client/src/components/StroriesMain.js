@@ -59,7 +59,7 @@ const StroriesMain = () => {
               >
                 <div className="userCred">
                   <Avatar src={slide?.profile} className="userPhoto" />
-                  <span className="userName">Alroy Fernandes</span>
+                  <span className="userName">{slide?.name}</span>
                 </div>
               </div>
             </div>

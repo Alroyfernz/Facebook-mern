@@ -271,9 +271,9 @@ const Homeheader = ({ selected }) => {
             }
             onClick={() => setRightO(!rightO)}
           >
-            <a href="#">
+            <a href={`/profile/${userInfo._id}`}>
               <div className="optionDrop">
-                <img src={user?.profilePicture} className="Avatar" />
+                <img src={userInfo?.profilePicture} className="Avatar" />
                 <div className="sideinfoDropAvatar">
                   <h1>{userInfo?.name}</h1>
                   <p>See your profile</p>

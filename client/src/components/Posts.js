@@ -5,11 +5,14 @@ import Post from "./Post";
 import Stories from "./Stories";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import LoadingScreen from "./LoadingScreen";
 const Posts = ({ profile }) => {
   const { userInfo } = useSelector((state) => state.userLogin);
   const [postes, setPostes] = useState([]);
+  const [code, setCode] = useState(0);
 
   useEffect(() => {
+    console.log("in posts");
     const fetchData = async () => {
       try {
         const res =
@@ -17,23 +20,31 @@ const Posts = ({ profile }) => {
             ? await axios.get("posts/" + userInfo.email)
             : await axios.get("posts/timeline/" + userInfo._id);
         setPostes(res.data);
+        setCode(res.status);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, []);
+  }, [userInfo]);
   return (
     <div className="posts">
       <Stories />
       <Imageup />
-      {postes.map((p, index) => {
-        return (
-          <div className="postWrapper">
-            <Post key={index} id={p._id} post={p} />
-          </div>
-        );
-      })}
+      {code !== 200 ? (
+        <LoadingScreen />
+      ) : (
+        <>
+          {postes.map((p, index) => {
+            return (
+              <div className="postWrapper">
+                <Post key={index} id={p._id} post={p} />
+              </div>
+            );
+          })}
+        </>
+      )}
+
       {/* <Post />
       <Post /> */}
     </div>

@@ -5,19 +5,27 @@ import Sidebar from "../components/Sidebar";
 import Sidebar2 from "../components/Sidebar2";
 import { useSelector } from "react-redux";
 import "./home.css";
+import LoadingScreen from "../components/LoadingScreen";
 
 const Home = () => {
+  const { userInfo } = useSelector((state) => state.userLogin);
   return (
-    <div>
-      <Homeheader selected />
-      <div className="app__page">
-        <Sidebar />
-        <div className="app__posts">
-          <Posts />
+    <>
+      {userInfo === null ? (
+        <LoadingScreen />
+      ) : (
+        <div>
+          <Homeheader selected />
+          <div className="app__page">
+            <Sidebar />
+            <div className="app__posts">
+              <Posts />
+            </div>
+            <Sidebar2 />
+          </div>
         </div>
-        <Sidebar2 />
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

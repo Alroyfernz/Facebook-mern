@@ -14,7 +14,7 @@ const StoryComp = ({ remove, slide, idx }) => {
         height="200px"
         style={{ objectFit: "cover" }}
       /> */}
-      <span className="userN">Alroy Fernandes</span>
+      <span className="userN">{slide?.name}</span>
     </div>
   );
 };
