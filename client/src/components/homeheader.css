@@ -17,7 +17,9 @@
     display: flex;
     flex-direction : row;
   }
-  
+  .anchor{
+    display: flex;
+  }
   .homeHeader__logo {
     height: 40px;
     width: 41px;
@@ -193,6 +195,9 @@
 }
 .mobileHeader{
   display:block;
+width:150px;
+height:60px;
+  
 }
 .homeHeader__logo{
   display: none;

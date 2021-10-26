@@ -77,7 +77,7 @@ const Homeheader = ({ selected }) => {
   return (
     <div className="homeHeader">
       <div className="homeHeaderLogoAndSearch">
-        <Link to="/">
+        <Link to="/" className="anchor">
           <img
             src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg"
             alt=""

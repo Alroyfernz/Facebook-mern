@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import "./app.css";
 import Profile from "./components/Profile";
 import { useSelector } from "react-redux";
+import LoadingScreen from "./components/LoadingScreen";
 import Messenger from "./pages/Messenger";
 import Stories from "./components/Stories";
 import StroriesMain from "./components/StroriesMain";
@@ -28,6 +29,9 @@ function App() {
         <Switch>
           <Route path="/login">
             {userInfo !== null ? <Home /> : <Login />}
+          </Route>
+          <Route path="/load">
+            <LoadingScreen />
           </Route>
           <Route path="/profile/:id">
             <Profile />
