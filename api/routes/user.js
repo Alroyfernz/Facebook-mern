@@ -41,12 +41,16 @@ router.put("/add/:id", async (req, res) => {
       const currentUser = await User.findById(req.params.id);
       const user = await User.findById(req.body.userId);
       if (!currentUser.friends.includes(req.body.userId)) {
-        await currentUser.updateOne(
+        const ogUser = await User.findOneAndUpdate(
+          { _id: req.params.id },
           { $push: { friends: req.body.userId } },
           { new: true }
         );
-        await user.updateOne({ $push: { friends: req.params.id } });
-        res.status(200).send(currentUser);
+        await User.findOneAndUpdate(
+          { _id: req.body.id },
+          { $push: { friends: req.params.id } }
+        );
+        res.status(200).send(ogUser);
       } else {
         res.status(403).json("You are already friends with this user");
       }
@@ -62,16 +66,18 @@ router.put("/remove/:id", async (req, res) => {
       const currentUser = await User.findById(req.params.id);
       const user = await User.findById(req.body.userId);
       if (currentUser.friends.includes(req.body.userId)) {
-        await currentUser.updateOne(
+        const ogUser = await User.findOneAndUpdate(
+          { _id: req.params.id },
           { $pull: { friends: req.body.userId } },
           { new: true }
         );
-        await user.updateOne(
+        await User.findOneAndUpdate(
+          { _id: req.body.id },
           { $pull: { friends: req.params.id } },
           { new: true }
         );
         console.log(currentUser);
-        res.status(200).send(currentUser);
+        res.status(200).send(ogUser);
       } else {
         res.status(403).json("you arent friends");
       }
@@ -87,8 +93,8 @@ router.put("/:id", async (req, res) => {
   try {
     const photoUrl = photo && (await uploadImage(photo));
     const photoUrl2 = photo2 && (await uploadImage(photo2));
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.params.id },
       {
         $set: { profilePicture: photoUrl },
         $set: { coverPicture: photoUrl2 },
