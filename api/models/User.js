@@ -20,7 +20,8 @@ const userSchema = new mongoose.Schema(
     },
     profilePicture: {
       type: String,
-      default: "",
+      default:
+        "https://img.favpng.com/18/15/13/avatar-user-profile-male-logo-png-favpng-peKBCyaCJCvp0C3KdHzm0bu2n.jpg",
     },
     DOB: {
       type: Array,

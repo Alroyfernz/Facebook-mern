@@ -105,6 +105,11 @@ const Homeheader = ({ selected }) => {
               "dropdown-content3"
             )[0].style.display = "block";
           }}
+          onClick={() => {
+            document.getElementsByClassName(
+              "dropdown-content3"
+            )[0].style.display = "block";
+          }}
         />
         <div className="dropdown-content3">
           <ul id="list">
@@ -271,7 +276,7 @@ const Homeheader = ({ selected }) => {
             }
             onClick={() => setRightO(!rightO)}
           >
-            <a href={`/profile/${userInfo._id}`}>
+            <a href={`/profile/${userInfo?._id}`}>
               <div className="optionDrop">
                 <img src={userInfo?.profilePicture} className="Avatar" />
                 <div className="sideinfoDropAvatar">

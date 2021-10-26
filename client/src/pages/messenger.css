@@ -86,6 +86,13 @@ align-items: center;
     vertical-align: -0.25em;
     -webkit-filter:invert(89%)sepia(6%)hue-rotate(185deg);
 }
+.chatToOpen{
+    font-size: 30px;
+    margin: auto;
+    color: #fff;
+    margin-left: 42%;
+   
+}
 .video{
     background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/y5/r/kYkjqw1T16g.png);
     background-position: 0px -236px;
@@ -222,6 +229,7 @@ form{
     width: 90%;
     margin-left: 10px;
     border: none;
+    color: #fff;
 }
 .toSend:focus{
     outline: none;

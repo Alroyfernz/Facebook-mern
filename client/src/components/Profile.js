@@ -1,7 +1,7 @@
 import { Avatar, Dialog } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import "./profile.css";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useParams } from "react-router-dom";
 import Posts from "./Posts.js";
 import Imageup from "./Imageup.js";
 import ProfileSidebar from "./ProfileSidebar.js";
@@ -13,6 +13,7 @@ import Homeheader from "./Homeheader";
 import { USER_UPDATE } from "../Redux/Constaints/userCons";
 import LoadingScreen from "./LoadingScreen";
 const Profile = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
   const [imageURL, setImageURL] = useState("");
   const [file, setFile] = useState(null);
@@ -119,15 +120,16 @@ const Profile = () => {
 
     fetchData();
   }, [user?._id]);
-
-  const id = history.location.pathname.split("/")[2];
+  console.log(id);
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const res = await axios.get("/user/" + id);
         setUser(res.data);
-        if (res.status === 200) {
-          setLoading(!loading);
+        if (res.status !== 200) {
+          setLoading(true);
+        } else {
+          setLoading(false);
         }
       } catch (error) {
         console.log("error while fetching the user");

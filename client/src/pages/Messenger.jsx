@@ -16,7 +16,8 @@ import { io } from "socket.io-client";
 import "./messenger.css";
 const Messenger = () => {
   const history = useHistory();
-
+  const formRef = useRef();
+  const [body, setBody] = useState("");
   const [conversations, setConversations] = useState([]);
   const [currentChats, setCurrentChats] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -66,9 +67,7 @@ const Messenger = () => {
     // const ac = new AbortController();
     socket.current.emit("addUser", userInfo._id);
     console.log("adding users");
-    socket.current.on("getUsers", (users) => {
-      console.log(users);
-    });
+    socket.current.on("getUsers", (users) => {});
     // return () => socket.close();
   });
   // console.log(searchTerm);
@@ -135,6 +134,7 @@ const Messenger = () => {
       const res = await axios.post("/message/", msg);
       // console.log(res, "messgae send bro");
       setMessages([...messages, res.data]);
+      setBody("");
     } catch (error) {
       console.log(error, "error while sending message");
     }
@@ -152,26 +152,12 @@ const Messenger = () => {
     getMessages();
   }, [currentChats]);
 
-  const collapseInput = () => {
-    // history.push();
-    // document.getElementsByClassName("homeHeader__logo")[0].style.display =
-    //   "block";
-    // document.getElementsByClassName("homeHeader__searchBack")[0].style.display =
-    //   "none";
-    // document.getElementsByClassName("searchBox")[0].style.display = "none";
-    // document.getElementsByClassName("homeHeader__search")[0].style.display =
-    //   "block";
-    // document.getElementsByClassName("dropdown-content3")[0].style.display =
-    // "none";
-    // document.getElementsByClassName("searchBox")[0].value = "";
-  };
-  // console.log(currentChats);
-  // console.log(messages);
+  const collapseInput = () => {};
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   });
-  // console.log(arrivalMessage);
+
   return (
     <>
       <Homeheader />
@@ -287,11 +273,6 @@ const Messenger = () => {
                       </div>
                     );
                   })}
-
-                  {/* <Message />
-                  <Message own />
-                  <Message own />
-                  <Message own /> */}
                 </div>
                 <div className="chatBoxBottom">
                   <div className="chatBoxBottomWrapper">
@@ -304,14 +285,16 @@ const Messenger = () => {
                     </div>
                     <div className="inputSend">
                       <div className="inputSendWrapper">
-                        <form onSubmit={handleSend}>
+                        <form ref={formRef} onSubmit={handleSend}>
                           <input
                             type="text"
                             placeholder="Type.."
                             className="toSend"
                             onChange={(e) => {
+                              setBody(e.target.value);
                               setMessageText(e.target.value);
                             }}
+                            value={body}
                           ></input>
                         </form>
                       </div>
@@ -324,7 +307,7 @@ const Messenger = () => {
               </div>
             </>
           ) : (
-            <span>open to start chatting</span>
+            <span className="chatToOpen">open to start chatting</span>
           )}
         </div>
         <div className="chatOnline">

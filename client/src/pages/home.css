@@ -4,6 +4,7 @@ body{
 }
 .app__page{
     display: flex;
+    overflow-y: hidden;
 }
 .app__posts{
     display: flex;

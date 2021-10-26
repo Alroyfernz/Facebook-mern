@@ -88,7 +88,10 @@ router.put("/remove/:id", async (req, res) => {
           { $pull: { friends: req.body.userId } },
           { new: true }
         );
-        await user.updateOne({ $pull: { friends: req.params.id } });
+        await user.updateOne(
+          { $pull: { friends: req.params.id } },
+          { new: true }
+        );
         console.log(currentUser);
         res.status(200).send(currentUser);
       } else {

@@ -8,10 +8,10 @@ import "./home.css";
 import LoadingScreen from "../components/LoadingScreen";
 
 const Home = () => {
-  const { userInfo } = useSelector((state) => state.userLogin);
+  const { isFetching } = useSelector((state) => state.userLogin);
   return (
     <>
-      {userInfo === null ? (
+      {isFetching === true ? (
         <LoadingScreen />
       ) : (
         <div>
