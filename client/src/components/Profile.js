@@ -110,7 +110,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("/posts/posts/" + user._id);
+        const res = await axios.get("/posts/posts/" + user?._id);
 
         setPostes(res.data);
       } catch (error) {
@@ -357,8 +357,8 @@ const Profile = () => {
             <div className="postAndWatch">
               {userInfo?._id === user?._id && <Imageup />}
               <div style={{ marginTop: "10px" }}>
-                {postes.map((p) => {
-                  return <Post id={p._id} post={p} />;
+                {postes.map((p, index) => {
+                  return <Post key={index} id={p._id} post={p} />;
                 })}
               </div>
             </div>

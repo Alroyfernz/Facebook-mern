@@ -11,7 +11,6 @@ const Stories = () => {
       try {
         const res = await axios.get("/story/");
         setSlides(res.data);
-        console.log(res.data);
       } catch (error) {}
     };
     fetchStory();
@@ -28,6 +27,7 @@ const Stories = () => {
           <div
             onClick={() => {
               history.push("/story");
+              console.log("clicked");
             }}
           >
             <StoryComp key={index} slide={slide} idx={index} />
