@@ -19,12 +19,9 @@ mongoose
   .connect(process.env.MONGO_URL)
   .then(() => console.log("connection to database succesfull"))
   .catch((error) => {
-    console.log("error while connecting to database");
+    console.log(error);
   });
-// bodyParser = {
-//   json: { limit: "50mb", extended: true },
-//   urlencoded: { limit: "50mb", extended: true },
-// };
+
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json());

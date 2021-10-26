@@ -10,10 +10,17 @@ import { useSelector } from "react-redux";
 import Messenger from "./pages/Messenger";
 import Stories from "./components/Stories";
 import StroriesMain from "./components/StroriesMain";
+import axios from "axios";
 function App() {
   const { userInfo } = useSelector((state) => state.userLogin);
-  const cookie = Cookies.get();
-  console.log(cookie, "jwt cookie");
+  setInterval(myFunction, 1000 * 60 * 60 * 48);
+  const myFunction = async () => {
+    try {
+      await axios.delete("/story/" + userInfo._id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
       <Router>

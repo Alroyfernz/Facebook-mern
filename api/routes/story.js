@@ -27,5 +27,13 @@ router.get("/", async (req, res) => {
     console.log(error);
   }
 });
-
+router.delete("/:userId", async (req, res) => {
+  try {
+    const currentStory = await Story.findOne({ userId: req.params.userId });
+    await currentStory.delete();
+    res.json("story deleted");
+  } catch (error) {
+    console.log(error);
+  }
+});
 module.exports = router;
