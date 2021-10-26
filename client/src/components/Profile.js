@@ -31,6 +31,7 @@ const Profile = () => {
 
   const handleUpdate = async () => {
     setOpenD(!openD);
+    console.log(imageURL, coverImgUrl);
     if (story === false) {
       try {
         const res = await axios.put("/user/" + userInfo._id, {
@@ -40,7 +41,7 @@ const Profile = () => {
 
         dispatch({ type: USER_UPDATE, payload: res.data });
         sessionStorage.setItem("userInfo", JSON.stringify(res.data));
-        console.log("image uploded");
+        console.log(res);
       } catch (error) {
         console.log(error);
       }

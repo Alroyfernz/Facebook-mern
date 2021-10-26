@@ -92,13 +92,15 @@ router.put("/:id", async (req, res) => {
   const photo2 = req.body.coverURL;
   try {
     const photoUrl = photo && (await uploadImage(photo));
+    console.log(photoUrl);
     const photoUrl2 = photo2 && (await uploadImage(photo2));
+
     const updatedUser = await User.findOneAndUpdate(
       { _id: req.params.id },
       {
-        $set: { profilePicture: photoUrl },
-        $set: { coverPicture: photoUrl2 },
+        $set: { profilePicture: photoUrl, coverPicture: photoUrl2 },
       },
+
       { new: true }
     );
     res.status(200).json(updatedUser);
