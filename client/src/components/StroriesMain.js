@@ -16,7 +16,6 @@ const StroriesMain = () => {
       try {
         const res = await axios.get("/story/");
         setSlides(res.data);
-        console.log(res.data);
       } catch (error) {}
     };
     fetchStory();

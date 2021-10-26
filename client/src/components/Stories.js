@@ -28,7 +28,6 @@ const Stories = () => {
           <div
             onClick={() => {
               history.push("/story");
-              console.log("clicked");
             }}
           >
             <StoryComp key={index} slide={slide} idx={index} />

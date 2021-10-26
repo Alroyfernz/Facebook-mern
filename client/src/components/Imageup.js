@@ -21,10 +21,6 @@ const Imageup = () => {
   const uploadFileWithClick = () => {};
   const handleUpload = () => {};
 
-  console.log(file);
-  console.log("size of cap is", caption.length);
-  console.log(selectPhoto);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newPost = {

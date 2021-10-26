@@ -87,7 +87,6 @@ const Profile = () => {
         userId: user._id,
       });
 
-      console.log("kelo re add!");
       // dispatch({ type: USER_UPDATE, payload: res.data });
       // sessionStorage.setItem("userInfo", JSON.stringify(res.data));
     } catch (error) {

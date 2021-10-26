@@ -12,7 +12,6 @@ const Posts = ({ profile }) => {
   const [code, setCode] = useState(0);
 
   useEffect(() => {
-    console.log("in posts");
     const fetchData = async () => {
       try {
         const res =
