@@ -122,6 +122,7 @@ const Homeheader = ({ selected }) => {
                   } else if (value.name === searchTerm) {
                     return value;
                   }
+                  return 0;
                 })
                 .map((user1, index) => {
                   return (
@@ -297,7 +298,7 @@ const Homeheader = ({ selected }) => {
               </div>
             </a>
             <div className="hr" />
-            <a href="#">
+            <Link>
               <div className="optionDrop">
                 <div className="iconDrop">
                   <i className="feedback" />
@@ -307,40 +308,40 @@ const Homeheader = ({ selected }) => {
                   <p>Help us improve the new Facebook</p>
                 </div>
               </div>
-            </a>
+            </Link>
             <div className="hr" />
-            <a href="#">
+            <Link>
               <div className="optionDrop">
                 <div className="iconDrop">
                   <i className="settings" />
                 </div>
                 <h1>Settings & Privacy</h1>
               </div>
-            </a>
-            <a href="#">
+            </Link>
+            <Link>
               <div className="optionDrop">
                 <div className="iconDrop">
                   <i className="helpAndSupport" />
                 </div>
                 <h1>Help & Support</h1>
               </div>
-            </a>
-            <a href="#">
+            </Link>
+            <Link>
               <div className="optionDrop">
                 <div className="iconDrop">
                   <i className="darkMode" />
                 </div>
                 <h1>Dark Mode</h1>
               </div>
-            </a>
-            <a href="#">
+            </Link>
+            <Link>
               <div onClick={logout} className="optionDrop">
                 <div className="iconDrop">
                   <i className="logout" />
                 </div>
                 <h1>Log out</h1>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

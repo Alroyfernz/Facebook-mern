@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { BsSearch } from "react-icons/bs";
-import { Avatar } from "@material-ui/core";
+
 import { IoIosAddCircle, IoMdPhotos } from "react-icons/io";
 import { IoSend } from "react-icons/io5";
 import { RiChatSmileFill } from "react-icons/ri";
@@ -10,7 +10,7 @@ import { useHistory } from "react-router";
 import Homeheader from "../components/Homeheader";
 import Message from "../components/Message";
 import MessageHeader from "../components/MessageHeader";
-import { Link } from "react-router-dom";
+
 import SidebarRoww from "../components/SidebarRoww";
 import { io } from "socket.io-client";
 import "./messenger.css";
@@ -29,8 +29,8 @@ const Messenger = () => {
   const [messageText, setMessageText] = useState("");
 
   const socket = useRef();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [users, setUsers] = useState([]);
+
+  // const [users, setUsers] = useState([]);
   const scrollRef = useRef();
 
   useEffect(() => {
@@ -83,18 +83,18 @@ const Messenger = () => {
     getConversation();
   }, [userInfo._id]);
 
-  useEffect(() => {
-    const fetchAll = async () => {
-      try {
-        const res = await axios.get("/user/");
-        setUsers(res.data);
-      } catch (error) {
-        console.log("Error while fetching all users");
-      }
-    };
+  // useEffect(() => {
+  //   const fetchAll = async () => {
+  //     try {
+  //       const res = await axios.get("/user/");
+  //       setUsers(res.data);
+  //     } catch (error) {
+  //       console.log("Error while fetching all users");
+  //     }
+  //   };
 
-    fetchAll();
-  }, []);
+  //   fetchAll();
+  // }, []);
 
   const id = history.location.pathname.split("/")[2];
   // console.log(conversations);
@@ -189,16 +189,10 @@ const Messenger = () => {
                   type="text"
                   placeholder="Search for friends"
                   className="chatMenuInput"
-                  onChange={(e) => {
-                    setSearchTerm(e.target.value);
-                    document.getElementsByClassName(
-                      "dropdown-content3"
-                    )[0].style.display = "block";
-                  }}
                 />
               </div>
             </div>
-            <div className="dropdown-content3" onClick={collapseInput}>
+            {/* <div className="dropdown-content3" onClick={collapseInput}>
               <ul id="list">
                 {users !== undefined &&
                   users
@@ -231,7 +225,7 @@ const Messenger = () => {
                       );
                     })}
               </ul>
-            </div>
+            </div> */}
             {conversations.map((c) => {
               return (
                 <div

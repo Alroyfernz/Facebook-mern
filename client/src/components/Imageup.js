@@ -9,7 +9,8 @@ const Imageup = () => {
   const { userInfo } = useSelector((state) => state.userLogin);
   const [open, setOpen] = useState(false);
 
-  const [imageURL, setImageURL] = useState(null);
+  const valuee = useState(null);
+  const imageURL = valuee[0];
   const [file, setFile] = useState({});
 
   const [caption, setCaption] = useState("");
