@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import CloseIcon from "@material-ui/icons/Close";
-import { FcVideoCall } from "react-icons/fc";
+
 import "./imageup.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 const Imageup = () => {
   const { userInfo } = useSelector((state) => state.userLogin);
   const [open, setOpen] = useState(false);
-  const [image, setImage] = useState("");
+
   const [imageURL, setImageURL] = useState(null);
   const [file, setFile] = useState({});
 
@@ -17,9 +17,8 @@ const Imageup = () => {
   const progress = 1;
   const handleClickOpen = () => {};
   const handleClose = () => {};
-  const handleChange = () => {};
+
   const uploadFileWithClick = () => {};
-  const handleUpload = () => {};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +29,7 @@ const Imageup = () => {
     };
 
     try {
-      const res = await axios.put("/posts", newPost);
+      await axios.put("/posts", newPost);
     } catch (error) {}
   };
 
@@ -50,7 +49,7 @@ const Imageup = () => {
           </div>
           <div class="hr2" />
           <div class="profileHead">
-            <img src={userInfo?.profilePicture} className="Avatar" />
+            <img src={userInfo?.profilePicture} alt="ff" className="Avatar" />
             <h1>{userInfo?.name}</h1>
           </div>
           <div class="inputForUpload">
@@ -63,7 +62,7 @@ const Imageup = () => {
             />
           </div>
           <div class={`previewImage ${!file && "vanish"}`}>
-            <img src={selectPhoto} className="previewImaage" />
+            <img src={selectPhoto} className="previewImaage" alt="dd" />
           </div>
           <img
             alt=""
@@ -119,7 +118,7 @@ const Imageup = () => {
 
       <div class="imageupload__container">
         <div class="postArea">
-          <img src={userInfo?.profilePicture} class="Avatar" />
+          <img src={userInfo?.profilePicture} class="Avatar" alt="dd" />
           <input
             value={caption}
             onChange={(e) => setCaption(e.target.value)}

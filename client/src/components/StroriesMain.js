@@ -1,4 +1,4 @@
-import { Avatar, Divider } from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";

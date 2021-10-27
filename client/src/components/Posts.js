@@ -25,7 +25,7 @@ const Posts = ({ profile }) => {
       }
     };
     fetchData();
-  }, [userInfo]);
+  }, [userInfo, profile]);
   return (
     <div className="posts">
       <Stories />

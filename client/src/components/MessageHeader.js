@@ -22,7 +22,7 @@ const MessageHeader = ({ convo, isOpen, open, setOpen }) => {
       }
     };
     getUser();
-  }, [convo._id]);
+  }, [convo._id, friendId]);
 
   return (
     <div className="messageheader">

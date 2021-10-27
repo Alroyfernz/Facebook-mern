@@ -10,7 +10,7 @@ import { useHistory } from "react-router";
 import Homeheader from "../components/Homeheader";
 import Message from "../components/Message";
 import MessageHeader from "../components/MessageHeader";
-import SidebarRow from "../components/SidebarRow";
+import { Link } from "react-router-dom";
 import SidebarRoww from "../components/SidebarRoww";
 import { io } from "socket.io-client";
 import "./messenger.css";
@@ -23,11 +23,11 @@ const Messenger = () => {
   const [messages, setMessages] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [open, setOpen] = useState(false);
-  const [newConversations, setNewConversation] = useState();
+
   const [click, setClick] = useState(false);
   const { userInfo } = useSelector((state) => state.userLogin);
   const [messageText, setMessageText] = useState("");
-  const friendId = null;
+
   const socket = useRef();
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUsers] = useState([]);
@@ -51,17 +51,17 @@ const Messenger = () => {
       setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage, currentChats]);
 
-  const setNewConvo = async () => {
-    try {
-      const res = await axios.post("/conversation", {
-        senderId: userInfo.id,
-        receiverId: friendId,
-      });
-      setConversations(res.data);
-    } catch (error) {
-      console.log("error while creating an conversation");
-    }
-  };
+  // const setNewConvo = async () => {
+  //   try {
+  //     const res = await axios.post("/conversation", {
+  //       senderId: userInfo.id,
+  //       receiverId: friendId,
+  //     });
+  //     setConversations(res.data);
+  //   } catch (error) {
+  //     console.log("error while creating an conversation");
+  //   }
+  // };
 
   useEffect(() => {
     // const ac = new AbortController();
@@ -212,18 +212,21 @@ const Messenger = () => {
                     .map((user1) => {
                       return (
                         <li
-                          onClick={collapseInput}
                           onClick={() => {
                             history.push(`/profile/${user1._id}`);
+                            collapseInput();
                           }}
                         >
-                          <a onClick={collapseInput}>
+                          <Link
+                            onClick={collapseInput}
+                            to={`/profile/${user1._id}`}
+                          >
                             <Avatar
                               src={user1.profilePicture}
                               className="searchAvatar"
                             />
                             <h3 className="searchH3">{user1.name}</h3>
-                          </a>
+                          </Link>
                         </li>
                       );
                     })}
@@ -285,7 +288,14 @@ const Messenger = () => {
                     </div>
                     <div className="inputSend">
                       <div className="inputSendWrapper">
-                        <form ref={formRef} onSubmit={handleSend}>
+                        <form
+                          ref={formRef}
+                          onSubmit={() => {
+                            if (body !== "") {
+                              handleSend();
+                            }
+                          }}
+                        >
                           <input
                             type="text"
                             placeholder="Type.."

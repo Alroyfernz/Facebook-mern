@@ -2,14 +2,14 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Cookies from "js-cookie";
+
 import Register from "./pages/Register";
 import "./app.css";
 import Profile from "./components/Profile";
 import { useSelector } from "react-redux";
 import LoadingScreen from "./components/LoadingScreen";
 import Messenger from "./pages/Messenger";
-import Stories from "./components/Stories";
+
 import StroriesMain from "./components/StroriesMain";
 import axios from "axios";
 function App() {

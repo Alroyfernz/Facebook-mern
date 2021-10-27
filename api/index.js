@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const dotenv = require("dotenv");
+const cors = require("cors");
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
@@ -9,7 +10,7 @@ const storyRouter = require("./routes/story");
 const commentRouter = require("./routes/comment");
 const conversationRouter = require("./routes/conversations");
 const messageRouter = require("./routes/messages");
-
+const port = process.env.PORT || 8800;
 const multer = require("multer");
 const path = require("path");
 var bodyParser = require("body-parser");
@@ -22,6 +23,7 @@ mongoose
     console.log(error);
   });
 
+app.use(cors());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json());
@@ -42,6 +44,9 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
     console.log(error);
   }
 });
+app.get("/", (req, res) => {
+  res.json("server running");
+});
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
@@ -50,7 +55,13 @@ app.use("/api/comments", commentRouter);
 app.use("/api/conversation", conversationRouter);
 app.use("/api/message", messageRouter);
 app.use("/api/story", storyRouter);
-
-app.listen(process.env.PORT, () => {
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("client/build"));
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+app.listen(port, () => {
   console.log("Backend server running");
 });

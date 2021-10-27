@@ -2,7 +2,7 @@ import { Avatar, Dialog } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import "./profile.css";
 import { useHistory, Link, useParams } from "react-router-dom";
-import Posts from "./Posts.js";
+
 import Imageup from "./Imageup.js";
 import ProfileSidebar from "./ProfileSidebar.js";
 import Post from "./Post";
@@ -47,7 +47,7 @@ const Profile = () => {
       }
     } else {
       try {
-        const res = await axios.post("/story/", {
+        await axios.post("/story/", {
           photo: imageURL,
           userId: userInfo._id,
           name: userInfo.name,
@@ -88,8 +88,8 @@ const Profile = () => {
         userId: user._id,
       });
 
-      // dispatch({ type: USER_UPDATE, payload: res.data });
-      // sessionStorage.setItem("userInfo", JSON.stringify(res.data));
+      dispatch({ type: USER_UPDATE, payload: res.data });
+      sessionStorage.setItem("userInfo", JSON.stringify(res.data));
     } catch (error) {
       console.log("error while adding friend");
     }
@@ -100,8 +100,8 @@ const Profile = () => {
         userId: user._id,
       });
 
-      // dispatch({ type: USER_UPDATE, payload: res.data });
-      // sessionStorage.setItem("userInfo", JSON.stringify(res.data));
+      dispatch({ type: USER_UPDATE, payload: res.data });
+      sessionStorage.setItem("userInfo", JSON.stringify(res.data));
     } catch (error) {
       console.log("error while deleting friend");
     }
@@ -150,7 +150,7 @@ const Profile = () => {
         <div class="makeStyles-paper-1">
           <div class="drop_top">
             <div className="Dtitle">
-              {story == true ? <h1>Add story</h1> : <h1>Edit profile</h1>}
+              {story === true ? <h1>Add story</h1> : <h1>Edit profile</h1>}
             </div>
             <div
               className="icon"
@@ -194,7 +194,7 @@ const Profile = () => {
             </div>
             <div className="profile_photo">
               {story === true ? (
-                file && <img src={imageURL} className="storyImg" />
+                file && <img src={imageURL} className="storyImg" alt="story" />
               ) : (
                 <Avatar
                   src={file ? imageURL : user?.profilePicture}
@@ -228,7 +228,7 @@ const Profile = () => {
                 />
               </div>
               <div className="cover_photo">
-                {file1 && <img src={coverImgUrl} className="cover" />}
+                {file1 && <img src={coverImgUrl} className="cover" alt="alt" />}
               </div>
             </div>
           )}

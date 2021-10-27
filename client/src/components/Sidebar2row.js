@@ -12,7 +12,7 @@ const Sidebar2row = ({ id }) => {
       } catch (error) {}
     };
     fetchUser();
-  }, []);
+  }, [id]);
 
   return (
     <div className="sidebar2row">

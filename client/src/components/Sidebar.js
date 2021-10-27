@@ -15,7 +15,7 @@ const Sidebar = () => {
       } catch (error) {}
     };
     fetchUser();
-  }, []);
+  }, [userInfo._id]);
 
   return (
     <div className="sidebar">

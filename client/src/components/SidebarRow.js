@@ -1,15 +1,8 @@
 import { Avatar } from "@material-ui/core";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+
+import React from "react";
 import "./sidebarrow.css";
-const SidebarRow = ({
-  currentUser,
-  conversation,
-  ImageLink,
-  title,
-  dropdown,
-  avatar,
-}) => {
+const SidebarRow = ({ ImageLink, title, dropdown, avatar }) => {
   return (
     <div className="sidebarRow">
       <Avatar

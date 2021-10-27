@@ -24,7 +24,7 @@ const SidebarRoww = ({
       }
     };
     getUser();
-  }, []);
+  }, [currentUser._id, conversation.members]);
 
   return (
     <div className="sidebarRow">

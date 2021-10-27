@@ -13,7 +13,7 @@ import { USER_LOGOUT } from "../Redux/Constaints/userCons";
 const Homeheader = ({ selected }) => {
   const [toggle, setToggle] = useState(false);
   const [users, setUsers] = useState([]);
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const dispatch = useDispatch();
   const [rightO, setRightO] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -64,15 +64,15 @@ const Homeheader = ({ selected }) => {
     fetchAll();
   }, []);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await axios.get("/user/" + userInfo._id);
-        setUser(res.data);
-      } catch (error) {}
-    };
-    fetchUser();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       const res = await axios.get("/user/" + userInfo._id);
+  //       setUser(res.data);
+  //     } catch (error) {}
+  //   };
+  //   fetchUser();
+  // }, []);
 
   return (
     <div className="homeHeader">
@@ -80,12 +80,13 @@ const Homeheader = ({ selected }) => {
         <Link to="/" className="anchor">
           <img
             src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg"
-            alt=""
+            alt="logo"
             className="mobileHeader"
           />
           <img
             src="https://i.ibb.co/72dN4JJ/Facebook-icon-2019-1.png"
             className="homeHeader__logo"
+            alt="logo"
           />
         </Link>
 
@@ -116,7 +117,7 @@ const Homeheader = ({ selected }) => {
             {users !== undefined &&
               users
                 .filter((value) => {
-                  if (searchTerm == "") {
+                  if (searchTerm === "") {
                     return value;
                   } else if (value.name === searchTerm) {
                     return value;
@@ -125,19 +126,22 @@ const Homeheader = ({ selected }) => {
                 .map((user1, index) => {
                   return (
                     <li
-                      onClick={collapseInput}
                       onClick={() => {
                         history.push(`/profile/${user1._id}`);
+                        collapseInput();
                       }}
                       key={index}
                     >
-                      <a onClick={collapseInput}>
+                      <Link
+                        onClick={collapseInput}
+                        to={`/profile/${user1._id}`}
+                      >
                         <Avatar
                           src={user1.profilePicture}
                           className="searchAvatar"
                         />
                         <h3 className="searchH3">{user1.name}</h3>
-                      </a>
+                      </Link>
                     </li>
                   );
                 })}
@@ -199,12 +203,15 @@ const Homeheader = ({ selected }) => {
         }
       >
         <div
-          class="round profile"
+          className="round profile"
           onClick={() => {
             history.push(`/profile/${userInfo._id}`);
           }}
         >
-          <a href="#" style={{ textDecoration: "none" }}>
+          <Link
+            to={`/profile/${userInfo._id}`}
+            style={{ textDecoration: "none" }}
+          >
             <img
               src={
                 userInfo?.profilePicture !== null
@@ -215,10 +222,10 @@ const Homeheader = ({ selected }) => {
               className="ProfileAvatar"
             />
             <p>{userInfo?.name}</p>
-          </a>
+          </Link>
         </div>
         <div
-          class="round"
+          className="round"
           style={{
             display: "flex",
             alignItems: "center",
@@ -231,7 +238,7 @@ const Homeheader = ({ selected }) => {
         </div>
 
         <div
-          class="round"
+          className="round"
           style={{
             display: "flex",
             alignItems: "center",
@@ -246,7 +253,7 @@ const Homeheader = ({ selected }) => {
           <svg
             viewBox="0 0 28 28"
             alt=""
-            class="messengerIcon"
+            className="messengerIcon"
             height="25px"
             width="27px"
           >
@@ -255,7 +262,7 @@ const Homeheader = ({ selected }) => {
         </div>
 
         <div
-          class="round"
+          className="round"
           onClick={renderProfile}
           style={{
             display: "flex",
@@ -272,13 +279,17 @@ const Homeheader = ({ selected }) => {
 
           <div
             className={
-              rightO == true ? "dropdown-content block" : "dropdown-content"
+              rightO === true ? "dropdown-content block" : "dropdown-content"
             }
             onClick={() => setRightO(!rightO)}
           >
             <a href={`/profile/${userInfo?._id}`}>
               <div className="optionDrop">
-                <img src={userInfo?.profilePicture} className="Avatar" />
+                <img
+                  src={userInfo?.profilePicture}
+                  alt="im"
+                  className="Avatar"
+                />
                 <div className="sideinfoDropAvatar">
                   <h1>{userInfo?.name}</h1>
                   <p>See your profile</p>

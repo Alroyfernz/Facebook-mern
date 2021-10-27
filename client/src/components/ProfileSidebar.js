@@ -11,6 +11,7 @@ const ProfileSidebar = () => {
             <img
               src="https://static.xx.fbcdn.net/rsrc.php/v3/y5/r/IqqJ0EjDF9B.png"
               className="birthday"
+              alt="bd"
             />
             <h1>20 November 2001</h1>
           </div>

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Register.css";
-import { useHistory } from "react-router-dom";
+
 import { Link } from "react-router-dom";
 
 function Register() {
-  const history = useHistory("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -38,8 +37,9 @@ function Register() {
   return (
     <div className="register">
       <img
+        alt="re"
         src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg"
-        class="register__logo"
+        className="register__logo"
       />
       <div className="register__container">
         <h1>Sign Up</h1>
