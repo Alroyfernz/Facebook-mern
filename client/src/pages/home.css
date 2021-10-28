@@ -5,6 +5,7 @@ body{
 .app__page{
     display: flex;
     overflow-y: hidden;
+    height: 88vh;
 }
 .app__posts{
     display: flex;
@@ -16,5 +17,9 @@ body{
     .app__posts{
         width: 100%;
         margin-top: 50px;
+        overflow-y: scroll;
+    }
+    .app__page{
+        height: 100vh;
     }
 }
