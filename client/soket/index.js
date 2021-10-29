@@ -1,4 +1,8 @@
-const io = require("socket.io")("https://fullstack-facebook.herokuapp.com");
+const io = require("socket.io")(8900, {
+  cors: {
+    origin: "https://localhost:3000/",
+  },
+});
 let users = [];
 const addUser = (userId, socketId) => {
   console.log("adding user", userId);

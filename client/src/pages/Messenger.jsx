@@ -285,9 +285,7 @@ const Messenger = () => {
                         <form
                           ref={formRef}
                           onSubmit={() => {
-                            if (body !== "") {
-                              handleSend();
-                            }
+                            handleSend();
                           }}
                         >
                           <input
