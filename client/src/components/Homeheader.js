@@ -206,11 +206,11 @@ const Homeheader = ({ selected }) => {
         <div
           className="round profile"
           onClick={() => {
-            history.push(`/profile/${userInfo._id}`);
+            history.push(`/profile/${userInfo?._id}`);
           }}
         >
           <Link
-            to={`/profile/${userInfo._id}`}
+            to={`/profile/${userInfo?._id}`}
             style={{ textDecoration: "none" }}
           >
             <img

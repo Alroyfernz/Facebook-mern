@@ -10,12 +10,12 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("/user/" + userInfo._id);
+        const res = await axios.get("/user/" + userInfo?._id);
         setUser(res.data);
       } catch (error) {}
     };
     fetchUser();
-  }, [userInfo._id]);
+  }, [userInfo?._id]);
 
   return (
     <div className="sidebar">
