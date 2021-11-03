@@ -152,26 +152,12 @@ const Messenger = () => {
     getMessages();
   }, [currentChats]);
 
-  const collapseInput = () => {
-    // history.push();
-    // document.getElementsByClassName("homeHeader__logo")[0].style.display =
-    //   "block";
-    // document.getElementsByClassName("homeHeader__searchBack")[0].style.display =
-    //   "none";
-    // document.getElementsByClassName("searchBox")[0].style.display = "none";
-    // document.getElementsByClassName("homeHeader__search")[0].style.display =
-    //   "block";
-    // document.getElementsByClassName("dropdown-content3")[0].style.display =
-    // "none";
-    // document.getElementsByClassName("searchBox")[0].value = "";
-  };
-  // console.log(currentChats);
-  // console.log(messages);
+  const collapseInput = () => {};
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   });
-  // console.log(arrivalMessage);
+
   return (
     <>
       <Homeheader />
