@@ -10,9 +10,11 @@ const storyRouter = require("./routes/story");
 const commentRouter = require("./routes/comment");
 const conversationRouter = require("./routes/conversations");
 const messageRouter = require("./routes/messages");
-const port = process.env.PORT;
+const port = 8800;
 const multer = require("multer");
 const path = require("path");
+const http = require("http");
+const socketIO = require("socket.io");
 var bodyParser = require("body-parser");
 
 dotenv.config();
@@ -27,7 +29,7 @@ app.use(cors());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json());
-
+const server = http.createServer(app);
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "public/images");
@@ -55,13 +57,53 @@ app.use("/api/comments", commentRouter);
 app.use("/api/conversation", conversationRouter);
 app.use("/api/message", messageRouter);
 app.use("/api/story", storyRouter);
-// if (process.env.NODE_ENV == "production") {
-//   app.use(express.static("client/build"));
-//   const path = require("path");
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("client/build"));
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+// const users = [];
+// const io = socketIO(server);
+// const addUser = (userId, socketId) => {
+//   console.log("adding user", userId);
+//   !users.some((user) => user.userId === userId) &&
+//     users.push({ userId, socketId });
+// };
+
+// const removeUser = (socketId) => {
+//   users = users.filter((user) => {
+//     user.socketId !== socketId;
 //   });
-// }
-app.listen(8800, () => {
+// };
+
+// const getUser = (userId) => {
+//   return users.find((user) => user.userId === userId);
+// };
+// io.on("connection", (socket) => {
+//   console.log(socket.id);
+
+//   console.log("a user connected");
+//   socket.on("addUser", (userId) => {
+//     addUser(userId, socket.id);
+//     io.emit("getUsers", users);
+//   });
+//   console.log(users);
+//   socket.on("sendMessage", ({ senderId, receiverId, text }) => {
+//     console.log(receiverId, "uska id");
+//     console.log(users);
+//     const user = getUser(receiverId);
+//     console.log(text);
+//     console.log(user, "friend");
+//     io.to(user?.socketId).emit("getMessage", { senderId, text });
+//   });
+//   socket.on("disconnect", () => {
+//     console.log("user disconnected");
+//     removeUser(socket.id);
+//     io.emit("getUsers", users);
+//   });
+// });
+app.listen(port, () => {
   console.log("Backend server running");
 });

@@ -11,18 +11,18 @@ import LoadingScreen from "./components/LoadingScreen";
 import Messenger from "./pages/Messenger";
 
 import StroriesMain from "./components/StroriesMain";
-import axios from "axios";
+// import axios from "axios";
 function App() {
   const { userInfo } = useSelector((state) => state.userLogin);
 
-  const myFunction = async () => {
-    try {
-      await axios.delete("/story/" + userInfo._id);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  setInterval(myFunction, 1000 * 60 * 60 * 48);
+  // const myFunction = async () => {
+  //   try {
+  //     await axios.delete("/story/" + userInfo._id);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // setInterval(myFunction, 1000 * 60 * 60 * 48);
   return (
     <div>
       <Router>

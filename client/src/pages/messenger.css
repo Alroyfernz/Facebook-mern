@@ -255,6 +255,15 @@ form{
 }
 
 @media  screen and (max-width: 768px){
+    .messenger{
+        height: 100vh;
+    }
+    .chatBoxWrapper{
+        margin-top: 30px;
+    }
+    .messageheader{
+        top: 50px !important;
+    }
     .chatBox.close{
         display: none;
     }

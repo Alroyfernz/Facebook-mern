@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+
 import "./homeheader.css";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillCaretDown } from "react-icons/ai";
@@ -21,8 +21,7 @@ const Homeheader = ({ selected }) => {
   const { userInfo } = useSelector((state) => state.userLogin);
   const logout = () => {
     dispatch({ type: USER_LOGOUT });
-    localStorage.removeItem("userInfo");
-    history.push("/login");
+    sessionStorage.removeItem("userInfo");
   };
   const history = useHistory();
   const renderProfile = () => {};
@@ -334,7 +333,7 @@ const Homeheader = ({ selected }) => {
                 <h1>Dark Mode</h1>
               </div>
             </Link>
-            <Link>
+            <Link to="/login">
               <div onClick={logout} className="optionDrop">
                 <div className="iconDrop">
                   <i className="logout" />

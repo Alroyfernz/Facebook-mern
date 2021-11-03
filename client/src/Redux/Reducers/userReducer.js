@@ -21,7 +21,7 @@ export const userLoginReducer = (state = initialState, action) => {
       return { isFetching: false, userInfo: action.payload, error: false };
 
     case USER_LOGIN_FAIL:
-      return { isFetching: false, error: true };
+      return { isFetching: false, userInfo: null, error: true };
 
     case USER_LOGOUT:
       return {

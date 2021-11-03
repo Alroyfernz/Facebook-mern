@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { BsSearch } from "react-icons/bs";
-
+import { Avatar } from "@material-ui/core";
 import { IoIosAddCircle, IoMdPhotos } from "react-icons/io";
 import { IoSend } from "react-icons/io5";
 import { RiChatSmileFill } from "react-icons/ri";
@@ -16,8 +16,7 @@ import { io } from "socket.io-client";
 import "./messenger.css";
 const Messenger = () => {
   const history = useHistory();
-  const formRef = useRef();
-  const [body, setBody] = useState("");
+
   const [conversations, setConversations] = useState([]);
   const [currentChats, setCurrentChats] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -29,8 +28,8 @@ const Messenger = () => {
   const [messageText, setMessageText] = useState("");
 
   const socket = useRef();
-
-  // const [users, setUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [users, setUsers] = useState([]);
   const scrollRef = useRef();
 
   useEffect(() => {
@@ -67,7 +66,9 @@ const Messenger = () => {
     // const ac = new AbortController();
     socket.current.emit("addUser", userInfo._id);
     console.log("adding users");
-    socket.current.on("getUsers", (users) => {});
+    socket.current.on("getUsers", (users) => {
+      console.log(users);
+    });
     // return () => socket.close();
   });
   // console.log(searchTerm);
@@ -83,18 +84,18 @@ const Messenger = () => {
     getConversation();
   }, [userInfo._id]);
 
-  // useEffect(() => {
-  //   const fetchAll = async () => {
-  //     try {
-  //       const res = await axios.get("/user/");
-  //       setUsers(res.data);
-  //     } catch (error) {
-  //       console.log("Error while fetching all users");
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchAll = async () => {
+      try {
+        const res = await axios.get("/user/");
+        setUsers(res.data);
+      } catch (error) {
+        console.log("Error while fetching all users");
+      }
+    };
 
-  //   fetchAll();
-  // }, []);
+    fetchAll();
+  }, []);
 
   const id = history.location.pathname.split("/")[2];
   // console.log(conversations);
@@ -134,7 +135,6 @@ const Messenger = () => {
       const res = await axios.post("/message/", msg);
       // console.log(res, "messgae send bro");
       setMessages([...messages, res.data]);
-      setBody("");
     } catch (error) {
       console.log(error, "error while sending message");
     }
@@ -152,12 +152,26 @@ const Messenger = () => {
     getMessages();
   }, [currentChats]);
 
-  const collapseInput = () => {};
+  const collapseInput = () => {
+    // history.push();
+    // document.getElementsByClassName("homeHeader__logo")[0].style.display =
+    //   "block";
+    // document.getElementsByClassName("homeHeader__searchBack")[0].style.display =
+    //   "none";
+    // document.getElementsByClassName("searchBox")[0].style.display = "none";
+    // document.getElementsByClassName("homeHeader__search")[0].style.display =
+    //   "block";
+    // document.getElementsByClassName("dropdown-content3")[0].style.display =
+    // "none";
+    // document.getElementsByClassName("searchBox")[0].value = "";
+  };
+  // console.log(currentChats);
+  // console.log(messages);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   });
-
+  // console.log(arrivalMessage);
   return (
     <>
       <Homeheader />
@@ -189,10 +203,16 @@ const Messenger = () => {
                   type="text"
                   placeholder="Search for friends"
                   className="chatMenuInput"
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    document.getElementsByClassName(
+                      "dropdown-content3"
+                    )[0].style.display = "block";
+                  }}
                 />
               </div>
             </div>
-            {/* <div className="dropdown-content3" onClick={collapseInput}>
+            <div className="dropdown-content3" onClick={collapseInput}>
               <ul id="list">
                 {users !== undefined &&
                   users
@@ -202,30 +222,28 @@ const Messenger = () => {
                       } else if (value.name === searchTerm) {
                         return value;
                       }
+                      return 0;
                     })
                     .map((user1) => {
                       return (
                         <li
                           onClick={() => {
-                            history.push(`/profile/${user1._id}`);
                             collapseInput();
+                            history.push(`/profile/${user1._id}`);
                           }}
                         >
-                          <Link
-                            onClick={collapseInput}
-                            to={`/profile/${user1._id}`}
-                          >
+                          <a href="/" onClick={collapseInput}>
                             <Avatar
                               src={user1.profilePicture}
                               className="searchAvatar"
                             />
                             <h3 className="searchH3">{user1.name}</h3>
-                          </Link>
+                          </a>
                         </li>
                       );
                     })}
               </ul>
-            </div> */}
+            </div>
             {conversations.map((c) => {
               return (
                 <div
@@ -260,6 +278,7 @@ const Messenger = () => {
                 isOpen={open}
                 open={open}
                 setOpen={setOpen}
+                className="message_header"
               />
               <div className="chatBoxWrapper">
                 <div className="chatBoxTop">
@@ -270,6 +289,11 @@ const Messenger = () => {
                       </div>
                     );
                   })}
+
+                  {/* <Message />
+                  <Message own />
+                  <Message own />
+                  <Message own /> */}
                 </div>
                 <div className="chatBoxBottom">
                   <div className="chatBoxBottomWrapper">
@@ -282,21 +306,14 @@ const Messenger = () => {
                     </div>
                     <div className="inputSend">
                       <div className="inputSendWrapper">
-                        <form
-                          ref={formRef}
-                          onSubmit={() => {
-                            handleSend();
-                          }}
-                        >
+                        <form onSubmit={handleSend}>
                           <input
                             type="text"
                             placeholder="Type.."
                             className="toSend"
                             onChange={(e) => {
-                              setBody(e.target.value);
                               setMessageText(e.target.value);
                             }}
-                            value={body}
                           ></input>
                         </form>
                       </div>
@@ -309,7 +326,7 @@ const Messenger = () => {
               </div>
             </>
           ) : (
-            <span className="chatToOpen">open to start chatting</span>
+            <span>open to start chatting</span>
           )}
         </div>
         <div className="chatOnline">

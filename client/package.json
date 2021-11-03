@@ -48,7 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "https://facebook-fullstack.herokuapp.com/api"
+  }
+  
+  ,"proxy": "http://localhost:8800/api"
   
 }

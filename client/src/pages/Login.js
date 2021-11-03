@@ -19,16 +19,25 @@ function Login() {
 
   const login = async (event) => {
     event.preventDefault();
-
+    if (email === "" || password === "") {
+      window.alert("input fields cannot be empty");
+      return;
+    }
     dispatch({ type: USER_LOGIN_REQUEST });
     try {
-      const { data } = await axios.post("/auth/login", { email, password });
-      console.log(data);
-      dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
-      sessionStorage.setItem("userInfo", JSON.stringify(data));
-      history.push("/");
+      const res = await axios.post("/auth/login", { email, password });
+      console.log(res);
+      if (res.status === 200) {
+        dispatch({ type: USER_LOGIN_SUCCESS, payload: res.data });
+        sessionStorage.setItem("userInfo", JSON.stringify(res.data));
+        history.push("/");
+      } else {
+        window.alert("Invalid credentials");
+      }
     } catch (error) {
       console.log(error);
+      window.alert("login error");
+      history.push("/login");
       dispatch({
         type: USER_LOGIN_FAIL,
       });
