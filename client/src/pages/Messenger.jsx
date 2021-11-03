@@ -264,9 +264,6 @@ const Messenger = () => {
                 </div>
               );
             })}
-
-            {/* <SidebarRow avatar ImageLink="" title="Raj" />
-            <SidebarRow avatar ImageLink="" title="clarrisa" /> */}
           </div>
         </div>
         <div className={open ? "chatBox open" : "chatBox close"}>
