@@ -193,6 +193,11 @@
 .homeHeader{
   position: fixed;
 }
+.dropdown-content.block{
+  width: 300px;
+ top: 0 !important;
+  left: 60px;
+}
 .mobileHeader{
   display:block;
 width:150px;

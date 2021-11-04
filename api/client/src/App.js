@@ -42,7 +42,7 @@ function App() {
           <Route path="/" exact>
             {userInfo !== null ? <Home /> : <Login />}
           </Route>
-          <Route path="">
+          <Route path="/story">
             <StroriesMain />
           </Route>
           <Route path="/register">{userInfo ? <Home /> : <Register />}</Route>

@@ -16,7 +16,7 @@ const Post = ({ post }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete("/posts/" + post._id, {
+      await axios.delete("/api/posts/" + post._id, {
         userId: userInfo._id,
       });
     } catch (error) {
@@ -30,7 +30,7 @@ const Post = ({ post }) => {
       setIsLiked(!isLiked);
 
       try {
-        await axios.post("/posts/like/" + post._id, userInfo._id);
+        await axios.post("/api/posts/like/" + post._id, userInfo._id);
       } catch (error) {
         console.log(error);
       }
@@ -39,7 +39,7 @@ const Post = ({ post }) => {
       setIsLiked(!isLiked);
 
       try {
-        await axios.put("/posts/like/" + post._id, userInfo._id);
+        await axios.put("/api/posts/like/" + post._id, userInfo._id);
       } catch (error) {
         console.log(error);
       }
@@ -49,7 +49,7 @@ const Post = ({ post }) => {
   const handleComment = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/comments/", {
+      const res = await axios.post("/api/comments/", {
         username: userInfo.name,
         postId: post._id,
         photoURL: userInfo.profilePicture,
@@ -62,7 +62,7 @@ const Post = ({ post }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`/user/${post.userId}`);
+        const res = await axios.get(`/api/user/${post.userId}`);
         setUser(res.data);
       } catch (error) {
         console.log(error);
@@ -75,7 +75,7 @@ const Post = ({ post }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await axios.get("/comments/" + post._id);
+        const res = await axios.get("/api/comments/" + post._id);
         setComment(res.data);
       } catch (error) {}
     };
@@ -104,7 +104,7 @@ const Post = ({ post }) => {
           <AiFillDelete onClick={handleDelete} className="deleteIcon" />
         )}
       </div>
-      <h4 className="post__tex5">my new post</h4>
+      <h4 className="post__tex5">{post.desc}</h4>
       <img src={post.photo} alt="" className="post__image" />
       <div className="post__likeandlove">
         <img

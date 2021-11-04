@@ -10,7 +10,7 @@ const storyRouter = require("./routes/story");
 const commentRouter = require("./routes/comment");
 const conversationRouter = require("./routes/conversations");
 const messageRouter = require("./routes/messages");
-const port = 8800;
+const port = process.env.PORT || 8800;
 const multer = require("multer");
 const path = require("path");
 const http = require("http");
@@ -46,9 +46,9 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
     console.log(error);
   }
 });
-app.get("/", (req, res) => {
-  res.json("server running");
-});
+// app.get("/", (req, res) => {
+//   res.json("server running");
+// });
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);

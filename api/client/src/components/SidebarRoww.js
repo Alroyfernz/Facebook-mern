@@ -17,7 +17,7 @@ const SidebarRoww = ({
 
     const getUser = async () => {
       try {
-        const res = await axios.get("/user/" + friendId);
+        const res = await axios.get("/api/user/" + friendId);
         setUser(res.data);
       } catch (error) {
         console.log(error);

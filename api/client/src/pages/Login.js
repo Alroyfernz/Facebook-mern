@@ -25,7 +25,7 @@ function Login() {
     }
     dispatch({ type: USER_LOGIN_REQUEST });
     try {
-      const res = await axios.post("/auth/login", { email, password });
+      const res = await axios.post("/api/auth/login", { email, password });
       console.log(res);
       if (res.status === 200) {
         dispatch({ type: USER_LOGIN_SUCCESS, payload: res.data });

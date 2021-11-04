@@ -14,7 +14,7 @@ const StroriesMain = () => {
   useEffect(() => {
     const fetchStory = async () => {
       try {
-        const res = await axios.get("/story/");
+        const res = await axios.get("/api/story/");
         setSlides(res.data);
       } catch (error) {}
     };

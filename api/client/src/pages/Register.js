@@ -19,7 +19,7 @@ function Register() {
     //   return alert("You are not eligible to register to Facebook!");
     // } else {
     try {
-      const response = await axios.post("/auth/register", {
+      const response = await axios.post("/api/auth/register", {
         name,
         email,
         password,

@@ -16,8 +16,8 @@ const Posts = ({ profile }) => {
       try {
         const res =
           profile === true
-            ? await axios.get("posts/" + userInfo.email)
-            : await axios.get("posts/timeline/" + userInfo._id);
+            ? await axios.get("/api/posts/" + userInfo.email)
+            : await axios.get("/api/posts/timeline/" + userInfo._id);
         setPostes(res.data);
         setCode(res.status);
       } catch (error) {
@@ -34,6 +34,13 @@ const Posts = ({ profile }) => {
         <LoadingScreen />
       ) : (
         <>
+          {postes.length === 0 && (
+            <h3
+              style={{ color: "white", textAlign: "center", fontSize: "18px" }}
+            >
+              Add friends to see thier posts
+            </h3>
+          )}
           {postes.map((p, index) => {
             return (
               <div className="postWrapper">

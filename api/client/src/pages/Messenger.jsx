@@ -33,8 +33,8 @@ const Messenger = () => {
   const scrollRef = useRef();
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
-    socket.current.on("getMessage", (data) => {
+    socket.current = io("ws:https://facebook-merng.herokuapp.com/");
+    socket.current?.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
@@ -64,9 +64,9 @@ const Messenger = () => {
 
   useEffect(() => {
     // const ac = new AbortController();
-    socket.current.emit("addUser", userInfo._id);
+    socket.current?.emit("addUser", userInfo._id);
     console.log("adding users");
-    socket.current.on("getUsers", (users) => {
+    socket.current?.on("getUsers", (users) => {
       console.log(users);
     });
     // return () => socket.close();
@@ -75,7 +75,7 @@ const Messenger = () => {
   useEffect(() => {
     const getConversation = async () => {
       try {
-        const res = await axios.get("/conversation/" + userInfo._id);
+        const res = await axios.get("/api/conversation/" + userInfo._id);
         setConversations(res.data);
       } catch (error) {
         console.log(error);
@@ -87,7 +87,7 @@ const Messenger = () => {
   useEffect(() => {
     const fetchAll = async () => {
       try {
-        const res = await axios.get("/user/");
+        const res = await axios.get("/api/user/");
         setUsers(res.data);
       } catch (error) {
         console.log("Error while fetching all users");
@@ -102,7 +102,7 @@ const Messenger = () => {
   if (id !== null && click === false) {
     const setChat = async () => {
       try {
-        const response = await axios.get("/conversation/single/" + id);
+        const response = await axios.get("/api/conversation/single/" + id);
         setCurrentChats(response.data);
       } catch (error) {
         console.log(error);
@@ -126,13 +126,13 @@ const Messenger = () => {
     );
     console.log("zata re send");
     console.log(receiverId);
-    socket.current.emit("sendMessage", {
+    socket.current?.emit("sendMessage", {
       senderId: userInfo._id,
       receiverId,
       text: messageText,
     });
     try {
-      const res = await axios.post("/message/", msg);
+      const res = await axios.post("/api/message/", msg);
       // console.log(res, "messgae send bro");
       setMessages([...messages, res.data]);
     } catch (error) {
@@ -143,7 +143,7 @@ const Messenger = () => {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get("/message/" + currentChats._id);
+        const res = await axios.get("/api/message/" + currentChats._id);
         setMessages(res.data);
       } catch (error) {
         console.log(error);

@@ -34,7 +34,7 @@ const Profile = () => {
     console.log(imageURL, coverImgUrl);
     if (story === false) {
       try {
-        const res = await axios.put("/user/" + userInfo._id, {
+        const res = await axios.put("/api/user/" + userInfo._id, {
           imageURL,
           coverURL: coverImgUrl,
         });
@@ -47,7 +47,7 @@ const Profile = () => {
       }
     } else {
       try {
-        await axios.post("/story/", {
+        await axios.post("/api/story/", {
           photo: imageURL,
           userId: userInfo._id,
           name: userInfo.name,
@@ -63,12 +63,12 @@ const Profile = () => {
 
   const setNewConvo = async () => {
     try {
-      const res = await axios.get("/conversation/" + user._id, {
+      const res = await axios.get("/api/conversation/" + user._id, {
         logged: userInfo._id,
       });
 
       if (res.data.length === 0) {
-        const response = await axios.post("/conversation", {
+        const response = await axios.post("/api/conversation", {
           senderId: userInfo._id,
           receiverId: user._id,
         });
@@ -84,7 +84,7 @@ const Profile = () => {
 
   const handleFriend = async () => {
     try {
-      const res = await axios.put("/user/add/" + userInfo._id, {
+      const res = await axios.put("/api/user/add/" + userInfo._id, {
         userId: user._id,
       });
 
@@ -96,7 +96,7 @@ const Profile = () => {
   };
   const handleNotFriend = async () => {
     try {
-      const res = await axios.put("/user/remove/" + userInfo._id, {
+      const res = await axios.put("/api/user/remove/" + userInfo._id, {
         userId: user._id,
       });
 
@@ -110,7 +110,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("/posts/posts/" + user?._id);
+        const res = await axios.get("/api/posts/posts/" + user?._id);
 
         setPostes(res.data);
       } catch (error) {
@@ -124,7 +124,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("/user/" + id);
+        const res = await axios.get("/api/user/" + id);
         setUser(res.data);
         if (res.status !== 200) {
           setLoading(true);

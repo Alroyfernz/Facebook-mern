@@ -7,7 +7,7 @@ const Sidebar2row = ({ id }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("/user/" + id);
+        const res = await axios.get("/api/user/" + id);
         setUser(res.data);
       } catch (error) {}
     };
