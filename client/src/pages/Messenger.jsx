@@ -16,7 +16,7 @@ import { io } from "socket.io-client";
 import "./messenger.css";
 const Messenger = () => {
   const history = useHistory();
-
+  const END_POINT = "";
   const [conversations, setConversations] = useState([]);
   const [currentChats, setCurrentChats] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -33,8 +33,8 @@ const Messenger = () => {
   const scrollRef = useRef();
 
   useEffect(() => {
-    socket.current = io("ws:https://facebook-merng.herokuapp.com/");
-    socket.current?.on("getMessage", (data) => {
+    socket = io(END_POINT);
+    socket?.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
@@ -64,9 +64,9 @@ const Messenger = () => {
 
   useEffect(() => {
     // const ac = new AbortController();
-    socket.current?.emit("addUser", userInfo._id);
+    socket?.emit("addUser", userInfo._id);
     console.log("adding users");
-    socket.current?.on("getUsers", (users) => {
+    socket.on("getUsers", (users) => {
       console.log(users);
     });
     // return () => socket.close();
