@@ -50,5 +50,5 @@
     ]
   }
   
-  
+  ,"proxy":"http://localhost:8800/"
 }

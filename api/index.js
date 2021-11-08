@@ -10,7 +10,7 @@ const storyRouter = require("./routes/story");
 const commentRouter = require("./routes/comment");
 const conversationRouter = require("./routes/conversations");
 const messageRouter = require("./routes/messages");
-const port = process.env.PORT || 8800;
+const port = 8800;
 const multer = require("multer");
 const path = require("path");
 const http = require("http");
@@ -57,13 +57,13 @@ app.use("/api/comments", commentRouter);
 app.use("/api/conversation", conversationRouter);
 app.use("/api/message", messageRouter);
 app.use("/api/story", storyRouter);
-if (process.env.NODE_ENV == "production") {
-  app.use(express.static("client/build"));
-  const path = require("path");
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
+// if (process.env.NODE_ENV == "production") {
+//   app.use(express.static("client/build"));
+//   const path = require("path");
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+//   });
+// }
 const users = [];
 const io = socketIO(server);
 const addUser = (userId, socketId) => {
