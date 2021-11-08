@@ -14,9 +14,12 @@ import MessageHeader from "../components/MessageHeader";
 import SidebarRoww from "../components/SidebarRoww";
 import { io } from "socket.io-client";
 import "./messenger.css";
+const END_POINT = "localhost:8800";
+
+let socket;
 const Messenger = () => {
   const history = useHistory();
-  const END_POINT = "ws:http://localhost:8800/";
+
   const [conversations, setConversations] = useState([]);
   const [currentChats, setCurrentChats] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -27,31 +30,32 @@ const Messenger = () => {
   const { userInfo } = useSelector((state) => state.userLogin);
   const [messageText, setMessageText] = useState("");
 
-  const socket = useRef();
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUsers] = useState([]);
   const scrollRef = useRef();
 
   useEffect(() => {
-    // const ac = new AbortController();
-    socket.current?.emit("addUser", userInfo._id);
-    console.log("adding users");
-    socket.current?.on("getUsers", (users) => {
-      console.log(users);
-    });
-    // return () => socket.close();
-  }, [userInfo._id]);
-
-  useEffect(() => {
-    socket.current = io(END_POINT);
-    socket.current?.on("getMessage", (data) => {
+    socket = io(END_POINT);
+    socket.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
         createdAt: Date.now(),
       });
     });
+
+    console.log(socket);
   }, []);
+
+  useEffect(() => {
+    // const ac = new AbortController();
+    socket.emit("addUser", userInfo._id);
+    console.log("adding users");
+    socket.on("getUsers", (users) => {
+      console.log(users);
+    });
+    // return () => socket.close();
+  });
 
   useEffect(() => {
     console.log(arrivalMessage);
@@ -127,7 +131,7 @@ const Messenger = () => {
     );
     console.log("zata re send");
     console.log(receiverId);
-    socket.current?.emit("sendMessage", {
+    socket.emit("sendMessage", {
       senderId: userInfo._id,
       receiverId,
       text: messageText,

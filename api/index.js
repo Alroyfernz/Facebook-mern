@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const app = express();
+
 const dotenv = require("dotenv");
 const cors = require("cors");
 const authRouter = require("./routes/auth");
@@ -13,10 +13,19 @@ const messageRouter = require("./routes/messages");
 const port = 8800;
 const multer = require("multer");
 const path = require("path");
-const http = require("http");
-const socketIO = require("socket.io");
+const { createServer } = require("http");
+const socketio = require("socket.io");
 var bodyParser = require("body-parser");
 
+const app = express();
+app.use(cors());
+const httpServer = createServer(app);
+const io = socketio(httpServer, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
 dotenv.config();
 mongoose
   .connect(process.env.MONGO_URL)
@@ -25,11 +34,10 @@ mongoose
     console.log(error);
   });
 
-app.use(cors());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json());
-const server = http.createServer(app);
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "public/images");
@@ -64,8 +72,9 @@ app.use("/api/story", storyRouter);
 //     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 //   });
 // }
-const users = [];
-const io = socketIO(server);
+
+var users = [];
+
 const addUser = (userId, socketId) => {
   console.log("adding user", userId);
   !users.some((user) => user.userId === userId) &&
@@ -104,6 +113,9 @@ io.on("connection", (socket) => {
     io.emit("getUsers", users);
   });
 });
-app.listen(port, () => {
+httpServer.listen(port, () => {
   console.log("Backend server running");
 });
+// httpServer.listen(port, () => {
+//   console.log("Socket server running");
+// });
