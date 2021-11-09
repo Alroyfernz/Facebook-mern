@@ -29,7 +29,7 @@ const Messenger = () => {
   const [click, setClick] = useState(false);
   const { userInfo } = useSelector((state) => state.userLogin);
   const [messageText, setMessageText] = useState("");
-
+  const [init, setInit] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUsers] = useState([]);
   const scrollRef = useRef();
@@ -140,6 +140,7 @@ const Messenger = () => {
       const res = await axios.post("/api/message/", msg);
       // console.log(res, "messgae send bro");
       setMessages([...messages, res.data]);
+      setInit("");
     } catch (error) {
       console.log(error, "error while sending message");
     }
@@ -297,9 +298,11 @@ const Messenger = () => {
                         <form onSubmit={handleSend}>
                           <input
                             type="text"
+                            value={init}
                             placeholder="Type.."
                             className="toSend"
                             onChange={(e) => {
+                              setInit(e.target.value);
                               setMessageText(e.target.value);
                             }}
                           ></input>
