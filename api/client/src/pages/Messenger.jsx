@@ -14,7 +14,7 @@ import MessageHeader from "../components/MessageHeader";
 import SidebarRoww from "../components/SidebarRoww";
 import { io } from "socket.io-client";
 import "./messenger.css";
-const END_POINT = "localhost:8800";
+const END_POINT = "facebook-merng.herokuapp.com";
 
 let socket;
 const Messenger = () => {
