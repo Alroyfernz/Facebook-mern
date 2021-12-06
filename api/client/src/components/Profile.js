@@ -22,7 +22,7 @@ const Profile = () => {
   const [coverImgUrl, setCoverImgUrl] = useState("");
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-
+  const numberOfFriends = user.friends.length();
   const { userInfo } = useSelector((state) => state.userLogin);
   const [postes, setPostes] = useState([]);
   const [openD, setOpenD] = useState(false);
@@ -274,7 +274,7 @@ const Profile = () => {
                   <ul className="optionList">
                     <li className="listItem">Posts</li>
                     <li className="listItem">About</li>
-                    <li className="listItem">Friends 99</li>
+                    <li className="listItem">Friends {numberOfFriends}</li>
                     <li className="listItem">Photos</li>
                   </ul>
                 </div>

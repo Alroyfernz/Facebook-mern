@@ -52,7 +52,7 @@ const Messenger = () => {
     socket.emit("addUser", userInfo._id);
     console.log("adding users");
     socket.on("getUsers", (users) => {
-      console.log(users);
+      // console.log(users);
     });
     // return () => socket.close();
   });
